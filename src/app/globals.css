@@ -15,17 +15,15 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-.main{
+
+html * {
+  font-family: "Open Sans", sans-serif;
+}
+.main {
   margin-left: 5vw;
 }
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #d5d5da;
 }
 @layer utilities {
   .text-balance {
