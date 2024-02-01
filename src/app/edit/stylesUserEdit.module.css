@@ -1,0 +1,48 @@
+.bigHeading {
+  font-size: 2em;
+}
+
+.largerText {
+  font-size: 1em;
+}
+
+.shiftedText {
+  margin-left: 600px;
+}
+
+.largerShiftedText {
+  margin-left: 300px;
+}
+
+.scrollableList {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.scrollableList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.scrollableList li {
+  padding: 8px;
+  border-bottom: 1px solid #ffffff;
+}
+
+.scrollableList li:last-child {
+  border-bottom: none;
+}
+
+.iconImage{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.icon{
+  width: 100%;
+  max-height: 7%;
+  color: rgb(0, 0, 0);
+}
+.linespaced {
+  line-height: 1.5; /* Adjust the value as needed */
+}
