@@ -1,15 +1,11 @@
 import React from "react";
-import styles from "../CSS Modules/navbar.module.css";
+import styles from "../CSS Modules/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { options } from "../src/app/api/auth/[...nextauth]/options";
-import { AiFillHome } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { MdPeople } from "react-icons/md";
-import { IoMdMail } from "react-icons/io";
-import { HiUserGroup } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
+import NavBtns from "./NavBtns";
 
 // function Icon(props) {
 //   return (
@@ -30,29 +26,6 @@ import { IoMdExit } from "react-icons/io";
 
 export default async function NavBar() {
   const session = await getServerSession(options);
-  const pages = [
-    { name: "Home", page: "/", icon: <AiFillHome className={styles.icon} /> },
-    {
-      name: "Edit Profile",
-      page: "/edit",
-      icon: <CgProfile className={styles.icon} />,
-    },
-    {
-      name: "Matches",
-      page: "/matches",
-      icon: <MdPeople className={styles.icon} />,
-    },
-    {
-      name: "Messages",
-      page: "messages",
-      icon: <IoMdMail className={styles.icon} />,
-    },
-    {
-      name: "Groups",
-      page: "/groups",
-      icon: <HiUserGroup className={styles.icon} />,
-    },
-  ];
 
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
@@ -66,14 +39,7 @@ export default async function NavBar() {
           <h2 className={styles.email}>{email}</h2>
         </div>
       </div>
-      {pages.map((page, key) => {
-        return (
-          <Link className={styles.navBtn} key={key} href={page.page}>
-            {page.icon}
-            {page.name}
-          </Link>
-        );
-      })}
+      <NavBtns />
       <Link className={styles.signoutBtn} href="/api/auth/signout">
         <IoMdExit className={styles.icon} />
         Sign Out
