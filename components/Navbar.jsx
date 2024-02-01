@@ -7,6 +7,7 @@ import { options } from "../src/app/api/auth/[...nextauth]/options";
 import { IoMdExit } from "react-icons/io";
 import NavBtns from "./NavBtns";
 
+
 // function Icon(props) {
 //   return (
 //     <Link href={"/" + props.link} className={`${styles.icon}`}>
@@ -29,11 +30,12 @@ export default async function NavBar() {
 
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
-
+  let image = session.user.image
+  console.log (image)
   return (
     <div className={styles.navbar}>
       <div className={styles.userContainer}>
-        <Image src={session.user.image} className={styles.profilePicture} />
+        <Image src={image} className={styles.profilePicture} width={1000} height={1000}/>
         <div className={styles.userInfoContainer}>
           <h1 className={styles.name}>{name[0] + " " + name[1][0] + "."}</h1>
           <h2 className={styles.email}>{email}</h2>

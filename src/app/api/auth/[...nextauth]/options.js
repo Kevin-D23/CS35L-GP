@@ -10,8 +10,18 @@ export const options = {
         };
       },
       clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET
+  callbacks: {
+    async jwt({ token, user }) {
+      if(user) token.picture = user.picture
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) session.user.image = token.picture;
+      return session;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };
