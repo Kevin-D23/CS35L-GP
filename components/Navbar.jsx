@@ -31,7 +31,6 @@ export default async function NavBar() {
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
   let image = session.user.image
-  console.log (image)
   return (
     <div className={styles.navbar}>
       <div className={styles.userContainer}>

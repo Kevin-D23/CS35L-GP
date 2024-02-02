@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
+.home {
+  width: 70rem;
+  height: 57rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Abel", sans-serif;
+}
+
+.userContainer {
+  width: 36rem;
+  display: flex;
+  background-color: white;
+}
+
+.userContainer h2 {
+  font-weight: 700;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.matchOption {
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  height: 27rem;
+  background-color: #f9f9fa;
+}
+
+.bioContainer {
+  height: 15rem;
+  padding: 1rem;
+  background-color: #dadae272;
+}
+
+.bioContainer h1 {
+  font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+.right {
+  width: 50%;
+}
+
+.coursesContainer {
+  height: calc(27rem / 2);
+  padding: 1rem;
+  background-color: #dadae272;
+}
+
+.timesContainer {
+  height: calc(27rem / 2);
+  padding: 1rem;
+}
+
+.locationContainer {
+  height: 15rem;
+  padding: 1rem;
+  background-color: #dadae2ce;
+}
