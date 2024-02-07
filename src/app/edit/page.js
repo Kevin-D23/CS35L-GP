@@ -8,7 +8,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 
 function EditButton() {
   return (
-    <button className={`${styles.largerText} ${styles.largerShiftedText}`}>
+    <button className={`${styles.largerText}`}>
       edit
     </button>
   );
@@ -31,86 +31,60 @@ export default async function edit() {
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <h1 className={`${styles.bigHeading} ${styles.largerShiftedText}`}>
-          {name[0] + " " + name[1]}
-        </h1>
-        <EditButton />
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop:"100px" }}>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+      <Image
+          src={session.user.image}
+          width={50}
+          height={50}
+          
+        />
+        <div style={{ marginLeft: "10px" }}>
+        <h1 className={`${styles.largerText} `}>
+        <b>{name[0] + " " + name[1]}</b>
+      </h1>
+        </div>
+        <div style={{ marginLeft: "10px" }}>
+        <h1 className={`${styles.largerText} `}>
+        {email}
+      </h1>
+        </div>
+        <div style={{ marginLeft: "100px" }}>
+          <EditButton />
+        </div>
       </div>
-      <div>
-        <h2 className={`${styles.largerText} ${styles.largerShiftedText}`}>
-          {email}
-        </h2>
-        <Image
-          src={session.user.image}
-          width={50}
-          height={50}
-          style={{ marginLeft: "100px" }}
-        />
-        <Image
-          src={session.user.image}
-          width={50}
-          height={50}
-          style={{ marginLeft: "100px" }}
-        />
-
-        <h1 className={`${styles.largerText} ${styles.largerShiftedText}`}>
-          Classes:
-        </h1>
-        <div className={`${styles.scrollableList} ${styles.largerShiftedText}`}>
+      <h1 className={`${styles.largerText} `}>Bio: Hi this is my bio!</h1>
+      <div style={{ marginTop: "10px" }}>
+      <h1 className={`${styles.largerText} `}>Classes:</h1>
+      <div className={`${styles.scrollableList}`}>
           <ul>
             {classes.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
         </div>
-      </div>
-      <h1
-        className={`${styles.largerText} ${styles.largerShiftedText}${styles.linespaced}`}
-      >
-        space:
-      </h1>
-      <h1 className={`${styles.largerText} ${styles.largerShiftedText}`}>
-        Times Available:
-      </h1>
-      <div className={`${styles.scrollableList} ${styles.largerShiftedText}`}>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+        <h1 className={`${styles.largerText}`}>Times Available:</h1>
+      <div className={`${styles.scrollableList} `}>
         <ul>
           {times.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
       </div>
-      <h1
-        className={`${styles.largerText} ${styles.largerShiftedText}${styles.linespaced}`}
-      >
-        space:
-      </h1>
-      <h1 className={`${styles.largerText} ${styles.largerShiftedText}`}>
-        Prefered Locations:
-      </h1>
-      <div className={`${styles.scrollableList} ${styles.largerShiftedText}`}>
+      </div>
+      <div style={{ marginTop: "10px" }}>
+      <h1 className={`${styles.largerText}`}>Prefered Locations: </h1>
+      <div className={`${styles.scrollableList} `}>
         <ul>
           {destinations.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
       </div>
-      <h1
-        className={`${styles.largerText} ${styles.largerShiftedText}${styles.linespaced}`}
-      >
-        space:
-      </h1>
-      <h1 className={`${styles.largerText} ${styles.largerShiftedText}`}>
-        Hobbies:
-      </h1>
-      <div className={`${styles.scrollableList} ${styles.largerShiftedText}`}>
-        <ul>
-          {hobby.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
       </div>
     </div>
   );
+  
 }

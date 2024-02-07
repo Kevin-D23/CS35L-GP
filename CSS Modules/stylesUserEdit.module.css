@@ -1,5 +1,5 @@
 .bigHeading {
-  font-size: 2em;
+  font-size: 3em;
 }
 
 .largerText {
@@ -15,8 +15,12 @@
 }
 
 .scrollableList {
+  font-size: 1em;
   max-height: 200px;
+  width: 500px;
   overflow-y: auto;
+  scrollbar-width: thin; 
+  scrollbar-color: transparent transparent; 
 }
 
 .scrollableList ul {
@@ -44,5 +48,5 @@
   color: rgb(0, 0, 0);
 }
 .linespaced {
-  line-height: 1.5; /* Adjust the value as needed */
+  line-height: 1; /* Adjust the value as needed */
 }
