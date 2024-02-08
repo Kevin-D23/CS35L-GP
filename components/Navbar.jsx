@@ -41,7 +41,7 @@ export default async function NavBar() {
         </div>
       </div>
       <NavBtns />
-      <Link className={styles.signoutBtn} href="/api/auth/signout?callbackUrl=%2F">
+      <Link className={styles.signoutBtn} href="/api/auth/signout?callbackUrl=/">
         <IoMdExit className={styles.icon} />
         Sign Out
       </Link>

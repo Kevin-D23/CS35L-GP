@@ -11,10 +11,10 @@ export default async function Home() {
     major: "Computer Science",
     bio: "I bully kids blah blah blah blah blah blah blah blah blah",
     courses: ["CS-33", "Jazz Appreciation", "PHSYC-1A"],
-    days: [0, 3, 6],
+    days: [0, 1, 2, 3, 4, 5, 6],
     timeStart: 18,
     timeEnd: 21,
-    locations: ["your mom house", "Powell"],
+    locations: ["your mom's house", "Powell"],
   };
   const days = [
     "Sunday",
@@ -58,7 +58,6 @@ export default async function Home() {
             <h2>
               Major:<p>{user.major}</p>
             </h2>
-            <h3>ABOUT ME</h3>
             <p>{user.bio}</p>
           </div>
         </div>

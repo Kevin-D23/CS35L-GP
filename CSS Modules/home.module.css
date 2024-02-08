@@ -67,6 +67,13 @@
   padding: 1rem;
 }
 
+.timesContainer ul {
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .locationContainer {
   height: 15rem;
   padding: 1rem;
