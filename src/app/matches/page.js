@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
 import styles from "../../../CSS Modules/matches.module.css";
+import { useRouter } from "next/navigation";
+import { HiNewspaper } from "react-icons/hi";
 
 export default function matches() {
   const matches = [
@@ -8,6 +11,10 @@ export default function matches() {
     { name: "Brittany", userID: "294829102", email: "brittany@hotmail.com" },
     { name: "Amanda", userID: "293401923", email: "amanda@g.ucla.edu.com" },
   ];
+  const router = useRouter();
+  function handleClick(id) {
+    router.push(`/user/${id}`);
+  }
 
   return (
     <div className={styles.matchesContainer}>
@@ -18,9 +25,12 @@ export default function matches() {
           return (
             <div key={key} className={styles.user}>
               <p className={styles.name}>{user.name}</p>
-              <Link className={styles.profile} href={"/" + user.userID}>
+              <p
+                className={styles.profile}
+                onClick={() => handleClick(user.userID)}
+              >
                 View Profile
-              </Link>
+              </p>
               <a
                 className={styles.email}
                 href={"mailto:" + user.email}

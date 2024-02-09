@@ -7,24 +7,6 @@ import { options } from "../src/app/api/auth/[...nextauth]/options";
 import { IoMdExit } from "react-icons/io";
 import NavBtns from "./NavBtns";
 
-
-// function Icon(props) {
-//   return (
-//     <Link href={"/" + props.link} className={`${styles.icon}`}>
-//       <div className={styles.icon}>
-//         <Image
-//           src="/icons/scissors.png"
-//           width={40}
-//           height={40}
-//           alt="Example Icon"
-//           className={styles.iconImage}
-//         />
-//         <div className={styles.iconImage}>{props.name}</div>
-//       </div>{" "}
-//     </Link>
-//   );
-// }
-
 export default async function NavBar() {
   const session = await getServerSession(options);
 
@@ -34,7 +16,7 @@ export default async function NavBar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.userContainer}>
-        <Image src={image} className={styles.profilePicture} width={1000} height={1000}/>
+        <Image src={image} className={styles.profilePicture} width={1000} height={1000} alt=""/>
         <div className={styles.userInfoContainer}>
           <h1 className={styles.name}>{name[0] + " " + name[1][0] + "."}</h1>
           <h2 className={styles.email}>{email}</h2>
@@ -45,8 +27,6 @@ export default async function NavBar() {
         <IoMdExit className={styles.icon} />
         Sign Out
       </Link>
-      {/* <Icon name="Test" link="./example" className="icon"></Icon>
-      <Icon name="Test2" link="./example" className="icon"></Icon> */}
     </div>
-  ); //put the route to your page in link.
+  );
 }
