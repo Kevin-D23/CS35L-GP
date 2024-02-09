@@ -1,0 +1,27 @@
+.matchesContainer {
+  background-color: white;
+  width: 36rem;
+  height: 57rem;
+  padding: 2rem;
+}
+
+.matchesContainer h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.user {
+  display: flex;
+}
+
+.name {
+  width: 8rem;
+}
+
+.profile {
+  margin-right: 2rem;
+}
+
+.email {
+  text-decoration: underline;
+}
