@@ -63,7 +63,7 @@ export default async function Home() {
         </div>
         <div className={styles.right}>
           <div className={styles.coursesContainer}>
-            <h2>COURSES</h2>
+            <h2 style={{ marginTop: "20px" }}>COURSES</h2>
             <ul>
               {user.courses.map((course, key) => {
                 return <li key={key}>{course}</li>;
