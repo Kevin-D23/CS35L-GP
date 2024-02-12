@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import styles from "../CSS Modules/home.module.css";
+import { usePathname } from "next/navigation";
+import { FaCheck } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 
 export default function ProfileCard(userArr) {
+  const location = usePathname();
   const [users, setUsers] = useState(userArr.userArr);
   const [user, setUser] = useState(users[0]);
   const days = [
@@ -39,9 +43,19 @@ export default function ProfileCard(userArr) {
     <>
       {user ? (
         <>
-          <div className={styles.matchOption}>
-            <button onClick={() => shiftArr()}>no likey :{"("}</button>
-          </div>
+          {location == "/" && (
+            <div className={styles.matchOption}>
+              <button onClick={() => shiftArr()}>
+                <FaXmark
+                  color="red"
+                  style={{
+                    width: "2.5rem",
+                    height: "2.5rem",
+                  }}
+                />
+              </button>
+            </div>
+          )}
           <div className={styles.userContainer}>
             <div className={styles.left}>
               <div className={styles.imageContainer}></div>
@@ -93,15 +107,22 @@ export default function ProfileCard(userArr) {
               </div>
             </div>
           </div>
-          <div className={styles.matchOption}>
-            <button onClick={() => shiftArr()}>me likey :{")"}</button>
-          </div>
+          {location == "/" && (
+            <div className={styles.matchOption}>
+              <button onClick={() => shiftArr()}>
+                <FaCheck
+                  color="green"
+                  style={{
+                    width: "2rem",
+                    height: "2rem",
+                  }}
+                />
+              </button>
+            </div>
+          )}
         </>
       ) : (
         <>
-          <div className={styles.matchOption}>
-            <button onClick={() => shiftArr()}>no likey :{"("}</button>
-          </div>
           <div className={styles.userContainer}>
             <div className={styles.left}>
               <div className={styles.imageContainer}></div>
@@ -130,9 +151,6 @@ export default function ProfileCard(userArr) {
                 ...
               </div>
             </div>
-          </div>
-          <div className={styles.matchOption}>
-            <button onClick={() => shiftArr()}>me likey :{")"}</button>
           </div>
         </>
       )}

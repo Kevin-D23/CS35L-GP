@@ -1,31 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
 .matchesContainer {
-  background-color: white;
+  background-color: var(--dark-100);
   width: 36rem;
   height: 57rem;
   padding: 2rem;
+  border-radius: 12px;
+}
+
+.matchesContainer hr {
+  border-color: var(--dark-500);
 }
 
 .matchesContainer h1 {
   font-size: 4rem;
   text-align: center;
+  color: var(--primary-300);
+  font-family: "Abel", sans-serif;
+}
+
+.usersContainer {
+  margin-top: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  max-height: 45rem;
+  overflow: auto;
 }
 
 .user {
   display: flex;
+  padding: 1rem;
+  align-items: center;
+  width: fit-content;
+  border-radius: 12px;
+  height: 4rem;
+  background-color: var(--dark-200);
 }
 
 .name {
+  color: var(--primary-text);
   width: 8rem;
 }
 
+.name p {
+  font-family: "Abel", sans-serif;
+}
+
 .profile {
-  margin-right: 2rem;
+  color: var(--primary-600);
+  margin-right: 0.5rem;
 }
 
 .profile:hover {
   cursor: pointer;
+  color: var(--dark-600);
 }
 
 .email {
   text-decoration: underline;
+  color: var(--dark-600);
+}
+
+.email:hover {
+  color: var(--primary-600);
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
 }
