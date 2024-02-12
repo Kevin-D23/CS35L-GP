@@ -5,8 +5,9 @@
   width: 16.6rem;
   height: 100%;
   position: fixed;
-  background-color: #ffffff;
-  color: #09090a;
+  background-color: var(--dark-300);
+  color: var(--primary-text);
+  border-radius: 0 12px 12px 0;
 }
 
 .iconImage {
@@ -17,7 +18,7 @@
 .icon {
   height: 2rem;
   width: 2rem;
-  color: black;
+  color: var(--primary-text);
 }
 .icon:hover {
   opacity: 80%;
@@ -79,7 +80,7 @@
 }
 
 .navBtn:hover {
-  background-color: #f9f9fa;
+  background-color: var(--dark-400);
 }
 
 .navBtnContainer {
