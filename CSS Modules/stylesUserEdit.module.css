@@ -1,9 +1,11 @@
 .bigHeading {
   font-size: 3em;
+  color:#ffffff;
 }
 
 .largerText {
   font-size: 1em;
+  color:#ffffff;
 }
 
 .shiftedText {
@@ -16,6 +18,7 @@
 
 .scrollableList {
   font-size: 1em;
+  color:#ffffff;
   max-height: 200px;
   width: 500px;
   overflow-y: auto;
