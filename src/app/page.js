@@ -5,8 +5,10 @@ import styles from "../../CSS Modules/home.module.css";
 
 export default async function Home() {
   const session = await getServerSession(options);
+  let name = session?.user?.name.split(" ");
+  let email = session?.user?.email;
   const user = {
-    name: "Haohan Chen",
+    name: name[0] + " " + name[1][0] + ".",
     year: 3,
     major: "Computer Science",
     bio: "I bully kids blah blah blah blah blah blah blah blah blah",

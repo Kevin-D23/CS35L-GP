@@ -3,14 +3,16 @@ import styles from "../../../CSS Modules/stylesUserEdit.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { IoMdExit } from "react-icons/io";
 import { options } from "../api/auth/[...nextauth]/options";
 
 function EditButton() {
   return (
+    <Link href="/edit/editing"> {}
     <button className={`${styles.largerText}`}>
       edit
     </button>
+    </Link>
+  
   );
 }
 
@@ -25,6 +27,8 @@ let times = [
 let classes = ["CS35L", "Intro to being swag", "Naptime 101"];
 let hobby = ["eat", "sleep", "nap"];
 let destinations = ["Sproul", "Rieber", "Hendrick"];
+
+
 export default async function edit() {
   const session = await getServerSession(options);
 
@@ -53,7 +57,8 @@ export default async function edit() {
           <EditButton />
         </div>
       </div>
-      <h1 className={`${styles.largerText} `}>Bio: Hi this is my bio!</h1>
+      <div><h1 className={`${styles.largerText} `}>Bio:</h1></div>
+      <h1 className={`${styles.largerText} `}> Hi this is my bio!</h1>
       <div style={{ marginTop: "10px" }}>
       <h1 className={`${styles.largerText} `}>Classes:</h1>
       <div className={`${styles.scrollableList}`}>
