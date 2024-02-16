@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import React from "react";
 import styles from "../CSS Modules/home.module.css";
 import { usePathname } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
@@ -9,6 +10,10 @@ export default function ProfileCard(userArr) {
   const location = usePathname();
   const [users, setUsers] = useState(userArr.userArr);
   const [user, setUser] = useState(users[0]);
+  const cardRef = React.useRef(null);
+  const leftSide = React.useRef(null);
+  const rightSide = React.useRef(null);
+  const background = React.useRef(null);
   const days = [
     "Sunday",
     "Monday",
@@ -30,7 +35,7 @@ export default function ProfileCard(userArr) {
       }
     }, 1000);
   }
-
+  
   function calcTime(start, end) {
     let startTime = start + "am";
     let endTime = end + "am";
@@ -38,14 +43,29 @@ export default function ProfileCard(userArr) {
     if (end > 12) endTime = end - 12 + "pm";
     return startTime + "-" + endTime;
   }
-
+  const handleMouseHover = (angle) =>{
+    if(cardRef.current){
+      if(angle < 0){
+        cardRef.current.style.transformOrigin = "20% 80%";
+        leftSide.current.style.backgroundColor = "red";
+      }
+      else if (angle > 0){
+        cardRef.current.style.transformOrigin = "80% 80%";
+        rightSide.current.style.backgroundColor = "green";
+      }
+      else{
+        leftSide.current.style.backgroundColor = "white";
+        rightSide.current.style.backgroundColor = "white";
+      }
+      cardRef.current.style.transform = `rotateZ(${angle}deg)`;
+    }
+  }
   return (
-    <>
+    <div className={styles.home} ref={background}>
       {user ? (
         <>
           {location == "/" && (
-            <div className={styles.matchOption}>
-              <button onClick={() => shiftArr()}>
+            <div className={styles.matchOption} onMouseEnter={()=>handleMouseHover(-5)} onMouseLeave={()=>handleMouseHover(0)} ref={leftSide} onClick={shiftArr}>
                 <FaXmark
                   color="red"
                   style={{
@@ -53,10 +73,9 @@ export default function ProfileCard(userArr) {
                     height: "2.5rem",
                   }}
                 />
-              </button>
             </div>
           )}
-          <div className={styles.userContainer}>
+          <div className={styles.userContainer} ref={cardRef}>
             <div className={styles.left}>
               <div className={styles.imageContainer}></div>
               <div className={styles.bioContainer}>
@@ -108,7 +127,7 @@ export default function ProfileCard(userArr) {
             </div>
           </div>
           {location == "/" && (
-            <div className={styles.matchOption}>
+            <div className={styles.matchOption} onMouseEnter={()=>handleMouseHover(5)} onMouseLeave={()=>handleMouseHover(0)} ref={rightSide} onClick={shiftArr}>
               <button onClick={() => shiftArr()}>
                 <FaCheck
                   color="green"
@@ -154,6 +173,6 @@ export default function ProfileCard(userArr) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

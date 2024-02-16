@@ -9,11 +9,14 @@
   font-family: "Abel", sans-serif;
   background-color: var(--dark-100);
 }
-
 .userContainer {
   width: 36rem;
   display: flex;
   background-color: var(--dark-200);
+  transform: rotateZ(0deg);
+  transform-style: preserve-3d;
+  transition-property: transform;
+  transition-duration: 0.5s;
 }
 
 .userContainer h2 {
@@ -24,10 +27,15 @@
 
 .matchOption {
   width: 15rem;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary-text);
+  background-color: white;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+  cursor: pointer;
 }
 
 .left {

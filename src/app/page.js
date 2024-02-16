@@ -33,8 +33,8 @@ export default async function Home() {
   ];
 
   return (
-    <main className={styles.home}>
+    <>
       <ProfileCard userArr={users} />
-    </main>
+    </>
   );
 }
