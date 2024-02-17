@@ -33,9 +33,9 @@ export default function ProfileCard(userArr) {
         setUsers(temp);
         setUser(users[0]);
       }
-    }, 1000);
+    }, 0);
   }
-  
+
   function calcTime(start, end) {
     let startTime = start + "am";
     let endTime = end + "am";
@@ -43,36 +43,63 @@ export default function ProfileCard(userArr) {
     if (end > 12) endTime = end - 12 + "pm";
     return startTime + "-" + endTime;
   }
-  const handleMouseHover = (angle) =>{
-    if(cardRef.current){
-      if(angle < 0){
+
+  const handleMouseHover = (angle) => {
+    if (cardRef.current) {
+      if (angle < 0) {
         cardRef.current.style.transformOrigin = "20% 80%";
-        leftSide.current.style.backgroundColor = "red";
-      }
-      else if (angle > 0){
+        leftSide.current.style.backgroundColor = "var(--dark-200)";
+        rightSide.current.style.backgroundColor = "var(--dark-200)";
+        background.current.style.backgroundColor = "var(--dark-200)";
+      } else if (angle > 0) {
         cardRef.current.style.transformOrigin = "80% 80%";
-        rightSide.current.style.backgroundColor = "green";
-      }
-      else{
-        leftSide.current.style.backgroundColor = "white";
-        rightSide.current.style.backgroundColor = "white";
+        rightSide.current.style.backgroundColor = "var(--primary-200)";
+        background.current.style.backgroundColor = "var(--primary-200)";
+        leftSide.current.style.backgroundColor = "var(--primary-200)";
+      } else {
+        leftSide.current.style.backgroundColor = "var(--dark-100)";
+        rightSide.current.style.backgroundColor = "var(--dark-100)";
+        background.current.style.backgroundColor = "var(--dark-100)";
       }
       cardRef.current.style.transform = `rotateZ(${angle}deg)`;
     }
+  };
+
+  function handleClick(direction) {
+    if (cardRef.current) {
+      cardRef.current.style.transform = `translateX(${
+        direction * 1500
+      }px) rotateZ(${direction * 100}deg)`;
+    }
+    setTimeout(() => {
+      cardRef.current.style.transform = `translateX(0) rotateZ(0)`;
+    }, 500);
   }
+
   return (
     <div className={styles.home} ref={background}>
       {user ? (
         <>
           {location == "/" && (
-            <div className={styles.matchOption} onMouseEnter={()=>handleMouseHover(-5)} onMouseLeave={()=>handleMouseHover(0)} ref={leftSide} onClick={shiftArr}>
-                <FaXmark
-                  color="red"
-                  style={{
-                    width: "2.5rem",
-                    height: "2.5rem",
-                  }}
-                />
+            <div
+              className={styles.matchOption}
+              onMouseEnter={() => handleMouseHover(-5)}
+              onMouseLeave={() => handleMouseHover(0)}
+              ref={leftSide}
+              onClick={() => {
+                handleClick(-1);
+                setTimeout(() => {
+                  shiftArr();
+                }, 600);
+              }}
+            >
+              <FaXmark
+                color="var(--dark-300)"
+                style={{
+                  width: "2.5rem",
+                  height: "2.5rem",
+                }}
+              />
             </div>
           )}
           <div className={styles.userContainer} ref={cardRef}>
@@ -127,10 +154,21 @@ export default function ProfileCard(userArr) {
             </div>
           </div>
           {location == "/" && (
-            <div className={styles.matchOption} onMouseEnter={()=>handleMouseHover(5)} onMouseLeave={()=>handleMouseHover(0)} ref={rightSide} onClick={shiftArr}>
+            <div
+              className={styles.matchOption}
+              onMouseEnter={() => handleMouseHover(5)}
+              onMouseLeave={() => handleMouseHover(0)}
+              ref={rightSide}
+              onClick={() => {
+                handleClick(1);
+                setTimeout(() => {
+                  shiftArr();
+                }, 600);
+              }}
+            >
               <button onClick={() => shiftArr()}>
                 <FaCheck
-                  color="green"
+                  color="var(--primary-200)"
                   style={{
                     width: "2rem",
                     height: "2rem",

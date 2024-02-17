@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
 .home {
-  width: 70rem;
-  height: 57rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Abel", sans-serif;
   background-color: var(--dark-100);
+  transition-duration: 0.5s;
 }
 .userContainer {
   width: 36rem;
@@ -26,13 +27,13 @@
 }
 
 .matchOption {
-  width: 15rem;
+  width: 30rem;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary-text);
-  background-color: white;
+  background-color: var(--dark-100);
   transition-duration: 0.5s;
   transition-property: background-color;
   cursor: pointer;

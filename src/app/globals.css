@@ -41,6 +41,7 @@ html * {
   position: relative;
   height: 100vh;
   background-color: var(--dark-100);
+  overflow: hidden;
 }
 body {
   background-color: var(--dark-100);
