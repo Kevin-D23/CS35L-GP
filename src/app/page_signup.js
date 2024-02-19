@@ -51,7 +51,7 @@ const Page = () => {
                 <a href = "#">Computer Science and Engineering</a>
             </div>
         </div>
-        
+
         <div className = "text">What classes are you looking for study buddies in?</div>
         <div className = "underline"></div>
 
@@ -100,7 +100,7 @@ const Page = () => {
 
         <br/>
         <button className = "submit">Submit</button>
-        
+
       </div>
     </div>
   );
@@ -111,7 +111,6 @@ function submit({onSubmit}) {
     <button className = "submit" onClick = {onSubmit}></button>
   );
 }
-
 function handleSubmit() {
   return
 }
