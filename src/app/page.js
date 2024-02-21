@@ -3,8 +3,12 @@ import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import styles from "../../CSS Modules/home.module.css";
 import ProfileCard from "../../components/ProfileCard";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+  // if (true) {
+  //   redirect("./signup");
+  // }
   const session = await getServerSession(options);
 
   const users = [
