@@ -57,11 +57,18 @@ async function Profilepic() {
   }
 }
 
-export default function editing() {
+export default async function editing() {
+  const session = await getServerSession(options);
+  let image = session?.user?.image;
 
   return (<div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop:"100px" }}>
   <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-  <Profilepic/>
+  <Image
+        src={image}
+        width={50}
+        height={50}
+        alt={"profile picture"}
+      />
     <div style={{ marginLeft: "10px" }}>
     <h1 className={`${styles.largerText} `}>
     <Name/>
