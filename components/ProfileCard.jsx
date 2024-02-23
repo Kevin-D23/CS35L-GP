@@ -53,9 +53,9 @@ export default function ProfileCard(userArr) {
         background.current.style.backgroundColor = "var(--dark-200)";
       } else if (angle > 0) {
         cardRef.current.style.transformOrigin = "80% 80%";
-        rightSide.current.style.backgroundColor = "var(--primary-200)";
-        background.current.style.backgroundColor = "var(--primary-200)";
-        leftSide.current.style.backgroundColor = "var(--primary-200)";
+        rightSide.current.style.backgroundColor = "var(--primary-300)";
+        background.current.style.backgroundColor = "var(--primary-300)";
+        leftSide.current.style.backgroundColor = "var(--primary-300)";
       } else {
         leftSide.current.style.backgroundColor = "var(--dark-100)";
         rightSide.current.style.backgroundColor = "var(--dark-100)";
@@ -126,7 +126,7 @@ export default function ProfileCard(userArr) {
             </div>
             <div className={styles.right}>
               <div className={styles.coursesContainer}>
-                <h2 style={{ marginTop: "20px" }}>COURSES</h2>
+                <h2>COURSES</h2>
                 <ul>
                   {user.courses.map((course, key) => {
                     return <li key={key}>{course}</li>;
