@@ -12,30 +12,38 @@ export default async function NavBar() {
 
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
-  let image = session.user.image;
+  let image = session?.user?.image;
   return (
-    <div className={styles.navbar}>
-      <div className={styles.userContainer}>
-        <Image
-          src={image}
-          className={styles.profilePicture}
-          width={1000}
-          height={1000}
-          alt=""
-        />
-        <div className={styles.userInfoContainer}>
-          <h1 className={styles.name}>{name[0] + " " + name[1][0] + "."}</h1>
-          <h2 className={styles.email}>{email}</h2>
+    <>
+      {session ? (
+        <div className={styles.navbar}>
+          <div className={styles.userContainer}>
+            <Image
+              src={image}
+              className={styles.profilePicture}
+              width={1000}
+              height={1000}
+              alt=""
+            />
+            <div className={styles.userInfoContainer}>
+              <h1 className={styles.name}>
+                {session ? name[0] + " " + name[1][0] + "." : ""}
+              </h1>
+              <h2 className={styles.email}>{email}</h2>
+            </div>
+          </div>
+          <NavBtns />
+          <Link
+            className={styles.signoutBtn}
+            href="/api/auth/signout?callbackUrl=/"
+          >
+            <IoMdExit className={styles.icon} />
+            Sign Out
+          </Link>
         </div>
-      </div>
-      <NavBtns />
-      <Link
-        className={styles.signoutBtn}
-        href="/api/auth/signout?callbackUrl=/"
-      >
-        <IoMdExit className={styles.icon} />
-        Sign Out
-      </Link>
-    </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
