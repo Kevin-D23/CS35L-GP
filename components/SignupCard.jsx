@@ -76,17 +76,27 @@ const SignupCard = ({ sessionName }) => {
   ];
 
   function handleSubmit() {
-    const data = {
-      name: name,
-      age: age,
-      year: year,
-      major: selectedMajor,
-      classes: selectedCourses,
-      studyStart: startTime,
-      studyEnd: endTime,
-      locations: selectedLocations,
-    };
-    console.log(data);
+    if (
+      name &&
+      selectedMajor &&
+      year &&
+      selectedCourses.length != 0 &&
+      selectedLocations.length != 0 &&
+      startTime &&
+      endTime
+    ) {
+      const data = {
+        name: name,
+        age: age,
+        year: year,
+        major: selectedMajor,
+        classes: selectedCourses,
+        studyStart: startTime,
+        studyEnd: endTime,
+        locations: selectedLocations,
+      };
+      console.log(data);
+    }
   }
 
   function updateCourses(x) {
@@ -213,7 +223,9 @@ const SignupCard = ({ sessionName }) => {
           selectedMajor &&
           year &&
           selectedCourses.length != 0 &&
-          selectedLocations.length != 0
+          selectedLocations.length != 0 &&
+          startTime &&
+          endTime
             ? { backgroundColor: "var(--primary-400" }
             : {}
         }
