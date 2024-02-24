@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "../CSS Modules/signup.module.css";
 import Select from "react-select";
+import { useRouter } from "next/navigation";
 
 const SignupCard = ({ sessionName }) => {
   const [selectedMajor, setSelectedMajor] = useState(null);
@@ -11,18 +12,25 @@ const SignupCard = ({ sessionName }) => {
   const [displayCourses, setDisplayCourses] = useState([]);
   const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
-  const [startTime, setStartTime] = useState(0);
+  const [startTime, setStartTime] = useState(null);
+  const [startTimeIndex, setStartTimeIndex] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const [endTimeIndex, setEndTimeIndex] = useState(null);
   const [selectedLocations, setselectedLocations] = useState([]);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+  const router = useRouter();
 
   const departments = [
     { value: "0", label: "COM SCI" },
     { value: "1", label: "ENGR" },
   ];
   const majors = [
-    { value: 0, label: "Computer Science" },
-    { value: 1, label: "Computer Engineering" },
-    { value: 2, label: "Computer Science and Engineering" },
+    { value: "Computer Science", label: "Computer Science" },
+    { value: "Computer Engineering", label: "Computer Engineering" },
+    {
+      value: "Computer Science and Engineering",
+      label: "Computer Science and Engineering",
+    },
   ];
 
   const courses = [
@@ -66,13 +74,13 @@ const SignupCard = ({ sessionName }) => {
     { value: 24, label: "11:59pm" },
   ];
 
-  let endTimes = startTimes.slice(startTime + 1, 24);
+  let endTimes = startTimes.slice(startTimeIndex + 1, 25);
 
   const locations = [
-    { value: 0, label: "YRL" },
-    { value: 1, label: "Boelter" },
-    { value: 2, label: "Powell" },
-    { value: 3, label: "Olympic" },
+    { value: "YRL", label: "YRL" },
+    { value: "Boelter", label: "Boelter" },
+    { value: "Powell", label: "Powell" },
+    { value: "Olympic", label: "Olympic" },
   ];
 
   function handleSubmit() {
@@ -83,7 +91,8 @@ const SignupCard = ({ sessionName }) => {
       selectedCourses.length != 0 &&
       selectedLocations.length != 0 &&
       startTime &&
-      endTime
+      endTime &&
+      startTimeIndex < endTimeIndex
     ) {
       const data = {
         name: name,
@@ -96,6 +105,9 @@ const SignupCard = ({ sessionName }) => {
         locations: selectedLocations,
       };
       console.log(data);
+      router.push("/");
+    } else {
+      setSubmitAttempted(true);
     }
   }
 
@@ -110,7 +122,9 @@ const SignupCard = ({ sessionName }) => {
       <h1>Create a Free Account</h1>
       <div className={styles.textInputs}>
         <label className={styles.textInput}>
-          Name
+          <div style={submitAttempted && !name ? { color: "red" } : {}}>
+            Name
+          </div>
           <input
             type="text"
             value={name}
@@ -128,7 +142,9 @@ const SignupCard = ({ sessionName }) => {
       </div>
       <div className={styles.yearMajorContainer}>
         <label>
-          What year are you?
+          <div style={submitAttempted && !year ? { color: "red" } : {}}>
+            What year are you?
+          </div>
           <Select
             className={styles.yearMajor}
             options={years}
@@ -136,7 +152,11 @@ const SignupCard = ({ sessionName }) => {
           />
         </label>
         <label>
-          What is your major?
+          <div
+            style={submitAttempted && !selectedMajor ? { color: "red" } : {}}
+          >
+            What is your major?
+          </div>
           <Select
             className={styles.yearMajor}
             options={majors}
@@ -146,7 +166,14 @@ const SignupCard = ({ sessionName }) => {
       </div>
       <div className={styles.courseSelectionContainer}>
         <div>
-          What classes are you looking for study buddies in?
+          <div
+            style={
+              submitAttempted && !selectedCourses.length ? { color: "red" } : {}
+            }
+          >
+            What classes are you looking for study buddies in?
+          </div>
+
           <Select
             className={styles.courseSelect}
             options={departments}
@@ -181,24 +208,54 @@ const SignupCard = ({ sessionName }) => {
       </div>
       <div className={styles.timeSelectContainer}>
         <label>
-          Study time?
+          <div
+            style={
+              submitAttempted && (!startTime || startTimeIndex >= endTimeIndex)
+                ? { color: "red" }
+                : {}
+            }
+          >
+            Study time?
+          </div>
+
           <Select
             className={styles.time}
             options={startTimes}
-            onChange={(e) => setStartTime(e.value)}
+            onChange={(e) => {
+              setStartTime(e.label);
+              setStartTimeIndex(e.value);
+            }}
           />
         </label>
         <label>
-          End
+          <div
+            style={
+              submitAttempted && (!endTime || startTimeIndex >= endTimeIndex)
+                ? { color: "red" }
+                : {}
+            }
+          >
+            End
+          </div>
+
           <Select
             className={styles.time}
             options={endTimes}
-            onChange={(e) => setEndTime(e.value)}
+            onChange={(e) => {
+              setEndTime(e.label);
+              setEndTimeIndex(e.value);
+            }}
           />
         </label>
       </div>
       <div className={styles.locationSelectContainer}>
-        Where do you like to study?
+        <div
+          style={
+            submitAttempted && !selectedLocations.length ? { color: "red" } : {}
+          }
+        >
+          Where do you like to study?
+        </div>
         <Select
           className={styles.locationSelect}
           options={locations}
@@ -225,7 +282,8 @@ const SignupCard = ({ sessionName }) => {
           selectedCourses.length != 0 &&
           selectedLocations.length != 0 &&
           startTime &&
-          endTime
+          endTime &&
+          startTimeIndex < endTimeIndex
             ? { backgroundColor: "var(--primary-400" }
             : {}
         }
