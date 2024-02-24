@@ -11,6 +11,7 @@
 .editButton {
   font-size: 1em;
   color:#ffffff;
+  width: 50px;
 }
 
 .editButton:hover {
