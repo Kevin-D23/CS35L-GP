@@ -13,7 +13,7 @@ export default function matches() {
       email: "michael@yahoo.com",
     },
     {
-      name: "Brittany Chen",
+      name: "Britney Chen",
       userID: "294829102",
       email: "brittany@hotmail.com",
     },

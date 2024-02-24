@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
+.group {
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-family: "Abel", sans-serif;
+    color: white;
+    background-color: var(--dark-300);
+    border-width: 2px;
+    border-color:black;
+    width: 1000px;
+}
+
+.group:hover {
+    background-color: blueviolet;
+    color: white;
+}
+
+.members {
+    display: none;
+    margin-top: 10px;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    flex-direction: column;
+}
+
+.members a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 0;
+    font-size: 8px;
+  }
+  
+.members.open {
+    display: flex;
+    max-height: 100px;
+}
+
+

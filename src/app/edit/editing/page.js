@@ -16,7 +16,7 @@ let times = [
 ];
 let classes = ["CS35L", "Intro to being swag", "Naptime 101"];
 let hobby = ["eat", "sleep", "nap"];
-let destinations = ["Sproul", "Rieber", "Hendrick"];
+let destinations = ["Sproul", "Rieber", "Hedrick"];
 
 function EditButton() {
   return (
