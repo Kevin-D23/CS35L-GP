@@ -12,12 +12,14 @@
 }
 .userContainer {
   width: 36rem;
+  min-width: 36rem;
   display: flex;
   background-color: var(--dark-200);
   transform: rotateZ(0deg);
   transform-style: preserve-3d;
   transition-property: transform;
   transition-duration: 0.5s;
+  aspect-ratio: auto;
 }
 
 .userContainer h2 {
