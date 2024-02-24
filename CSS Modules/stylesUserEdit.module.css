@@ -8,6 +8,16 @@
   color:#ffffff;
 }
 
+.editButton {
+  font-size: 1em;
+  color:#ffffff;
+}
+
+.editButton:hover {
+  font-weight: bold;
+  color: blueviolet;
+}
+
 .shiftedText {
   margin-left: 600px;
 }

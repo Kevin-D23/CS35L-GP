@@ -8,11 +8,13 @@ import { options } from "../api/auth/[...nextauth]/options";
 function EditButton() {
   return (
     <Link href="/edit/editing"> {}
-    <button className={`${styles.largerText}`}>
+    <button className={`${styles.editButton}`}>
       edit
     </button>
     </Link>
-  
+
+    // original
+    // <button className={`${styles.largerText}`}></button>
   );
 }
 

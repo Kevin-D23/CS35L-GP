@@ -21,7 +21,7 @@ let destinations = ["Sproul", "Rieber", "Hendrick"];
 function EditButton() {
   return (
     <Link href="/edit"> {}
-    <button className={`${styles.largerText}`}>
+    <button className={`${styles.editButton}`}>
       save
     </button>
     </Link>
