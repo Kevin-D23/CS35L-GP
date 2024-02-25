@@ -22,14 +22,18 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 
 const session = await getServerSession(options);
 let email = session?.user?.email;
+
+
+/* To get fields from user object: */
 const user = getUser(email) --> returns user object
+example: 
+let name = user.name
+
+
 const userArray = getAllUsers() --> returns array of user objects
 
-/* To get fields from DB: */
-let field = user.field
-
-ex: 
-let name = user.name
+let changes = {name: "Haohan Smith, age: 16}
+updateUser(email, changes) --> changes fields in user object and returns newly updated object
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
