@@ -3,7 +3,7 @@ import styles from "../CSS Modules/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
-import { options } from "../src/app/api/auth/[...nextauth]/options";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 import { IoMdExit } from "react-icons/io";
 import NavBtns from "./NavBtns";
 
