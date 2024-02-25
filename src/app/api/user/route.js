@@ -8,3 +8,12 @@ export async function POST(req) {
   await User.create({ name, email });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
+<<<<<<< Updated upstream
+=======
+
+export async function getUser(email) {
+  await connect();
+  let result = await User.findOne({ email });
+  return result;
+}
+>>>>>>> Stashed changes
