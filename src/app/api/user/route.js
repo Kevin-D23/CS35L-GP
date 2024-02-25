@@ -14,3 +14,9 @@ export async function getUser(email) {
   let result = await User.findOne({ email });
   return result;
 }
+
+export async function getAllUsers() {
+  await connect();
+  let result = await User.find()
+  return result;
+}

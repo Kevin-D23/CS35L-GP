@@ -1,6 +1,5 @@
 import User from "@/app/(models)/User";
 import GoogleProvider from "next-auth/providers/google";
-import { getUser } from "@/app/api/user/route";
 
 export const options = {
   providers: [
@@ -45,7 +44,6 @@ export const options = {
             if (res.ok) return user;
           } catch (err) {}
         } else {
-          console.log(await getUser(email))
           return user;
         }
       }

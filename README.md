@@ -16,18 +16,20 @@ bun dev
 
 How to fetch user information:
 ```
-import { getUser } from "@/app/api/user/route";
+import { getUser, getAllUsers } from "@/app/api/user/route";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
 const session = await getServerSession(options);
 let email = session?.user?.email;
-const user = getUser(email) --> getUser() returns user object
+const user = getUser(email) --> returns user object
+const userArray = getAllUsers() --> returns array of user objects
 
 /* To get fields from DB: */
 let field = user.field
 
-ex: let name = user.name
+ex: 
+let name = user.name
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
