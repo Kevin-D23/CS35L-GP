@@ -9,9 +9,11 @@ const SignupCard = ({ sessionName }) => {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [name, setName] = useState(sessionName);
   const [age, setAge] = useState(18);
+  const [bio, setBio] = useState(null);
   const [displayCourses, setDisplayCourses] = useState([]);
   const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
+  const [selectedDays, setselectedDays] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [startTimeIndex, setStartTimeIndex] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -44,6 +46,16 @@ const SignupCard = ({ sessionName }) => {
     { value: 3, label: "Year 3" },
     { value: 4, label: "Year 4" },
     { value: 5, label: "Year 5" },
+  ];
+
+  const days = [
+    {value: 1, label: "Sunday"},
+    {value: 2, label: "Monday"},
+    {value: 3, label: "Tuesday"},
+    {value: 4, label: "Wednesday"},
+    {value: 5, label: "Thursday"},
+    {value: 6, label: "Friday"},
+    {value: 7, label: "Saturday"},
   ];
 
   const startTimes = [
@@ -86,8 +98,10 @@ const SignupCard = ({ sessionName }) => {
   function handleSubmit() {
     if (
       name &&
+      age &&
       selectedMajor &&
       year &&
+      bio &&
       selectedCourses.length != 0 &&
       selectedLocations.length != 0 &&
       startTime &&
@@ -99,7 +113,9 @@ const SignupCard = ({ sessionName }) => {
         age: age,
         year: year,
         major: selectedMajor,
+        bio: bio,
         classes: selectedCourses,
+        days: selectedDays,
         studyStart: startTime,
         studyEnd: endTime,
         locations: selectedLocations,
@@ -164,6 +180,16 @@ const SignupCard = ({ sessionName }) => {
           />
         </label>
       </div>
+      <div className={styles.bioContainer}>
+        <div style={submitAttempted && !bio ? { color: "red" } : {}}>
+            Write a short bio about you!
+          </div>
+          <textarea
+            className={styles.bioInput}
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          />
+      </div>
       <div className={styles.courseSelectionContainer}>
         <div>
           <div
@@ -206,6 +232,31 @@ const SignupCard = ({ sessionName }) => {
           </div>
         </div>
       </div>
+      <div className={styles.daysSelectContainer}>
+        <div
+          style={
+            submitAttempted && !selectedLocations.length ? { color: "red" } : {}
+          }
+        >
+          What days are you available?
+        </div>
+        <Select
+          className={styles.daysSelect}
+          options={days}
+          isMulti
+          onChange={(e) => {
+            let x = [];
+            for (let i = 0; i < e.length; i++) x.push(e[i].label);
+            setselectedDays(x);
+          }}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              color: "var(--primary-300)",
+            }),
+          }}
+        />
+      </div>
       <div className={styles.timeSelectContainer}>
         <label>
           <div
@@ -215,7 +266,7 @@ const SignupCard = ({ sessionName }) => {
                 : {}
             }
           >
-            Study time?
+            Study Time: Start
           </div>
 
           <Select
@@ -235,7 +286,7 @@ const SignupCard = ({ sessionName }) => {
                 : {}
             }
           >
-            End
+            Study Time: End
           </div>
 
           <Select
