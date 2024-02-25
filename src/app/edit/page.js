@@ -12,9 +12,6 @@ function EditButton() {
       edit
     </button>
     </Link>
-
-    // original
-    // <button className={`${styles.largerText}`}></button>
   );
 }
 

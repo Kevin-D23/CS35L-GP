@@ -16,7 +16,14 @@ export default async function NavBar() {
   return (
     <>
       {session ? (
-        <div className={styles.navbar}>
+        <div className={styles.navbar}> 
+        <br/>
+        <div style={{display: 'flex', width: '100%'}}>
+        <img 
+          src="/icons/StudentsInfernoLogo.png"
+          style={{width: '250px'}}
+        />
+        </div>
           <div className={styles.userContainer}>
             <Image
               src={image}
