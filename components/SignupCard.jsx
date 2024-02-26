@@ -9,7 +9,7 @@ const SignupCard = ({ sessionName }) => {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [name, setName] = useState(sessionName);
   const [age, setAge] = useState(18);
-  const [bio, setBio] = useState(null);
+  const [bio, setBio] = useState("");
   const [displayCourses, setDisplayCourses] = useState([]);
   const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
@@ -49,13 +49,13 @@ const SignupCard = ({ sessionName }) => {
   ];
 
   const days = [
-    {value: 1, label: "Sunday"},
-    {value: 2, label: "Monday"},
-    {value: 3, label: "Tuesday"},
-    {value: 4, label: "Wednesday"},
-    {value: 5, label: "Thursday"},
-    {value: 6, label: "Friday"},
-    {value: 7, label: "Saturday"},
+    { value: 1, label: "Sunday" },
+    { value: 2, label: "Monday" },
+    { value: 3, label: "Tuesday" },
+    { value: 4, label: "Wednesday" },
+    { value: 5, label: "Thursday" },
+    { value: 6, label: "Friday" },
+    { value: 7, label: "Saturday" },
   ];
 
   const startTimes = [
@@ -182,13 +182,13 @@ const SignupCard = ({ sessionName }) => {
       </div>
       <div className={styles.bioContainer}>
         <div style={submitAttempted && !bio ? { color: "red" } : {}}>
-            Write a short bio about you!
-          </div>
-          <textarea
-            className={styles.bioInput}
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
+          Write a short bio about you!
+        </div>
+        <textarea
+          className={styles.bioInput}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
       </div>
       <div className={styles.courseSelectionContainer}>
         <div>

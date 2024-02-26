@@ -6,7 +6,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 const Page = async () => {
   const session = await getServerSession(options);
   return (
-    <div className={styles.signupContainer}>
+    <div>
       <SignupCard sessionName={session?.user?.name} />
     </div>
   );
