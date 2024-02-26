@@ -32,6 +32,15 @@ export const options = {
         const userExists = await User.findOne({ email });
         if (!userExists) {
           try {
+            // Default information
+            const defaultAge = 0;
+            const defaultYear = 0;
+            const defaultMajor = '';
+            const defaultClasses = [''];
+            const defaultStudyStart = 0;
+            const defaultStudentEnd = 0;
+            const defaultLocations = [''];
+            const defaultUserCompleted = false;
             const res = await fetch("http://localhost:3000/api/user", {
               method: "POST",
               headers: {
@@ -40,6 +49,14 @@ export const options = {
               body: JSON.stringify({
                 name,
                 email,
+                defaultAge,
+                defaultYear,
+                defaultMajor,
+                defaultClasses,
+                defaultStudyStart,
+                defaultStudyEnd,
+                defaultLocations,
+                defaultUserCompleted
               }),
             });
             if (res.ok) return user;
