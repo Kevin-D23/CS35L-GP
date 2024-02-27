@@ -1,5 +1,6 @@
 import User from "@/app/(models)/User";
 import GoogleProvider from "next-auth/providers/google";
+import { getUser } from "../../user/route";
 
 export const options = {
   providers: [
@@ -27,8 +28,7 @@ export const options = {
     async signIn({ user, account }) {
       if (account.provider === "google") {
         const { name, email } = user;
-
-        const userExists = await User.findOne({ email });
+        const userExists = await getUser(email);
         if (!userExists) {
           try {
             const res = await fetch("http://localhost:3000/api/user", {
@@ -42,7 +42,9 @@ export const options = {
               }),
             });
             if (res.ok) return user;
-          } catch (err) {}
+          } catch (err) {
+            console.log(err);
+          }
         } else {
           return user;
         }
