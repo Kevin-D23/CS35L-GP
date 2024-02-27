@@ -4,7 +4,7 @@ import styles from "../CSS Modules/signup.module.css";
 import Select from "react-select";
 import { useRouter } from "next/navigation";
 
-const SignupCard = ({ sessionName }) => {
+const SignupCard = ({ sessionName, submit }) => {
   const [selectedMajor, setSelectedMajor] = useState(null);
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [name, setName] = useState(sessionName);
@@ -120,7 +120,7 @@ const SignupCard = ({ sessionName }) => {
         studyEnd: endTime,
         locations: selectedLocations,
       };
-      console.log(data);
+      submit({name: "alkj"});
       router.push("/");
     } else {
       setSubmitAttempted(true);

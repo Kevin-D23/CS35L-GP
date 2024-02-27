@@ -39,6 +39,7 @@ export const options = {
               body: JSON.stringify({
                 name,
                 email,
+                signupCompleted: false
               }),
             });
             if (res.ok) return user;

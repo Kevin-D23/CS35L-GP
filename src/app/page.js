@@ -4,12 +4,13 @@ import { options } from "./api/auth/[...nextauth]/options";
 import styles from "../../CSS Modules/home.module.css";
 import ProfileCard from "../../components/ProfileCard";
 import { redirect } from "next/navigation";
+import { getUser } from "./api/user/route";
 
 export default async function Home() {
-  // if (true) {
-  //   redirect("./signup");
-  // }
   const session = await getServerSession(options);
+  const email = session?.user?.email;
+  const user = await getUser(email);
+  if (!user.signupCompleted) redirect("/signup");
 
   const users = [
     {

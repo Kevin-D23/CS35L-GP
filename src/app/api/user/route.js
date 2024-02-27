@@ -3,9 +3,9 @@ import User from "../../(models)/User";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { name, email } = await req.json();
+  const { name, email, signupCompleted } = await req.json();
   await connect();
-  await User.create({ name, email });
+  await User.create({ name: name, email: email, signupCompleted: signupCompleted });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
 

@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-How to fetch user information:
+How to fetch user information (ONLY WORKS ON SERVER SIDE COMPONENTS):
 ```
 import { getUser, getAllUsers } from "@/app/api/user/route";
 import { getServerSession } from "next-auth";
