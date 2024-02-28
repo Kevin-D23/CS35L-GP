@@ -110,17 +110,18 @@ const SignupCard = ({ sessionName, submit }) => {
     ) {
       const data = {
         name: name,
-        age: age,
-        year: year,
-        major: selectedMajor,
-        bio: bio,
-        classes: selectedCourses,
-        days: selectedDays,
-        studyStart: startTime,
-        studyEnd: endTime,
-        locations: selectedLocations,
+        // age: age,
+        // year: year,
+        // major: selectedMajor,
+        // bio: bio,
+        // classes: selectedCourses,
+        // days: selectedDays,
+        // studyStart: startTime,
+        // studyEnd: endTime,
+        // locations: selectedLocations,
+        signupCompleted: true
       };
-      submit({name: "alkj"});
+      submit(data);
       router.push("/");
     } else {
       setSubmitAttempted(true);
