@@ -43,7 +43,7 @@ export default async function edit() {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        marginTop: "100px",
+        marginTop: "50px",
       }}
     >
       <div
@@ -66,7 +66,10 @@ export default async function edit() {
         <h1 className={`${styles.largerText} `}>Bio:</h1>
       </div>
       <h1 className={`${styles.largerText} `}> Hi this is my bio!</h1>
-      <div style={{ marginTop: "10px" }}>
+      <h1 className={`${styles.largerText} `}>
+            Year: 2
+          </h1>
+      <div style={{ marginTop: "10px" }}>    
         <h1 className={`${styles.largerText} `}>Classes:</h1>
         <div className={`${styles.scrollableList}`}>
           <ul>
@@ -77,7 +80,8 @@ export default async function edit() {
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
-        <h1 className={`${styles.largerText}`}>Times Available:</h1>
+        <h1 className={`${styles.largerText}`}>Times Available: 8am -9 pm</h1>
+        <h1 className={`${styles.largerText}`}>Days Available:</h1>
         <div className={`${styles.scrollableList} `}>
           <ul>
             {times.map((item, index) => (
