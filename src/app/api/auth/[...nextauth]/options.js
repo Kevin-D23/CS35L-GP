@@ -28,6 +28,8 @@ export const options = {
     async signIn({ user, account }) {
       if (account.provider === "google") {
         const { name, email } = user;
+        
+        // check if user exists in database, if not, add user 
         const userExists = await getUser(email);
         if (!userExists) {
           try {

@@ -2,10 +2,15 @@ import connect from "../connect";
 import User from "../../(models)/User";
 import { NextResponse } from "next/server";
 
+// make POST request whenever adding a new user to database; req is a JSON object
 export async function POST(req) {
   const { name, email, signupCompleted } = await req.json();
   await connect();
-  await User.create({ name: name, email: email, signupCompleted: signupCompleted });
+  await User.create({
+    name: name,
+    email: email,
+    signupCompleted: signupCompleted,
+  });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
 
@@ -16,10 +21,10 @@ export async function getUser(email) {
   return result;
 }
 
-// returns array of all users
+// returns array of all users with completed accounts
 export async function getAllUsers() {
   await connect();
-  let result = await User.find();
+  let result = await User.find({signupCompleted: true});
   return result;
 }
 

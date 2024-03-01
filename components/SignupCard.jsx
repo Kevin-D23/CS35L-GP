@@ -236,7 +236,7 @@ const SignupCard = ({ sessionName, submit }) => {
       <div className={styles.daysSelectContainer}>
         <div
           style={
-            submitAttempted && !selectedLocations.length ? { color: "red" } : {}
+            submitAttempted && !selectedDays.length ? { color: "red" } : {}
           }
         >
           What days are you available?
