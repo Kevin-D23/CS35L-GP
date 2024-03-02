@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -20,11 +18,12 @@ import { getUser, getAllUsers } from "@/app/api/user/route";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
+# get current session and user email
 const session = await getServerSession(options);
 let email = session?.user?.email;
 
 
-/* To get fields from user object: */
+# To get fields from user object:
 const user = getUser(email) --> returns user object
 example: 
 let name = user.name

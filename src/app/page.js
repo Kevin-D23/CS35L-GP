@@ -9,9 +9,7 @@ export default async function Home() {
   const session = await getServerSession(options);
   const email = session?.user?.email;
   const user = await getUser(email);
-  if (!user?.signupCompleted) redirect("/signup");
-
-  console.log(await getAllUsers());
+  if (!user.signupCompleted) redirect("/signup");
 
   const users = [
     {
