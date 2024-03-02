@@ -1,44 +1,65 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from "../../../../CSS Modules/signup.module.css";
 import Select from "react-select";
 import Link from "next/link";
 import style from "../../../../CSS Modules/stylesUserEdit.module.css";
-
+import {processData} from "./actions"
+import Image from "next/image";
 function EditButton({ onSave}) {
 
 
   const handleEditClick = () => {
     onSave();
- 
+ window.location.href = '/edit';
 
   };
 
-  return ( <Link href="/edit">
-  {" "}
-  {}
+  return ( 
    <button className={`${style.editButton}`} onClick={handleEditClick}>
       save
     </button>
-</Link>
+
    
   );
 }
 
 
 
-export default function EditableText({text}) {
+
+export default function EditableText({text,name,email,pic,times}) {
+
+
+
+
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [displayCourses, setDisplayCourses] = useState([]);
-  const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
-  const [startTime, setStartTime] = useState(null);
+  const [startTime, setStartTime] = useState([{value: 0, label:"12:00am"}]);
   const [startTimeIndex, setStartTimeIndex] = useState(null);
-  const [endTime, setEndTime] = useState(null);
+  const [endTime, setEndTime] = useState([{value: 25, label:"1:00am"}]);
   const [endTimeIndex, setEndTimeIndex] = useState(null);
-  const [selectedLocations, setselectedLocations] = useState([]);
-  const [selectedDays, setselectedDays] = useState([]);
-  const [selectedMajor, setSelectedMajor] = useState(null);
+
+
+  const [selectedDays, setselectedDays] = useState([
+    { value: 'Monday', label: 'Monday' },
+    { value: 'Wednesday', label: 'Wednesday' },
+  ]);
+
+  const days = [
+    { value: 'Monday', label: 'Monday' },
+    { value: 'Tuesday', label: 'Tuesday' },
+    { value: 'Wednesday', label: 'Wednesday' },
+    { value: 'Thursday', label: 'Thursday' },
+    { value: 'Friday', label: 'Friday' },
+    { value: 'Saturday', label: 'Saturday', },
+    { value: 'Sunday', label: 'Sunday' },
+  ];
+
+  const handleSelectChange = (selectedOptions) => {
+    setselectedDays(selectedOptions);
+  };
+
   const departments = [
     { value: "0", label: "COM SCI" },
     { value: "1", label: "ENGR" },
@@ -92,23 +113,11 @@ export default function EditableText({text}) {
     { value: 23, label: "11:00pm" },
     { value: 24, label: "11:59pm" },
   ];
-  const days = [
-    { value: 0, label: "Monday" },
-    { value: 1, label: "Tuesday" },
-    { value: 2, label: "Wednesday" },
-    { value: 3, label: "Thursday" },
-    { value: 4, label: "Friday" },
-    { value: 5, label: "Saturday" },
-    { value: 6, label: "Sunday" }
-  ]
+
   let endTimes = startTimes.slice(startTimeIndex + 1, 25);
 
-  const locations = [
-    { value: "YRL", label: "YRL" },
-    { value: "Boelter", label: "Boelter" },
-    { value: "Powell", label: "Powell" },
-    { value: "Olympic", label: "Olympic" },
-  ];
+
+
   function updateCourses(x) {
     let temp = [];
     for (let i = 0; i < courses[x].length; i++)
@@ -119,11 +128,70 @@ export default function EditableText({text}) {
 
 
 const handleSave = async () => {
+  const processedData = processData("helo");
 
+  // Display the result
+  console.log('Result:', processedData);
+  console.log('Result:', selectedCourses);
+};
+const [year, setYear] = useState(years[1]);
+const handleyear = (year) =>
+{
+setYear(year)
 };
 
+
+const [selectedMajor, setSelectedMajor] = useState(majors[0]);
+const handlemajor = (selectedMajor) =>
+{
+setSelectedMajor(selectedMajor)
+};
+
+const [selectedLocations, setselectedLocations] = useState([
+  { value: "YRL", label: "YRL" }
+]);
+
+const locations = [
+  { value: "YRL", label: "YRL" },
+  { value: "Boelter", label: "Boelter" },
+  { value: "Powell", label: "Powell" },
+  { value: "Olympic", label: "Olympic" },
+];
+
+const handleLocation = (selectedLocations) => {
+  setselectedLocations(selectedLocations);
+};
+
+const handleStartTime =(startTime)=>
+{
+  setStartTime(startTime);
+};
+
+const handleEndTime =(endTime)=>
+{
+  setEndTime(endTime);
+};
 return(
+  
   <div className={styles.signupContainer}>
+    <div style={{ display: "flex",marginBottom:"5"}}>
+
+
+<div style={{ marginLeft: "10px" }}>
+<h1 style={{color:'white',fontSize:'1em'}}>{name}</h1>
+</div>
+
+<div style={{ marginLeft: "10px" }}>
+<h1 style={{color:'white',fontSize:'1em'}}>{email}</h1>
+
+</div>
+<div style={{ marginLeft: "10px" }}><EditButton onSave={handleSave}/></div>
+
+
+    </div>
+        
+    
+
   <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Bio:</h1>
  <textarea
           className={styles.bioInput}
@@ -140,7 +208,8 @@ return(
       <Select
         className={styles.yearMajor}
         options={years}
-        onChange={(e) => setYear(e.value)}
+        value ={year}
+        onChange={handleyear}
       />
     </label>
     <label>
@@ -148,7 +217,8 @@ return(
       <Select
         className={styles.yearMajor}
         options={majors}
-        onChange={(e) => setSelectedMajor(e.value)}
+        value={selectedMajor}
+        onChange={handlemajor}
       />
     </label>
   </div>
@@ -169,10 +239,11 @@ return(
       <div>
         {department != null ? (
           <Select
-            className={styles.courseSelect}
-            options={displayCourses}
-            isMulti
-            onChange={(e) => {
+          className={styles.courseSelect}
+          options={displayCourses}
+          isMulti
+  
+          onChange={(e) =>{
               let x = [];
               for (let i = 0; i < e.length; i++) x.push(e[i].value);
               setSelectedCourses(x);
@@ -192,21 +263,12 @@ return(
   </div>
   <div className={styles.daysSelectContainer}>
   <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Days:</h1>
-    <Select
-      className={styles.daysSelect}
+  <Select
+       className={styles.locationSelect}
       options={days}
       isMulti
-      onChange={(e) => {
-        let x = [];
-        for (let i = 0; i < e.length; i++) x.push(e[i].label);
-        setselectedDays(x);
-      }}
-      styles={{
-        control: (styles) => ({
-          ...styles,
-          color: "var(--primary-300)",
-        }),
-      }}
+      value={selectedDays} // Set the initially selected values
+      onChange={handleSelectChange}
     />
   </div>
   <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Times:</h1>
@@ -217,8 +279,9 @@ return(
       <Select
         className={styles.time}
         options={startTimes}
+        value={startTime}
         onChange={(e) => {
-          setStartTime(e.label);
+          handleStartTime();
           setStartTimeIndex(e.value);
         }}
       />
@@ -229,32 +292,24 @@ return(
       <Select
         className={styles.time}
         options={endTimes}
+        value={endTime}
         onChange={(e) => {
-          setEndTime(e.label);
+          handleEndTime();
           setEndTimeIndex(e.value);
         }}
       />
     </label>
   </div>
   <div className={styles.locationSelectContainer}>
-
-    <Select
-      className={styles.locationSelect}
+  <h1 style={{color:'white',fontSize:'1em'}}>Location:</h1>
+  <Select
+       className={styles.locationSelect}
       options={locations}
       isMulti
-      onChange={(e) => {
-        let x = [];
-        for (let i = 0; i < e.length; i++) x.push(e[i].value);
-        setselectedLocations(x);
-      }}
-      styles={{
-        control: (styles) => ({
-          ...styles,
-          color: "var(--primary-300)",
-        }),
-      }}
+      value={selectedLocations} // Set the initially selected values
+      onChange={handleLocation}
     />
-    <div style={{marginTop: '5px'}}> <EditButton onSave={handleSave}/></div>
+    
     
   </div>
 

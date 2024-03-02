@@ -16,19 +16,17 @@ function EditButton() {
     </Link>
   );
 }
-
 let times = [
   "Saturday",
   "Sunday",
-  "Thursdays",
-  "Fridays",
-  "Mondays",
-  "Tuesdays",
 ];
 let classes = ["CS35L", "Intro to being swag", "Naptime 101"];
 let hobby = ["eat", "sleep", "nap"];
 let destinations = ["Sproul", "Rieber", "Hedrick"];
-
+export function getTimes()
+{
+return(times)
+}
 export default async function edit() {
   const session = await getServerSession(options);
   let name = session?.user?.name.split(" ");
