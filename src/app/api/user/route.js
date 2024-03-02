@@ -6,10 +6,31 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   const { name, email, signupCompleted } = await req.json();
   await connect();
+  const defaultAge = 0;
+  const defaultYear = 0;
+  const defaultMajor = '';
+  const defaultBio = '';
+  const defaultClasses = [];
+  const defaultDaysAvailable = [];
+  const defaultStudyStart = '';
+  const defaultStudyEnd = '';
+  const defaultLocations = [];
+  const defaultPeopleSeen = [];
+
   await User.create({
     name: name,
     email: email,
-    signupCompleted: signupCompleted,
+    age: defaultAge,
+    year: defaultYear,
+    major: defaultMajor,
+    bio: defaultBio,
+    classes: defaultClasses,
+    daysAvailable: defaultDaysAvailable,
+    studyStart: defaultStudyStart,
+    studyEnd: defaultStudyEnd,
+    locations: defaultLocations,
+    peopleSeen: defaultPeopleSeen,
+    signupCompleted: signupCompleted
   });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
@@ -31,6 +52,7 @@ export async function getAllUsers() {
 // updates user with new fields from `changes`; Returns user object with new info
 // Example: changes = {name: "Haohan Smith", age: 16}
 // ``Check @/app/(models)/User.js to view existing fields ``
+// TO DO: Update function to include new fields
 export async function updateUser(email, changes) {
   await connect();
   await User.updateOne({ email: email }, { $set: changes });

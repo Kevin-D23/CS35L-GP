@@ -4,7 +4,17 @@ const userSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
-    signupCompleted: { type: Boolean, required: true },
+    age: { type: Number, required: false },
+    year: { type: Number, required: false },
+    major: { type: String, required: false },
+    bio: { type: String, required: false },
+    classes: { type: [String], required: false},
+    daysAvailable: { type: [String], required: false },
+    studyStart: { type: String, required: false},
+    studyEnd: { type: String, required: false },
+    locations: { type: [String], required: false },
+    peopleSeen: {type: [String], required: false },
+    signupCompleted: { type: Boolean, required: true }
   },
   { timestamps: true }
 );

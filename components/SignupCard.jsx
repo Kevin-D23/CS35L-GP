@@ -13,12 +13,12 @@ const SignupCard = ({ sessionName, submit }) => {
   const [displayCourses, setDisplayCourses] = useState([]);
   const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
-  const [selectedDays, setselectedDays] = useState([]);
+  const [selectedDays, setSelectedDays] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [startTimeIndex, setStartTimeIndex] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [endTimeIndex, setEndTimeIndex] = useState(null);
-  const [selectedLocations, setselectedLocations] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const router = useRouter();
 
@@ -95,6 +95,11 @@ const SignupCard = ({ sessionName, submit }) => {
     { value: "Olympic", label: "Olympic" },
   ];
 
+  // TO DO: This >.<
+  const peopleSeen = [
+    ''
+  ]
+
   function handleSubmit() {
     if (
       name &&
@@ -110,15 +115,16 @@ const SignupCard = ({ sessionName, submit }) => {
     ) {
       const data = {
         name: name,
-        // age: age,
-        // year: year,
-        // major: selectedMajor,
-        // bio: bio,
-        // classes: selectedCourses,
-        // days: selectedDays,
-        // studyStart: startTime,
-        // studyEnd: endTime,
-        // locations: selectedLocations,
+        age: age,
+        year: year,
+        major: selectedMajor,
+        bio: bio,
+        classes: selectedCourses,
+        daysAvailable: selectedDays,
+        studyStart: startTime,
+        studyEnd: endTime,
+        locations: selectedLocations,
+        peopleSeen: peopleSeen,
         signupCompleted: true
       };
       submit(data);
@@ -248,7 +254,7 @@ const SignupCard = ({ sessionName, submit }) => {
           onChange={(e) => {
             let x = [];
             for (let i = 0; i < e.length; i++) x.push(e[i].label);
-            setselectedDays(x);
+            setSelectedDays(x);
           }}
           styles={{
             control: (styles) => ({
@@ -315,7 +321,7 @@ const SignupCard = ({ sessionName, submit }) => {
           onChange={(e) => {
             let x = [];
             for (let i = 0; i < e.length; i++) x.push(e[i].value);
-            setselectedLocations(x);
+            setSelectedLocations(x);
           }}
           styles={{
             control: (styles) => ({
