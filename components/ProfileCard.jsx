@@ -104,7 +104,12 @@ export default function ProfileCard(userArr) {
           )}
           <div className={styles.userContainer} ref={cardRef}>
             <div className={styles.left}>
-              <div className={styles.imageContainer}></div>
+              <div className={styles.imageContainer}>
+                <img 
+                  src="/icons/haohan.jpeg"
+                  style={{width: '100%'},{height: '100%'}}
+                />
+              </div>
               <div className={styles.bioContainer}>
                 <h1>{user.name.toUpperCase()}</h1>
                 <h2>
