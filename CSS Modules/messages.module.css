@@ -1,0 +1,27 @@
+.box{
+    color:red;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 75%;
+}
+.messagePart{
+    width:100%;
+}
+.senderProfile{
+    width: 10%;
+    height: 90%;
+}
+.sender{
+    background-color: green;
+    height: 10%;
+}
+.messageBody{
+    background-color: blueviolet;
+    height: 80%;
+}
+.recipients{
+    background-color: red;
+    height: 10%;
+}

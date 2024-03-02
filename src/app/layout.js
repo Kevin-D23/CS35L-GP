@@ -16,7 +16,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
+       <NavBar />
         <div className="main" params={params}>
           {children}
         </div>
