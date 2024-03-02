@@ -5,14 +5,13 @@ import { redirect } from "next/navigation";
 import { getUser } from "./api/user/route";
 import { getAllUsers } from "./api/user/route";
 
-
 export default async function Home() {
   const session = await getServerSession(options);
   const email = session?.user?.email;
   const user = await getUser(email);
-  if (!user.signupCompleted) redirect("/signup");
+  if (!user?.signupCompleted) redirect("/signup");
 
-  console.log(await getAllUsers())
+  console.log(await getAllUsers());
 
   const users = [
     {

@@ -8,7 +8,7 @@ export default async function matches() {
   const session = await getServerSession(options)
   const email = session?.user?.email;
   const user = await getUser(email);
-  if (!user.signupCompleted) redirect("/signup");
+  if (!user?.signupCompleted) redirect("/signup");
   
 
   return (

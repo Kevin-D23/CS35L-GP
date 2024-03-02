@@ -10,7 +10,7 @@ const Page = async () => {
   const name = session?.user?.name;
   const email = session?.user?.email;
   const user = await getUser(email);
-  const signupCompleted = user.signupCompleted;
+  const signupCompleted = user?.signupCompleted;
 
   if (signupCompleted) redirect("/");
   

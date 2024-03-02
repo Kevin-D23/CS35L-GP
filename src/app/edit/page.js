@@ -33,7 +33,7 @@ export default async function edit() {
   let email = session?.user?.email;
   const user = await getUser(email);
 
-  if (!user.signupCompleted) redirect("/signup");
+  if (!user?.signupCompleted) redirect("/signup");
 
   return (
     <div
