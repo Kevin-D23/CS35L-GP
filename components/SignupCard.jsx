@@ -100,6 +100,11 @@ const SignupCard = ({ sessionName, submit }) => {
     ''
   ]
 
+  // TO DO: This >.<
+  const maatches = [
+    ''
+  ]
+
   function handleSubmit() {
     if (
       name &&
@@ -125,6 +130,7 @@ const SignupCard = ({ sessionName, submit }) => {
         studyEnd: endTime,
         locations: selectedLocations,
         peopleSeen: peopleSeen,
+        matches: matches,
         signupCompleted: true
       };
       submit(data);

@@ -15,6 +15,7 @@ export async function POST(req) {
   const defaultStudyStart = '';
   const defaultStudyEnd = '';
   const defaultLocations = [];
+  const defaultMatches = [];
   const defaultPeopleSeen = [];
 
   await User.create({
@@ -30,6 +31,7 @@ export async function POST(req) {
     studyEnd: defaultStudyEnd,
     locations: defaultLocations,
     peopleSeen: defaultPeopleSeen,
+    matches: defaultMatches,
     signupCompleted: signupCompleted
   });
   return NextResponse.json({ message: "Success" }, { status: 201 });
