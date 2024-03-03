@@ -105,9 +105,9 @@ export default function ProfileCard(userArr) {
           <div className={styles.userContainer} ref={cardRef}>
             <div className={styles.left}>
               <div className={styles.imageContainer}>
-                <img 
+                <img
                   src="/icons/haohan.jpeg"
-                  style={{width: '100%'},{height: '100%'}}
+                  style={{ width: "100%", height: "100%" }}
                 />
               </div>
               <div className={styles.bioContainer}>
