@@ -1,64 +1,26 @@
 "use client";
-import React, { useState,useEffect } from 'react';
+import React, { useState } from "react";
 import styles from "../../../../CSS Modules/signup.module.css";
 import Select from "react-select";
-import Link from "next/link";
-import style from "../../../../CSS Modules/stylesUserEdit.module.css";
+import { useRouter } from "next/navigation";
 import {processData} from "./actions"
-import Image from "next/image";
-function EditButton({ onSave}) {
 
-
-  const handleEditClick = () => {
-    onSave();
- window.location.href = '/edit';
-
-  };
-
-  return ( 
-   <button className={`${style.editButton}`} onClick={handleEditClick}>
-      save
-    </button>
-
-   
-  );
-}
-
-
-
-
-export default function EditableText({text,name,email,pic,times}) {
-
-
-
-
+const SignupCard = () => {
+  const [selectedMajor, setSelectedMajor] = useState(null);
   const [selectedCourses, setSelectedCourses] = useState([]);
+  const [age, setAge] = useState(18);
+  const [bio, setBio] = useState("");
+  const [name, setName] = useState("");
   const [displayCourses, setDisplayCourses] = useState([]);
+  const [year, setYear] = useState(null);
   const [department, setDepartment] = useState(null);
-  const [startTime, setStartTime] = useState([{value: 0, label:"12:00am"}]);
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [startTime, setStartTime] = useState(null);
   const [startTimeIndex, setStartTimeIndex] = useState(null);
-  const [endTime, setEndTime] = useState([{value: 25, label:"1:00am"}]);
+  const [endTime, setEndTime] = useState(null);
   const [endTimeIndex, setEndTimeIndex] = useState(null);
-
-
-  const [selectedDays, setselectedDays] = useState([
-    { value: 'Monday', label: 'Monday' },
-    { value: 'Wednesday', label: 'Wednesday' },
-  ]);
-
-  const days = [
-    { value: 'Monday', label: 'Monday' },
-    { value: 'Tuesday', label: 'Tuesday' },
-    { value: 'Wednesday', label: 'Wednesday' },
-    { value: 'Thursday', label: 'Thursday' },
-    { value: 'Friday', label: 'Friday' },
-    { value: 'Saturday', label: 'Saturday', },
-    { value: 'Sunday', label: 'Sunday' },
-  ];
-
-  const handleSelectChange = (selectedOptions) => {
-    setselectedDays(selectedOptions);
-  };
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const router = useRouter();
 
   const departments = [
     { value: "0", label: "COM SCI" },
@@ -84,6 +46,16 @@ export default function EditableText({text,name,email,pic,times}) {
     { value: 3, label: "Year 3" },
     { value: 4, label: "Year 4" },
     { value: 5, label: "Year 5" },
+  ];
+
+  const days = [
+    { value: 1, label: "Sunday" },
+    { value: 2, label: "Monday" },
+    { value: 3, label: "Tuesday" },
+    { value: 4, label: "Wednesday" },
+    { value: 5, label: "Thursday" },
+    { value: 6, label: "Friday" },
+    { value: 7, label: "Saturday" },
   ];
 
   const startTimes = [
@@ -116,7 +88,31 @@ export default function EditableText({text,name,email,pic,times}) {
 
   let endTimes = startTimes.slice(startTimeIndex + 1, 25);
 
+  const locations = [
+    { value: "YRL", label: "YRL" },
+    { value: "Boelter", label: "Boelter" },
+    { value: "Powell", label: "Powell" },
+    { value: "Olympic", label: "Olympic" },
+  ];
 
+  function handleSubmit() {
+      const data = {
+        name:name,
+        age: age,
+        year: year,
+        major: selectedMajor,
+        bio: bio,
+        classes: selectedCourses,
+        daysAvailable: selectedDays,
+        studyStart: startTime,
+        studyEnd: endTime,
+        locations: selectedLocations,
+      };
+      processData(data);
+      window.location.href = '/edit';
+
+    } 
+  
 
   function updateCourses(x) {
     let temp = [];
@@ -124,197 +120,191 @@ export default function EditableText({text,name,email,pic,times}) {
       temp.push({ value: courses[x][i], label: courses[x][i] });
     setDisplayCourses(temp);
   }
-  const [editableText, setEditableText] = useState(text||' ');
-
-
-const handleSave = async () => {
-  const processedData = processData("helo");
-
-  // Display the result
-  console.log('Result:', processedData);
-  console.log('Result:', selectedCourses);
-};
-const [year, setYear] = useState(years[1]);
-const handleyear = (year) =>
-{
-setYear(year)
-};
-
-
-const [selectedMajor, setSelectedMajor] = useState(majors[0]);
-const handlemajor = (selectedMajor) =>
-{
-setSelectedMajor(selectedMajor)
-};
-
-const [selectedLocations, setselectedLocations] = useState([
-  { value: "YRL", label: "YRL" }
-]);
-
-const locations = [
-  { value: "YRL", label: "YRL" },
-  { value: "Boelter", label: "Boelter" },
-  { value: "Powell", label: "Powell" },
-  { value: "Olympic", label: "Olympic" },
-];
-
-const handleLocation = (selectedLocations) => {
-  setselectedLocations(selectedLocations);
-};
-
-const handleStartTime =(startTime)=>
-{
-  setStartTime(startTime);
-};
-
-const handleEndTime =(endTime)=>
-{
-  setEndTime(endTime);
-};
-return(
-  
-  <div className={styles.signupContainer}>
-    <div style={{ display: "flex",marginBottom:"5"}}>
-
-
-<div style={{ marginLeft: "10px" }}>
-<h1 style={{color:'white',fontSize:'1em'}}>{name}</h1>
-</div>
-
-<div style={{ marginLeft: "10px" }}>
-<h1 style={{color:'white',fontSize:'1em'}}>{email}</h1>
-
-</div>
-<div style={{ marginLeft: "10px" }}><EditButton onSave={handleSave}/></div>
-
-
-    </div>
-        
+  return (
+    <div className={styles.signupContainer}>
+      <h1>Edit your profile:</h1>
+      <div className={styles.textInputs}>
+        <label className={styles.textInput}>
     
-
-  <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Bio:</h1>
- <textarea
-          className={styles.bioInput}
-          value={editableText}
-          onChange={(e) => setEditableText(e.target.value)}
-        />
-  <div className={styles.textInputs}>
-   
-  </div>
-  
-  <div className={styles.yearMajorContainer}>
-    <label>
-    <h1 style={{color:'white',fontSize:'1em'}}>Year:</h1>
-      <Select
-        className={styles.yearMajor}
-        options={years}
-        value ={year}
-        onChange={handleyear}
-      />
-    </label>
-    <label>
-    <h1 style={{color:'white',fontSize:'1em'}}>Major:</h1>
-      <Select
-        className={styles.yearMajor}
-        options={majors}
-        value={selectedMajor}
-        onChange={handlemajor}
-      />
-    </label>
-  </div>
-
-  <div className={styles.courseSelectionContainer}>
-    <div>
+            Name
+       
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label className={styles.textInput}>
+          Age
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </label>
+      </div>
+      <div className={styles.yearMajorContainer}>
+        <label>
+         
+            What year are you?
       
-    <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Courses:</h1>
-
-      <Select
-        className={styles.courseSelect}
-        options={departments}
-        onChange={(e) => {
-          updateCourses(e.value);
-          setDepartment(e.value);
-        }}
-      />
-      <div>
-        {department != null ? (
           <Select
-          className={styles.courseSelect}
-          options={displayCourses}
-          isMulti
-  
-          onChange={(e) =>{
-              let x = [];
-              for (let i = 0; i < e.length; i++) x.push(e[i].value);
-              setSelectedCourses(x);
-            }}
-            styles={{
-              control: (styles) => ({
-                ...styles,
-                color: "var(--primary-300)",
-              }),
+            className={styles.yearMajor}
+            options={years}
+            onChange={(e) => setYear(e.value)}
+          />
+        </label>
+        <label>
+          
+            What is your major?
+          
+          <Select
+            className={styles.yearMajor}
+            options={majors}
+            onChange={(e) => setSelectedMajor(e.value)}
+          />
+        </label>
+      </div>
+      <div className={styles.bioContainer}>
+        
+          Write a short bio about you!
+     
+        <textarea
+          className={styles.bioInput}
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
+      </div>
+      <div className={styles.courseSelectionContainer}>
+        <div>
+         
+            What classes are you looking for study buddies in?
+        
+
+          <Select
+            className={styles.courseSelect}
+            options={departments}
+            onChange={(e) => {
+              updateCourses(e.value);
+              setDepartment(e.value);
             }}
           />
-        ) : (
-          <Select />
-        )}
+          <div>
+            {department != null ? (
+              <Select
+                className={styles.courseSelect}
+                options={displayCourses}
+                isMulti
+                onChange={(e) => {
+                  let x = [];
+                  for (let i = 0; i < e.length; i++) x.push(e[i].value);
+                  setSelectedCourses(x);
+                }}
+                styles={{
+                  control: (styles) => ({
+                    ...styles,
+                    color: "var(--primary-300)",
+                  }),
+                }}
+              />
+            ) : (
+              <Select />
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div className={styles.daysSelectContainer}>
-  <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Days:</h1>
-  <Select
-       className={styles.locationSelect}
-      options={days}
-      isMulti
-      value={selectedDays} // Set the initially selected values
-      onChange={handleSelectChange}
-    />
-  </div>
-  <h1 style={{color:'white',fontSize:'1em',marginRight:'400px'}}>Times:</h1>
-  <div className={styles.timeSelectContainer}>
-    <label>
-   
+      <div className={styles.daysSelectContainer}>
+        
+          What days are you available?
+  
+        <Select
+          className={styles.daysSelect}
+          options={days}
+          isMulti
+          onChange={(e) => {
+            let x = [];
+            for (let i = 0; i < e.length; i++) x.push(e[i].label);
+            setSelectedDays(x);
+          }}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              color: "var(--primary-300)",
+            }),
+          }}
+        />
+      </div>
+      <div className={styles.timeSelectContainer}>
+        <label>
+         
+            Study Time: Start
+       
 
-      <Select
-        className={styles.time}
-        options={startTimes}
-        value={startTime}
-        onChange={(e) => {
-          handleStartTime();
-          setStartTimeIndex(e.value);
-        }}
-      />
-    </label>
-    <label>
-   
+          <Select
+            className={styles.time}
+            options={startTimes}
+            onChange={(e) => {
+              setStartTime(e.label);
+              setStartTimeIndex(e.value);
+            }}
+          />
+        </label>
+        <label>
+          
+            Study Time: End
+       
 
-      <Select
-        className={styles.time}
-        options={endTimes}
-        value={endTime}
-        onChange={(e) => {
-          handleEndTime();
-          setEndTimeIndex(e.value);
-        }}
-      />
-    </label>
-  </div>
-  <div className={styles.locationSelectContainer}>
-  <h1 style={{color:'white',fontSize:'1em'}}>Location:</h1>
-  <Select
-       className={styles.locationSelect}
-      options={locations}
-      isMulti
-      value={selectedLocations} // Set the initially selected values
-      onChange={handleLocation}
-    />
-    
-    
-  </div>
-
+          <Select
+            className={styles.time}
+            options={endTimes}
+            onChange={(e) => {
+              setEndTime(e.label);
+              setEndTimeIndex(e.value);
+            }}
+          />
+        </label>
+      </div>
+      <div className={styles.locationSelectContainer}>
       
-</div>
-);
-}
+          Where do you like to study?
+       
+        <Select
+          className={styles.locationSelect}
+          options={locations}
+          isMulti
+          onChange={(e) => {
+            let x = [];
+            for (let i = 0; i < e.length; i++) x.push(e[i].value);
+            setSelectedLocations(x);
+          }}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              color: "var(--primary-300)",
+            }),
+          }}
+        />
+      </div>
+      <button
+        className={styles.submit}
+        style={
+          name &&
+          selectedMajor &&
+          year &&
+          selectedCourses.length != 0 &&
+          selectedLocations.length != 0 &&
+          startTime &&
+          endTime &&
+          startTimeIndex < endTimeIndex
+            ? { backgroundColor: "var(--primary-400" }
+            : {}
+        }
+        onClick={() => handleSubmit()}
+      >
+        Save
+      </button>
+    </div>
+  );
+};
 
+export default SignupCard;
