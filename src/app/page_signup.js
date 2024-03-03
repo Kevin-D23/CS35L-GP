@@ -105,14 +105,5 @@ const Page = () => {
     </div>
   );
 }
-/*
-function submit({onSubmit}) {
-  return (
-    <button className = "submit" onClick = {onSubmit}></button>
-  );
-}
-function handleSubmit() {
-  return
-}
-*/
+
 export default Page;
