@@ -17,6 +17,7 @@ export async function POST(req) {
   const defaultLocations = [];
   const defaultMatches = [];
   const defaultPeopleSeen = [];
+  const defaultLikes = []
 
   await User.create({
     name: name,
@@ -32,6 +33,7 @@ export async function POST(req) {
     locations: defaultLocations,
     peopleSeen: defaultPeopleSeen,
     matches: defaultMatches,
+    likes: defaultLikes,
     signupCompleted: signupCompleted
   });
   return NextResponse.json({ message: "Success" }, { status: 201 });

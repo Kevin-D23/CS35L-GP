@@ -6,42 +6,24 @@ import { usePathname } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
-export default function ProfileCard(userArr) {
+export default function ProfileCard({userArr, likeUser}) {
   const location = usePathname();
-  const [users, setUsers] = useState(userArr.userArr);
+  const [users, setUsers] = useState(userArr);
   const [user, setUser] = useState(users[0]);
   const cardRef = React.useRef(null);
   const leftSide = React.useRef(null);
   const rightSide = React.useRef(null);
   const background = React.useRef(null);
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
 
-  function shiftArr() {
+  function shiftArr(like) {
+      likeUser(user.email, like)
     setUser(null);
-    setTimeout(() => {
-      if (users.length > 1) {
-        let temp = users;
-        temp.shift();
-        setUsers(temp);
-        setUser(users[0]);
-      }
-    }, 0);
-  }
-
-  function calcTime(start, end) {
-    let startTime = start + "am";
-    let endTime = end + "am";
-    if (start > 12) startTime = start - 12 + "pm";
-    if (end > 12) endTime = end - 12 + "pm";
-    return startTime + "-" + endTime;
+    if (users.length > 1) {
+      let temp = users;
+      temp.shift();
+      setUsers(temp);
+      setUser(users[0]);
+    }
   }
 
   const handleMouseHover = (angle) => {
@@ -89,7 +71,7 @@ export default function ProfileCard(userArr) {
               onClick={() => {
                 handleClick(-1);
                 setTimeout(() => {
-                  shiftArr();
+                  shiftArr(0);
                 }, 600);
               }}
             >
@@ -133,7 +115,7 @@ export default function ProfileCard(userArr) {
               <div className={styles.coursesContainer}>
                 <h2>COURSES</h2>
                 <ul>
-                  {user.courses.map((course, key) => {
+                  {user.classes.map((course, key) => {
                     return <li key={key}>{course}</li>;
                   })}
                 </ul>
@@ -141,12 +123,14 @@ export default function ProfileCard(userArr) {
               <div className={styles.timesContainer}>
                 <h2>AVAILABLE DAYS</h2>
                 <ul>
-                  {user.days.map((day, key) => {
-                    return <li key={key}>{days[day]}</li>;
+                  {user.daysAvailable.map((day, key) => {
+                    return <li key={key}>{day}</li>;
                   })}
                 </ul>
                 <h2>WHEN</h2>
-                <p>{calcTime(user.timeStart, user.timeEnd)}</p>
+                <p>
+                  {user.studyStart} - {user.studyEnd}
+                </p>
               </div>
               <div className={styles.locationContainer}>
                 <h2>LOCATIONS</h2>
@@ -167,11 +151,11 @@ export default function ProfileCard(userArr) {
               onClick={() => {
                 handleClick(1);
                 setTimeout(() => {
-                  shiftArr();
+                  shiftArr(1);
                 }, 600);
               }}
             >
-              <button onClick={() => shiftArr()}>
+              <button>
                 <FaCheck
                   color="var(--primary-200)"
                   style={{
