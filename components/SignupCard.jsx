@@ -4,6 +4,7 @@ import styles from "../CSS Modules/signup.module.css";
 import Select from "react-select";
 import { useRouter } from "next/navigation";
 
+// submit is a function that pushes data from signup page to database
 const SignupCard = ({ sessionName, submit }) => {
   const [selectedMajor, setSelectedMajor] = useState(null);
   const [selectedCourses, setSelectedCourses] = useState([]);

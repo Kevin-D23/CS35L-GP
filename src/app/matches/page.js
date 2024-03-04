@@ -11,7 +11,7 @@ export default async function matches() {
   if (!user?.signupCompleted) redirect("/signup");
 
   let matchEmails = [];
-  matchEmails = user.matches;
+  matchEmails = user?.matches;
   let matches = [];
 
   for (let i = 0; i < matchEmails.length; i++) {

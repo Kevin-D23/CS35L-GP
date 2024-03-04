@@ -7,6 +7,7 @@ import { IoMdMail } from "react-icons/io";
 export default function Matches({ matches }) {
   const router = useRouter();
   function handleClick(id) {
+
     router.push(`/user/${id}`);
   }
 
@@ -24,7 +25,7 @@ export default function Matches({ matches }) {
               </div>
               <p
                 className={styles.profile}
-                onClick={() => handleClick(user.email)}
+                onClick={() => handleClick(user._id)}
               >
                 <CgProfile className={styles.icon} />
               </p>
