@@ -8,13 +8,15 @@ const userSchema = new Schema(
     year: { type: Number, required: false },
     major: { type: String, required: false },
     bio: { type: String, required: false },
-    classes: { type: [String], required: false},
+    classes: { type: [String], required: false },
     daysAvailable: { type: [String], required: false },
-    studyStart: { type: String, required: false},
+    studyStart: { type: String, required: false },
     studyEnd: { type: String, required: false },
     locations: { type: [String], required: false },
-    peopleSeen: {type: [String], required: false },
-    signupCompleted: { type: Boolean, required: true }
+    peopleSeen: { type: [String], required: false },
+    matches: { type: [String], required: false },
+    likes: { type: [String], required: false },
+    signupCompleted: { type: Boolean, required: true },
   },
   { timestamps: true }
 );

@@ -1,13 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
+.homeContainer {
+  transition-duration: 0.5s;
+  display: flex;
+  flex-direction: column;
+}
+
 .home {
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Abel", sans-serif;
-  background-color: var(--dark-100);
   transition-duration: 0.5s;
 }
 .userContainer {
@@ -122,4 +126,29 @@
 
 .locationContainer h2 {
   color: var(--primary-300);
+}
+
+.filterOptionsContainer {
+  position: relative;
+  color: var(--primary-300);
+  padding: 0rem 2rem 2rem 2rem;
+  top: 10rem;
+}
+
+.filterOptionsContainer h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.filterOptions {
+  display: flex;
+  justify-content: center;
+}
+
+.filterOption {
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }

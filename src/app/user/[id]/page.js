@@ -16,7 +16,7 @@ export default function User({ params }) {
   ];
   return (
     <>
-      <ProfileCard userArr={users}/>
+      <ProfileCard userArr={users} />
     </>
   );
 }

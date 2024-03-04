@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
-import { getUser } from "../api/user/route";
+import { getUser,getAllUsers,updateUser } from "../api/user/route";
 import { redirect } from "next/navigation";
 
 function EditButton() {
@@ -20,8 +20,7 @@ let times = [
   "Saturday",
   "Sunday",
 ];
-let classes = ["CS35L", "Intro to being swag", "Naptime 101"];
-let hobby = ["eat", "sleep", "nap"];
+
 let destinations = ["Sproul", "Rieber", "Hedrick"];
 export function getTimes()
 {
@@ -29,9 +28,16 @@ return(times)
 }
 export default async function edit() {
   const session = await getServerSession(options);
-  let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
   const user = await getUser(email);
+  let name = user.name;
+  let year = user.year;
+  let bio = user.bio;
+  let classes = user.classes;
+  let daysAvailable = user.daysAvailable;
+  let studyStart = user.studyStart;
+  let studyEnd = user.studyEnd;
+  let locations = user.locations;
 
   if (!user?.signupCompleted) redirect("/signup");
 
@@ -50,7 +56,7 @@ export default async function edit() {
         <Image src={session.user.image} width={50} height={50} />
         <div style={{ marginLeft: "10px" }}>
           <h1 className={`${styles.largerText} `}>
-            <b>{name[0] + " " + name[1]}</b>
+            <b>{name}</b>
           </h1>
         </div>
         <div style={{ marginLeft: "10px" }}>
@@ -63,9 +69,9 @@ export default async function edit() {
       <div>
         <h1 className={`${styles.largerText} `}>Bio:</h1>
       </div>
-      <h1 className={`${styles.largerText} `}> Hi this is my bio!</h1>
+      <h1 className={`${styles.largerText} `}> {bio}</h1>
       <h1 className={`${styles.largerText} `}>
-            Year: 2
+            Year: {year}
           </h1>
       <div style={{ marginTop: "10px" }}>    
         <h1 className={`${styles.largerText} `}>Classes:</h1>
@@ -78,11 +84,11 @@ export default async function edit() {
         </div>
       </div>
       <div style={{ marginTop: "10px" }}>
-        <h1 className={`${styles.largerText}`}>Times Available: 8am -9 pm</h1>
+        <h1 className={`${styles.largerText}`}>Times Available: {studyStart} - {studyEnd}</h1>
         <h1 className={`${styles.largerText}`}>Days Available:</h1>
         <div className={`${styles.scrollableList} `}>
           <ul>
-            {times.map((item, index) => (
+            {daysAvailable.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -92,7 +98,7 @@ export default async function edit() {
         <h1 className={`${styles.largerText}`}>Prefered Locations: </h1>
         <div className={`${styles.scrollableList} `}>
           <ul>
-            {destinations.map((item, index) => (
+            {locations.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
