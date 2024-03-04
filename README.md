@@ -1,3 +1,7 @@
+# Students Inferno
+
+Study companion app designed to help students find others to study with. This platform combines the convenience of a dating app with the purpose of finding like-minded individuals.
+
 ## Getting Started
 
 First, run the development server:
@@ -12,6 +16,7 @@ pnpm dev
 bun dev
 ```
 
+## Documentation
 How to fetch user information (ONLY WORKS ON SERVER SIDE COMPONENTS):
 
 ```javascript
@@ -41,14 +46,28 @@ await updateUser(email, changes);
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Contributors:
+## Tech Stack
 
-Hieu Duong - Kevin-D23
+- React
+- NextJS
+- MongoDB Atlas
+- Express
 
-Britney Chen - Britney Chen
+#### Libraries:
+- next-auth
+- mongoose
+- react-select
+- react-icons
 
-Michael Khojastegan - mkhojastegan
 
-Haohan Chen - Tangerine-maker
+## Contributors:
 
-Amanda Mai - moomoonda
+**Hieu Duong** - Kevin-D23
+
+**Britney Chen** - Britney Chen
+
+**Michael Khojastegan** - mkhojastegan
+
+**Haohan Chen** - Tangerine-maker
+
+**Amanda Mai** - moomoonda

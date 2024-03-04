@@ -28,8 +28,8 @@ export const options = {
     async signIn({ user, account }) {
       if (account.provider === "google") {
         const { name, email } = user;
-        
-        // check if user exists in database, if not, add user 
+
+        // check if user exists in database, if not, add user
         const userExists = await getUser(email);
         if (!userExists) {
           try {
@@ -41,7 +41,7 @@ export const options = {
               body: JSON.stringify({
                 name,
                 email,
-                signupCompleted: false
+                signupCompleted: false,
               }),
             });
             if (res.ok) return user;
@@ -55,4 +55,7 @@ export const options = {
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/signin",
+  },
 };
