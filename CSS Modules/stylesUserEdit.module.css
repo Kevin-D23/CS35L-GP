@@ -14,11 +14,13 @@
   font-size: large;
   color:#ffffff;
   width: 50px;
+  text-align: right;
 }
 
 .editButton:hover {
   font-weight: bold;
   color: blueviolet;
+  text-align: right;
 }
 
 .shiftedText {
