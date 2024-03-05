@@ -4,7 +4,6 @@ import ProfileCard from "../../components/ProfileCard";
 import { redirect } from "next/navigation";
 import { getUser, updateUser } from "./api/user/route";
 import { getAllUsers } from "./api/user/route";
-import { get } from "http";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -43,17 +42,26 @@ export default async function Home() {
       let likedUserMatches = likedUserObj.matches;
       let userLikes = user.likes;
       let userMatches = user.matches;
+
+      // check if current user is liked by the user they liked
       if (userLikes.includes(likedUser)) {
         let index = userLikes.indexOf(likedUser);
+        // remove the user they liked from their liked users array
         userLikes.splice(index, 1);
+        console.log(userLikes);
+        // add the liked user to the current user's matches
         userMatches.push(likedUser);
         await updateUser(email, { likes: userLikes, matches: userMatches });
+        // add current user to liked user's matches
         likedUserMatches.push(email);
         await updateUser(likedUser, { matches: likedUserMatches });
-      } else !likedUserLikes.includes(email);
-      likedUserLikes.push(email);
-      await updateUser(likedUser, { likes: likedUserLikes });
+      } else if (!likedUserLikes.includes(email)) {
+        // add current user to liked user's likes
+        likedUserLikes.push(email);
+        await updateUser(likedUser, { likes: likedUserLikes });
+      }
     }
+    // add the user that current user just liked/disliked to peopleSeen array
     let userSeen = user.peopleSeen;
     userSeen.push(likedUser);
     await updateUser(email, { peopleSeen: userSeen });
@@ -87,14 +95,14 @@ export default async function Home() {
       });
     }
     return new Promise((resolve, reject) => {
-      resolve(temp)
+      resolve(temp);
     });
   }
 
   return (
     <>
       <ProfileCard
-        userArr={users}
+        userArr={initialUsers}
         likeUser={likeUser}
         getFilteredUsers={getFilteredUsers}
       />

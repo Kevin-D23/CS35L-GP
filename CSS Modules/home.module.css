@@ -14,6 +14,7 @@
   font-family: "Abel", sans-serif;
   transition-duration: 0.5s;
 }
+
 .userContainer {
   width: 36rem;
   min-width: 36rem;
@@ -33,7 +34,7 @@
 }
 
 .matchOption {
-  width: 30rem;
+  width: 35rem;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -132,7 +133,7 @@
   position: relative;
   color: var(--primary-300);
   padding: 0rem 2rem 2rem 2rem;
-  top: 10rem;
+  top: 5rem;
 }
 
 .filterOptionsContainer h2 {
