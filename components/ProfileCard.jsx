@@ -18,6 +18,7 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
   const background = React.useRef(null);
   const [filters, setFilters] = useState([]);
 
+  // whenever user clicks like/dislike, shift array 1 left and set user to front of array
   function shiftArr(like) {
     likeUser(user.email, like);
     setUser(null);
@@ -64,7 +65,7 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
   async function handleFilters(filter) {
     let temp = filters;
     if (filters.includes(filter)) {
-      const index = filters.indexOf(2);
+      const index = filters.indexOf(filter);
       temp.splice(index, 1);
       setFilters(temp);
     } else {
@@ -80,35 +81,36 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
   return (
     <div className={styles.homeContainer} ref={background}>
       {location == "/" && (
-      <div className={styles.filterOptionsContainer}>
-        <h2>Filter By</h2>
-        <div className={styles.filterOptions}>
-          <div className={styles.filterOption}>
-            <label>Major</label>
-            <input
-              type="checkbox"
-              value={"major"}
-              onClick={(e) => handleFilters(e.target.value)}
-            />
-          </div>
-          <div className={styles.filterOption}>
-            <label>Classes</label>
-            <input
-              type="checkbox"
-              value={"classes"}
-              onClick={(e) => handleFilters(e.target.value)}
-            />
-          </div>
-          <div className={styles.filterOption}>
-            <label>Locations</label>
-            <input
-              type="checkbox"
-              value={"locations"}
-              onClick={(e) => handleFilters(e.target.value)}
-            />
+        <div className={styles.filterOptionsContainer}>
+          <h2>Filter By</h2>
+          <div className={styles.filterOptions}>
+            <div className={styles.filterOption}>
+              <label>Major</label>
+              <input
+                type="checkbox"
+                value={"major"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterOption}>
+              <label>Classes</label>
+              <input
+                type="checkbox"
+                value={"classes"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterOption}>
+              <label>Locations</label>
+              <input
+                type="checkbox"
+                value={"locations"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
           </div>
         </div>
-      </div>)}
+      )}
       {user ? (
         <div className={styles.home} ref={background}>
           {location == "/" && (
