@@ -1,6 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
+.title {
+  font-size: 4rem;
+  text-align: center;
+  color: var(--primary-300);
+  font-family: "Abel", sans-serif;
+}
 .group {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 30px;
+  font-family: "Abel", sans-serif;
+  color: white;
+  background-color: var(--dark-300);
+  border-width: 2px;
+  border-color: black;
+  width: 1000px;
+}
+
+.suggestions:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+.suggestions {
   cursor: pointer;
   padding: 10px 20px;
   font-size: 30px;
@@ -93,6 +116,21 @@
 }
 
 .exit:hover {
-  background-color: red;
-  color: white;
+  background-color: lightcoral;
+  color: black;
+}
+
+.join {
+  color: black;
+  background-color: var(--dark-600);
+  border-width: 2px;
+  border-color: black;
+  width: 1000px;
+  font-family: "Abel", sans-serif;
+  font-size: 20px;
+}
+
+.join:hover {
+  background-color: lightgreen;
+  color: black;
 }
