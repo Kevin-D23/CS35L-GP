@@ -31,28 +31,22 @@
     padding: 1.25rem;
 }
 .sendeeProfile{
+    position: relative;
     width: 8%;
     height: 60%;
 }
 .sendeeName{
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 2rem;
+    right: 0.5rem;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent overlay */
-    color: #fff; /* White text color */
-    transform: translateX(-100%); /* Start hidden below the container */
-    transition: transform 0.5s ease-in-out; /* Smooth slide-in effect */
-    padding: 20px 0; /* Some padding */
+    padding: 20px 0;
 }
 .recipients{
-    position:relative;
+    position: relative;
     display: flex;
     align-items: center;
     background-color: gray;
     height: 10%;
-}
-.recipients:hover .sendeeName{
-    transform: translateX(0);
 }
 
