@@ -8,15 +8,16 @@ export async function POST(req) {
   await connect();
   const defaultAge = 0;
   const defaultYear = 0;
-  const defaultMajor = '';
-  const defaultBio = '';
+  const defaultMajor = "";
+  const defaultBio = "";
   const defaultClasses = [];
   const defaultDaysAvailable = [];
-  const defaultStudyStart = '';
-  const defaultStudyEnd = '';
+  const defaultStudyStart = "";
+  const defaultStudyEnd = "";
   const defaultLocations = [];
   const defaultMatches = [];
   const defaultPeopleSeen = [];
+  const defaultLikes = [];
 
   await User.create({
     name: name,
@@ -32,22 +33,24 @@ export async function POST(req) {
     locations: defaultLocations,
     peopleSeen: defaultPeopleSeen,
     matches: defaultMatches,
-    signupCompleted: signupCompleted
+    likes: defaultLikes,
+    signupCompleted: signupCompleted,
   });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
 
 // takes user's email as argument and returns corresponding user object
-export async function getUser(email) {
+export async function getUser(email, id) {
   await connect();
   let result = await User.findOne({ email: email });
+  if (id) result = await User.findOne({ _id: id });
   return result;
 }
 
 // returns array of all users with completed accounts
 export async function getAllUsers() {
   await connect();
-  let result = await User.find({signupCompleted: true});
+  let result = await User.find({ signupCompleted: true });
   return result;
 }
 

@@ -6,42 +6,28 @@ import { usePathname } from "next/navigation";
 import { FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
-export default function ProfileCard(userArr) {
+// takes an array of users and displays first index of array as profile card
+// likeUser and getFilteredUsers are functions to handle liking users and getting a new array of users based on filters
+export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
   const location = usePathname();
-  const [users, setUsers] = useState(userArr.userArr);
+  const [users, setUsers] = useState(userArr);
   const [user, setUser] = useState(users[0]);
   const cardRef = React.useRef(null);
   const leftSide = React.useRef(null);
   const rightSide = React.useRef(null);
   const background = React.useRef(null);
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  const [filters, setFilters] = useState([]);
 
-  function shiftArr() {
+  // whenever user clicks like/dislike, shift array 1 left and set user to front of array
+  function shiftArr(like) {
+    likeUser(user.email, like);
     setUser(null);
-    setTimeout(() => {
-      if (users.length > 1) {
-        let temp = users;
-        temp.shift();
-        setUsers(temp);
-        setUser(users[0]);
-      }
-    }, 0);
-  }
-
-  function calcTime(start, end) {
-    let startTime = start + "am";
-    let endTime = end + "am";
-    if (start > 12) startTime = start - 12 + "pm";
-    if (end > 12) endTime = end - 12 + "pm";
-    return startTime + "-" + endTime;
+    if (users.length > 1) {
+      let temp = users;
+      temp.shift();
+      setUsers(temp);
+      setUser(users[0]);
+    }
   }
 
   const handleMouseHover = (angle) => {
@@ -76,10 +62,57 @@ export default function ProfileCard(userArr) {
     }, 500);
   }
 
+  async function handleFilters(filter) {
+    let temp = filters;
+    if (filters.includes(filter)) {
+      const index = filters.indexOf(filter);
+      temp.splice(index, 1);
+      setFilters(temp);
+    } else {
+      temp.push(filter);
+      setFilters(temp);
+    }
+    await getFilteredUsers(filters).then((res) => {
+      setUsers(res);
+      setUser(res[0]);
+    });
+  }
+
   return (
-    <div className={styles.home} ref={background}>
+    <div className={styles.homeContainer} ref={background}>
+      {location == "/" && (
+        <div className={styles.filterOptionsContainer}>
+          <h2>Filter By</h2>
+          <div className={styles.filterOptions}>
+            <div className={styles.filterOption}>
+              <label>Major</label>
+              <input
+                type="checkbox"
+                value={"major"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterOption}>
+              <label>Classes</label>
+              <input
+                type="checkbox"
+                value={"classes"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterOption}>
+              <label>Locations</label>
+              <input
+                type="checkbox"
+                value={"locations"}
+                onClick={(e) => handleFilters(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      )}
       {user ? (
-        <>
+        <div className={styles.home} ref={background}>
           {location == "/" && (
             <div
               className={styles.matchOption}
@@ -89,7 +122,7 @@ export default function ProfileCard(userArr) {
               onClick={() => {
                 handleClick(-1);
                 setTimeout(() => {
-                  shiftArr();
+                  shiftArr(0);
                 }, 600);
               }}
             >
@@ -102,59 +135,63 @@ export default function ProfileCard(userArr) {
               />
             </div>
           )}
-          <div className={styles.userContainer} ref={cardRef}>
-            <div className={styles.left}>
-              <div className={styles.imageContainer}>
-                <img 
-                  src="/icons/haohan.jpeg"
-                  style={{width: '100%'},{height: '100%'}}
-                />
+          <div>
+            <div className={styles.userContainer} ref={cardRef}>
+              <div className={styles.left}>
+                <div className={styles.imageContainer}>
+                  <img
+                    src="/icons/haohan.jpeg"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </div>
+                <div className={styles.bioContainer}>
+                  <h1>{user.name.toUpperCase()}</h1>
+                  <h2>
+                    {user.year}
+                    {user.year === 1
+                      ? "st"
+                      : user.year == 2
+                      ? "nd"
+                      : user.year === 3
+                      ? "rd"
+                      : "th"}{" "}
+                    year
+                  </h2>
+                  <h2>
+                    Major:<p>{user.major}</p>
+                  </h2>
+                  <p>{user.bio}</p>
+                </div>
               </div>
-              <div className={styles.bioContainer}>
-                <h1>{user.name.toUpperCase()}</h1>
-                <h2>
-                  {user.year}
-                  {user.year === 1
-                    ? "st"
-                    : user.year == 2
-                    ? "nd"
-                    : user.year === 3
-                    ? "rd"
-                    : "th"}{" "}
-                  year
-                </h2>
-                <h2>
-                  Major:<p>{user.major}</p>
-                </h2>
-                <p>{user.bio}</p>
-              </div>
-            </div>
-            <div className={styles.right}>
-              <div className={styles.coursesContainer}>
-                <h2>COURSES</h2>
-                <ul>
-                  {user.courses.map((course, key) => {
-                    return <li key={key}>{course}</li>;
-                  })}
-                </ul>
-              </div>
-              <div className={styles.timesContainer}>
-                <h2>AVAILABLE DAYS</h2>
-                <ul>
-                  {user.days.map((day, key) => {
-                    return <li key={key}>{days[day]}</li>;
-                  })}
-                </ul>
-                <h2>WHEN</h2>
-                <p>{calcTime(user.timeStart, user.timeEnd)}</p>
-              </div>
-              <div className={styles.locationContainer}>
-                <h2>LOCATIONS</h2>
-                <ul>
-                  {user.locations.map((location, key) => {
-                    return <li key={key}>{location}</li>;
-                  })}
-                </ul>
+              <div className={styles.right}>
+                <div className={styles.coursesContainer}>
+                  <h2>COURSES</h2>
+                  <ul>
+                    {user.classes.map((course, key) => {
+                      return <li key={key}>{course}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div className={styles.timesContainer}>
+                  <h2>AVAILABLE DAYS</h2>
+                  <ul>
+                    {user.daysAvailable.map((day, key) => {
+                      return <li key={key}>{day}</li>;
+                    })}
+                  </ul>
+                  <h2>WHEN</h2>
+                  <p>
+                    {user.studyStart} - {user.studyEnd}
+                  </p>
+                </div>
+                <div className={styles.locationContainer}>
+                  <h2>LOCATIONS</h2>
+                  <ul>
+                    {user.locations.map((location, key) => {
+                      return <li key={key}>{location}</li>;
+                    })}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -167,11 +204,11 @@ export default function ProfileCard(userArr) {
               onClick={() => {
                 handleClick(1);
                 setTimeout(() => {
-                  shiftArr();
+                  shiftArr(1);
                 }, 600);
               }}
             >
-              <button onClick={() => shiftArr()}>
+              <button>
                 <FaCheck
                   color="var(--primary-200)"
                   style={{
@@ -182,9 +219,10 @@ export default function ProfileCard(userArr) {
               </button>
             </div>
           )}
-        </>
+        </div>
       ) : (
-        <>
+        <div className={styles.home} ref={background}>
+          <div className={styles.matchOption}></div>
           <div className={styles.userContainer}>
             <div className={styles.left}>
               <div className={styles.imageContainer}></div>
@@ -214,7 +252,8 @@ export default function ProfileCard(userArr) {
               </div>
             </div>
           </div>
-        </>
+          <div className={styles.matchOption}></div>
+        </div>
       )}
     </div>
   );

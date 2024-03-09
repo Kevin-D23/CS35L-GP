@@ -1,26 +1,13 @@
-"use client"
+"use client";
 import styles from "../CSS Modules/matches.module.css";
 import { useRouter } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { IoMdMail } from "react-icons/io";
 
-export default async function Matches() {
-  const matches = [
-    { name: "Haohan Chen", userID: "1234556789", email: "haohan@gmail.com" },
-    {
-      name: "Michael Khojastegan",
-      userID: "987654321",
-      email: "michael@yahoo.com",
-    },
-    {
-      name: "Britney Chen",
-      userID: "294829102",
-      email: "brittany@hotmail.com",
-    },
-    { name: "Amanda Mai", userID: "293401923", email: "amanda@g.ucla.edu.com" },
-  ];
+export default function Matches({ matches }) {
   const router = useRouter();
   function handleClick(id) {
+
     router.push(`/user/${id}`);
   }
 
@@ -38,7 +25,7 @@ export default async function Matches() {
               </div>
               <p
                 className={styles.profile}
-                onClick={() => handleClick(user.userID)}
+                onClick={() => handleClick(user._id)}
               >
                 <CgProfile className={styles.icon} />
               </p>

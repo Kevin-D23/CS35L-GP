@@ -1,0 +1,25 @@
+.signinPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+}
+
+.signinContainer {
+  border: 1px solid var(--dark-600);
+  color: black;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 100px;
+  gap: 1rem;
+}
+
+.signinContainer span {
+  font-weight: 600;
+}

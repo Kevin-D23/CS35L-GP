@@ -1,22 +1,15 @@
 import ProfileCard from "../../../../components/ProfileCard";
+import { getUser } from "@/app/api/user/route";
 
-export default function User({ params }) {
-  const users = [
-    {
-      name: "Haohan Chen",
-      year: 3,
-      major: "Computer Science",
-      bio: "I bully kids blah blah blah blah blah blah blah blah blah",
-      courses: ["CS-33", "Jazz Appreciation", "PHSYC-1A"],
-      days: [0, 1, 2, 3, 4, 5, 6],
-      timeStart: 18,
-      timeEnd: 21,
-      locations: ["your mom's house", "Powell"],
-    },
-  ];
+export default async function User({ params }) {
+  let user;
+  await getUser(null, params.id).then((res) => {
+    user = res;
+    user = JSON.parse(JSON.stringify(user));
+  });
   return (
     <>
-      <ProfileCard userArr={users}/>
+      <ProfileCard userArr={[user]} />
     </>
   );
 }
