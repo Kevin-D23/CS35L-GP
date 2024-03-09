@@ -125,6 +125,9 @@ const SignupCard = ({ sessionName, submit }) => {
         // Not changing
         //peopleSeen: peopleSeen,
         //matches: matches,
+        //messagesSent: [],
+        //messagesRecieved: [],
+        //messagesRead: [],
         signupCompleted: true
       };
       submit(data);

@@ -37,9 +37,6 @@ export async function POST(req) {
     matches: defaultMatches,
     likes: defaultLikes,
     signupCompleted: signupCompleted,
-    messagesSent: [],
-    messagesRecieved: [],
-    messagesRead: [],
   });
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
@@ -70,11 +67,5 @@ export async function updateUser(email, changes) {
   return result;
 }
 
-// Returns array of everyone's emails
-// Untested
-async function getEmailsOfCompletedSignups() {
-  await connect();
-  let users = await User.find({ signupCompleted: true }, 'email').exec();
-  let emails = users.map(user => user.email);
-  return emails;
-}
+
+

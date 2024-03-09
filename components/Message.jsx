@@ -18,7 +18,10 @@ function Icon(props){
   return(<div>
     <img src={props.source} className={styles.sendeeProfile} onClick={toggleVisbility}></img>
     {isVisible && (
-        <div className={styles.sendeeName}>Haohan</div>
+        <div className={styles.sendeeName}>
+          <div className={styles.sendeeName}>Haohan</div>
+          <div>Computer Science</div>
+        </div>
       )}
   </div>)
 }
