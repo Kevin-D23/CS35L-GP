@@ -11,16 +11,14 @@
 }
 
 .editButton {
-  font-size: large;
   color:#ffffff;
-  width: 50px;
-  text-align: right;
+  background-color: var(  --primary-300);
+  width: 100%;
 }
 
 .editButton:hover {
-  font-weight: bold;
-  color: blueviolet;
-  text-align: right;
+  background-color: blueviolet;
+  width: 100%;
 }
 
 .shiftedText {

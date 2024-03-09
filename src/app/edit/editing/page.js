@@ -1,14 +1,8 @@
-import "../../../../CSS Modules/editing.module.css";
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
 import Image from "next/image";
-import styles from "../../../../CSS Modules/stylesUserEdit.module.css";
 import EditableText from "./editableText"
-import GetButton from "./editableText"
-import { getUser, getAllUsers } from "../../api/user/route";
-import {getTimes} from "../page"
-
-
+import "../../../../CSS Modules/editing.module.css";
 async function Name() {
   const session = await getServerSession(options);
 
@@ -39,7 +33,6 @@ async function Profilepic() {
 }
 
 export default async function editing() {
-console.log(getTimes())
   const session = await getServerSession(options);
   let image = session?.user?.image; 
   

@@ -1,109 +1,92 @@
 import React from "react";
-import styles from "../../../CSS Modules/stylesUserEdit.module.css";
-import Image from "next/image";
+import styles from "../../../CSS Modules/home.module.css";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { getUser,getAllUsers,updateUser } from "../api/user/route";
 import { redirect } from "next/navigation";
-
+import style from "../../../CSS Modules/stylesUserEdit.module.css";
 function EditButton() {
   return (
     <Link href="/edit/editing">
       {" "}
       {}
-      <button className={`${styles.editButton}`}>edit</button>
+      <button className={`${style.editButton}`}>Edit Your Profile</button>
     </Link>
   );
 }
-let times = [
-  "Saturday",
-  "Sunday",
-];
 
-let destinations = ["Sproul", "Rieber", "Hedrick"];
-export function getTimes()
-{
-return(times)
-}
 export default async function edit() {
   const session = await getServerSession(options);
   let email = session?.user?.email;
   const user = await getUser(email);
   let name = user.name;
-  let year = user.year;
-  let bio = user.bio;
-  let classes = user.classes;
-  let daysAvailable = user.daysAvailable;
-  let studyStart = user.studyStart;
-  let studyEnd = user.studyEnd;
-  let locations = user.locations;
-  console.log(name);
   if (!user?.signupCompleted) redirect("/signup");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        marginTop: "50px",
-      }}
-    >
-      <div
-        style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
-      >
-        <Image src={session.user.image} width={50} height={50} />
-        <div style={{ marginLeft: "10px" }}>
-          <h1 className={`${styles.largerText} `}>
-            <b>{name}</b>
-          </h1>
+    <div>
+    <div className={styles.userContainer} style={{width:"36em",minWidth:"36rem",display:"flex",
+    backgroundColor:"var(--dark-200)",aspectRatio:"auto"}}>
+      <div className={styles.left}>
+        <div className={styles.imageContainer}>
+          <img
+            src="/icons/haohan.jpeg"
+            style={{ width: "100%", height: "100%" }}
+          />
         </div>
-        <div style={{ marginLeft: "10px" }}>
-          <h1 className={`${styles.largerText} `}>{email}</h1>
-        </div>
-        <div style={{ marginLeft: "100px" }}>
-          <EditButton />
+        <div className={styles.bioContainer}>
+          <h1>{user.name.toUpperCase()}</h1>
+          <h2>
+            {user.year}
+            {user.year === 1
+              ? "st"
+              : user.year == 2
+              ? "nd"
+              : user.year === 3
+              ? "rd"
+              : "th"}{" "}
+            year
+          </h2>
+          <h2>
+            Major:<p>{user.major}</p>
+          </h2>
+          <p>{user.bio}</p>
         </div>
       </div>
-      <div>
-        <h1 className={`${styles.largerText} `}>Bio:</h1>
-      </div>
-      <h1 className={`${styles.largerText} `}> {bio}</h1>
-      <h1 className={`${styles.largerText} `}>
-            Year: {year}
-          </h1>
-      <div style={{ marginTop: "10px" }}>    
-        <h1 className={`${styles.largerText} `}>Classes:</h1>
-        <div className={`${styles.scrollableList}`}>
+      <div className={styles.right}>
+        <div className={styles.coursesContainer}>
+          <h2>COURSES</h2>
           <ul>
-            {classes.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
+            {user.classes.map((course, key) => {
+              return <li key={key}>{course}</li>;
+            })}
           </ul>
         </div>
-      </div>
-      <div style={{ marginTop: "10px" }}>
-        <h1 className={`${styles.largerText}`}>Times Available: {studyStart} - {studyEnd}</h1>
-        <h1 className={`${styles.largerText}`}>Days Available:</h1>
-        <div className={`${styles.scrollableList} `}>
+        <div className={styles.timesContainer}>
+          <h2>AVAILABLE DAYS</h2>
           <ul>
-            {daysAvailable.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
+            {user.daysAvailable.map((day, key) => {
+              return <li key={key}>{day}</li>;
+            })}
           </ul>
+          <h2>WHEN</h2>
+          <p>
+            {user.studyStart} - {user.studyEnd}
+          </p>
         </div>
-      </div>
-      <div style={{ marginTop: "10px" }}>
-        <h1 className={`${styles.largerText}`}>Prefered Locations: </h1>
-        <div className={`${styles.scrollableList} `}>
+        <div className={styles.locationContainer}>
+          <h2>LOCATIONS</h2>
           <ul>
-            {locations.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
+            {user.locations.map((location, key) => {
+              return <li key={key}>{location}</li>;
+            })}
           </ul>
         </div>
       </div>
     </div>
+
+    <div style={{color:"white"}}>  <EditButton/></div>   
+    
+  </div>
   );
 }
