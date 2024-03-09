@@ -4,13 +4,10 @@ import ProfileCard from "../../components/ProfileCard";
 import { redirect } from "next/navigation";
 import { getUser, updateUser } from "./api/user/route";
 import { getAllUsers } from "./api/user/route";
-// Please remove later
-import { generateRandomUser } from "./api/auth/[...nextauth]/testUsers.js"
+
 
 export default async function Home() {
-  // Create random user (TESTING)
-  // PLEASE REMOVE LATER
-  generateRandomUser();
+
 
   const session = await getServerSession(options);
   const email = session?.user?.email;
