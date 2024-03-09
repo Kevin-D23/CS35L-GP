@@ -66,3 +66,12 @@ export async function updateUser(email, changes) {
   let result = await User.findOne({ email: email });
   return result;
 }
+
+// Returns array of everyone's emails
+// Untested
+async function getEmailsOfCompletedSignups() {
+  await connect();
+  let users = await User.find({ signupCompleted: true }, 'email').exec();
+  let emails = users.map(user => user.email);
+  return emails;
+}

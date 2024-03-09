@@ -62,5 +62,7 @@ export async function generateRandomUser(){
     await connect();
 
     User.create(data);
-
+    return(
+      <></>
+    )
   }
