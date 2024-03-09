@@ -1,4 +1,3 @@
-// const mongoose = require('mongoose');
 import { userSchema } from "/src/app/(models)/User.js";
 import User from "@/app/(models)/User";
 
