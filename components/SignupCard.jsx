@@ -20,6 +20,7 @@ const SignupCard = ({ sessionName, submit }) => {
   const [endTime, setEndTime] = useState(null);
   const [endTimeIndex, setEndTimeIndex] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState([]);
+  const [image, setImage] = useState(null);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const router = useRouter();
 
@@ -120,6 +121,7 @@ const SignupCard = ({ sessionName, submit }) => {
         studyStart: startTime,
         studyEnd: endTime,
         locations: selectedLocations,
+        image: image,
         // Not changing
         //peopleSeen: peopleSeen,
         //matches: matches,

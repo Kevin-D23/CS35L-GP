@@ -1,0 +1,7 @@
+If you want to change the model of the user
+schema, change the following files:
+
+CS35L-GP\src\app\(models)\User.js
+CS35L-GP\src\app\api\user\route.js
+CS35L-GP\components\SignupCard.jsx
+CS35L-GP\src\app\api\auth\[...nextauth]\testUsers.js

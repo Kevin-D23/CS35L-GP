@@ -10,10 +10,22 @@ function Sender(props){
 function MessageBody(props){
   return <div className={`${styles.messagePart} ${styles.messageBody}`}>{props.contents}</div>
 }
+function Icon(props){
+  const [isVisible, setVisible] = React.useState(false)
+  const toggleVisbility = () => {
+    setVisible(!isVisible)
+  }
+  return(<div>
+    <img src={props.source} className={styles.sendeeProfile} onClick={toggleVisbility}></img>
+    {isVisible && (
+        <div className={styles.sendeeName}>Haohan</div>
+      )}
+  </div>)
+}
 function Recipients(props){
   return (<div className={`${styles.messagePart} ${styles.recipients}`}> 
-    <img src="/icons/scissors.png" className={styles.sendeeProfile}></img>
-    <div className={styles.sendeeName}>Haohan</div>
+    <Icon source={"/icons/scissors.png"}></Icon>
+    
   </div>)
 }
 export default function Message(props){ 

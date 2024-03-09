@@ -16,6 +16,7 @@ const Page = async () => {
   
   const submit = async (data) => {
     "use server";
+    // Sends information to database
     await updateUser(email, data);
   };
   return (

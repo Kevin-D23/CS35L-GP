@@ -13,6 +13,7 @@ const userSchema = new Schema(
     studyStart: { type: String, required: false },
     studyEnd: { type: String, required: false },
     locations: { type: [String], required: false },
+    image: { type: String, required: false },
     peopleSeen: { type: [String], required: false },
     matches: { type: [String], required: false },
     likes: { type: [String], required: false },

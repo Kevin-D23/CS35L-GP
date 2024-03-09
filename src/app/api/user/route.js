@@ -15,6 +15,7 @@ export async function POST(req) {
   const defaultStudyStart = "";
   const defaultStudyEnd = "";
   const defaultLocations = [];
+  const defaultImage = "https://media.vanityfair.com/photos/64ca8376f9a03860a86c239f/9:16/w_747,h_1328,c_limit/taylor-swift-bonuses.jpg";
   const defaultMatches = [];
   const defaultPeopleSeen = [];
   const defaultLikes = [];
@@ -31,6 +32,7 @@ export async function POST(req) {
     studyStart: defaultStudyStart,
     studyEnd: defaultStudyEnd,
     locations: defaultLocations,
+    image: defaultImage,
     peopleSeen: defaultPeopleSeen,
     matches: defaultMatches,
     likes: defaultLikes,
