@@ -130,6 +130,8 @@ const SignupCard = () => {
       startTime &&
       endTime &&
       startTimeIndex < endTimeIndex
+      &&
+      selectedDays.length != 0
     ) {
       
       const data = {
