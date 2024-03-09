@@ -4,7 +4,7 @@ Study companion app designed to help students find others to study with. This pl
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
@@ -17,6 +17,7 @@ bun dev
 ```
 
 ## Documentation
+
 How to fetch user information (ONLY WORKS ON SERVER SIDE COMPONENTS):
 
 ```javascript
@@ -54,11 +55,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Express
 
 #### Libraries:
+
 - next-auth
 - mongoose
 - react-select
 - react-icons
-
 
 ## Contributors:
 

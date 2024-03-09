@@ -57,6 +57,10 @@
   border: 1px solid var(--dark-500);
 }
 
+.imageContainer img {
+  object-fit: cover;
+}
+
 .bioContainer {
   height: 15rem;
   padding: 1rem;

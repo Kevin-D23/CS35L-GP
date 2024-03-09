@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
+.signupPageContainer {
+  display: flex;
+  align-items: center;
+}
+
 .signupContainer {
   background-color: var(--dark-200);
   width: 35rem;
@@ -133,4 +138,55 @@
 
 .signupContainer textarea {
   resize: none;
+}
+
+.pictureContainer {
+  background-color: var(--dark-200);
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.pictureContainer h1 {
+  color: var(--primary-300);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.pictures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
+  grid-template-rows: repeat(
+    4,
+    1fr
+  ); /* 5 rows */ /* Adjust the gap between photos as needed */
+}
+
+.picture {
+  width: 6rem;
+  height: 9rem;
+  object-fit: cover;
+  padding: none;
+}
+
+.pictureButtons {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.pictureButtons button {
+  border-radius: 4px;
+  width: 10rem;
+  height: 2rem;
+  background-color: var(--dark-300);
 }

@@ -140,7 +140,7 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
               <div className={styles.left}>
                 <div className={styles.imageContainer}>
                   <img
-                    src="/icons/haohan.jpeg"
+                    src={user.image}
                     style={{ width: "100%", height: "100%" }}
                   />
                 </div>
