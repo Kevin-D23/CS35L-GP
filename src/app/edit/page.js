@@ -38,7 +38,7 @@ export default async function edit() {
   let studyStart = user.studyStart;
   let studyEnd = user.studyEnd;
   let locations = user.locations;
-
+  console.log(name);
   if (!user?.signupCompleted) redirect("/signup");
 
   return (
