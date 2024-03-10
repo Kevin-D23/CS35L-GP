@@ -4,6 +4,7 @@ import ProfileCard from "../../components/ProfileCard";
 import { redirect } from "next/navigation";
 import { getUser, updateUser } from "./api/user/route";
 import { getAllUsers } from "./api/user/route";
+import { matching } from "./api/user/route";
 
 export default async function Home() {
 
@@ -13,8 +14,14 @@ export default async function Home() {
   const user = await getUser(email);
   if (!user?.signupCompleted) redirect("/signup");
 
+  let users = []
+  const pairs = await matching(email)
+  for(let i = 0; i<pairs.length; i++) {
+    let temp = await getUser(pairs[i].email)
+    users.push(temp)
+  }
+  console.log(users)
   // convert returned array into plain text
-  let users = await getAllUsers();
   for (let i = 0; i < users.length; i++) {
     users[i] = JSON.parse(JSON.stringify(users[i]));
   }
