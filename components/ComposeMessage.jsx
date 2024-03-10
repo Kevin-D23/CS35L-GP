@@ -10,7 +10,7 @@ export default function ComposeMessage(props){
     const [target, setTarget] = React.useState('')
     const handleSubmit = () =>{
         const data = {sender:props.user.email,
-        receiver:target,
+        reciever:target,
         title: title,
         message: content}
         props.sendData(data)
