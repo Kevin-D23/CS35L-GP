@@ -21,6 +21,12 @@
     position: absolute;
     cursor: pointer;
 }
+.submitButton{
+    position: absolute;
+    bottom: -10%;
+    cursor: pointer;
+    background-color: green;
+}
 .title{
     background-color: aquamarine;
     height: 100%;

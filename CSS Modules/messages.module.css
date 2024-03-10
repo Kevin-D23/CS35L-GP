@@ -1,8 +1,7 @@
 .box{
-    color:red;
     background-color: aqua;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 20% 80%;
     width: 50%;
     height: 75%;
 }

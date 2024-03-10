@@ -62,9 +62,18 @@ export default function Message(props){
   const [buttonTextIndex, setButtonTextIndex] = React.useState(Array(data.length).fill(0));
   
   const toggleBackgroundColor = (index,newColor) => {
-    setButtonColors(buttonColors.map((color, idx) => 
-      idx === index ? [newColor,10,20] : color // Toggle to 'red' for the clicked button
-    ));
+    setButtonColors(buttonColors.map((color, idx) => { 
+      //idx === index ? [newColor,10,20] : color
+      if (idx === index && color[1] == 10){
+        return [newColor, 80, 92]
+      }
+      else if(idx === index && color[1] == 80){
+        return [newColor, 10, 20]
+      }
+      else{
+        return color
+      }
+    }));
   };
   const toggleButtonText = (index,newColor) => {
     const updatedIndexes = [...buttonTextIndex];
@@ -81,7 +90,7 @@ export default function Message(props){
             <button
               style={{background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`}}
               className={styles.button}
-              onClick={() => toggleButtonText(index,"red")}
+              onClick={() => toggleButtonText(index,buttonColors[index][0])}
               id={`message${index}`}
             >
               {buttonTexts[buttonTextIndex[index]]}
