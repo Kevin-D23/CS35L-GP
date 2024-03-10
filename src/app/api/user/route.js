@@ -72,6 +72,26 @@ export async function updateUser(email, changes) {
   return result;
 }
 
+// Appends to messagesRecieved the messageID, given the email to append to
+export async function appendUserMessagesRecieved(email, messageID){
+  await connect();
+  try{
+    await User.updateOne({ email: email }, { $push: { messagesRecieved: messageID } });
+  } catch (error){
+    console.log("Error in appending to messagesRecieved")
+  }
+}
+
+// Appends to messagesSent the messageID, given the email to append to
+export async function appendUserMessagesSent(email, messageID){
+  await connect();
+  try{
+    await User.updateOne({ email: email }, { $push: { messagesSent: messageID }});
+  } catch (error){
+    console.log("Error in appending to messagesSent")
+  }
+}
+
 // Returns array of everyone's emails
 // To print: getEmailsOfCompletedSignups().then(emails => console.log(emails));
 export async function getEmailsOfCompletedSignups() {

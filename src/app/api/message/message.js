@@ -1,5 +1,6 @@
 import { messageSchema } from "/src/app/(models)/Message.js";
 import Message from "@/app/(models)/Message";
+import { appendUserMessagesRecieved, appendUserMessagesSent } from "../user/route";
 
 const mongoose = require('mongoose');
 const connect = async () => {
@@ -37,8 +38,13 @@ const data = {
     };
 */
 export async function pushMessage(data){
-    Message.create(data);
-    return(
-        <></>
-    )
+    try{
+        const doc = await Message.create(data);
+        const messageID = doc._id;
+        appendUserMessagesRecieved(data.reciever, messageID);
+        appendUserMessagesSent(data.sender, messageID);
+    } catch(error){
+        console.log("Error creating message");
+        console.log(error);
+    }
 }
