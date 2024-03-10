@@ -1,6 +1,7 @@
 'use client'
 import React from "react"
 import styles from "../CSS Modules/messages.module.css"
+
 function Sender(props){
     return <header className={`${styles.messagePart} ${styles.sender}`}>
       <img src="/icons/scissors.png" className={styles.senderProfile}></img>
@@ -25,16 +26,63 @@ function Icon(props){
       )}
   </div>)
 }
+
 function Recipients(props){
   return (<div className={`${styles.messagePart} ${styles.recipients}`}> 
     <Icon source={"/icons/scissors.png"}></Icon>
     
   </div>)
 }
+const data = [
+  ["Button 1", "New Text 1"],
+  ["Button 2", "New Text 2"],
+  ["Button 3", "New Text 3"],
+  ["Button 4", "New Text 4"],
+  ["Button 5", "New Text 5"],
+  ["Button 6", "New Text 6"],
+  ["Button 7", "New Text 7"],
+  ["Button 8", "New Text 8"],
+  ["Button 9", "New Text 9"],
+  ["Button 10", "New Text 10"],
+  // Add more pairs as needed
+];
+function ButtonClick({message,toggleBool})
+{
+if(toggleBool)
+{
+  return(<div>{message}</div>);
+}
+
+}
+
 export default function Message(props){ 
-    return( <div className={styles.box}>
-      <Sender sender={"Banana"}></Sender>
-      <MessageBody contents="Please come urgently" ></MessageBody>
-      <Recipients></Recipients>
-    </div>)
+  const [buttonTextIndex, setButtonTextIndex] = React.useState(Array(data.length).fill(0));
+  const toggleButtonText = (index) => {
+    const updatedIndexes = [...buttonTextIndex];
+    updatedIndexes[index] = 1 - updatedIndexes[index]; 
+    setButtonTextIndex(updatedIndexes);
+  };
+
+  return (
+    <div>
+      <div className={styles.scrollContainer}>
+        {data.map((buttonTexts, index) => (
+          <div key={index} className={styles.buttonContainer}>
+            <button
+              className={styles.button}
+              onClick={() => toggleButtonText(index)}
+            >
+              {buttonTexts[buttonTextIndex[index]]}
+            </button>
+            {buttonTextIndex[index] === 1 && (
+              <div>
+                Additional Content for {buttonTexts[0]}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
 }
