@@ -116,16 +116,46 @@ export async function getUserMajor(currentUserEmail){
 }
 
 export async function matching(currentUserEmail){
+  // Setup connection, get current user info
   await connect();
-  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+  const currentMajor = await getUserMajor(currentUserEmail);
+  const currentClasses = await getUserClasses(currentUserEmail);
+  const currentLocations = await getUserLocations(currentUserEmail);
 
-  for(let email of emails){
-    getUserClasses(email).then(classes => console.log(classes));
-    getUserMajor(email).then(major => console.log(major));
-    getUserLocations(email).then(locations => console.log(locations));
+  const POINTS_PER_MAJOR = 10;
+  const POINTS_PER_LOCATION = 20;
+  const POINTS_PER_CLASS = 10;
+  
+  // Get emails of everyone else
+  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+  
+  // Pairs of emails to points
+  let pairs = emails.map(email => ({ email: email, value: 0 }));
+
+  // Compare majors
+  for(let pair of pairs){
+    const otherMajor = await getUserMajor(pair.email);
+    if(currentMajor === otherMajor){
+      pair.value += POINTS_PER_MAJOR;
+    }
   }
   
-  return emails;
+  // Compare locations
+  for(let pair of pairs){
+    const otherLocations = await getUserLocations(pair.email);
+    const commonLocations = currentLocations.filter(location => otherLocations.includes(location));
+    pair.value += (otherLocations.length * POINTS_PER_LOCATION);
+  }
+
+  // Compare classes
+  for(let pair of pairs){
+    const otherClasses = await getUserClasses(pair.email);
+    const commonClasses = currentClasses.filter(classes => otherClasses.includes(classes));
+    pair.value += (commonClasses.length * POINTS_PER_CLASS);
+  }
+
+  pairs.sort((a, b) => b.value - a.value);
+  return pairs;
 }
 
 
