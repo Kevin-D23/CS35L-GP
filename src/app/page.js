@@ -20,7 +20,6 @@ export default async function Home() {
     let temp = await getUser(pairs[i].email)
     users.push(temp)
   }
-  console.log(users)
   // convert returned array into plain text
   for (let i = 0; i < users.length; i++) {
     users[i] = JSON.parse(JSON.stringify(users[i]));

@@ -81,7 +81,14 @@ export async function appendUserMessagesRecieved(email, messageID) {
   try {
     await User.updateOne(
       { email: email },
-      { $push: { messagesRecieved: messageID } }
+      { 
+        $push: { 
+          messagesRecieved: {
+            $each: [messageID],
+            $sort: -1
+          } 
+        }
+      }
     );
   } catch (error) {
     console.log("Error in appending to messagesRecieved");
@@ -94,7 +101,14 @@ export async function appendUserMessagesSent(email, messageID) {
   try {
     await User.updateOne(
       { email: email },
-      { $push: { messagesSent: messageID } }
+      { 
+        $push: { 
+          messagesSent: {
+            $each: [messageID],
+            $sort: -1
+          } 
+        }
+      }
     );
   } catch (error) {
     console.log("Error in appending to messagesSent");
