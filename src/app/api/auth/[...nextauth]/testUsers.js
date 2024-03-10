@@ -19,7 +19,7 @@ export async function generateRandomUser(){
     const name = nameChoices[randNumStart1(4) - 1];
     const age = randNumStart1(50) + 18;
     console.log(typeof(age));
-    const year = randNumStart1(4);
+    const year = randNumStart1(5);
     const majorChoices = ["Computer Science", "Computer Science and Engineering", "Computer Engineering"];
     const major = majorChoices[randNumStart1(4) - 1];
     const bio = "I am a UCLA student teehee";

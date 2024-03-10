@@ -44,6 +44,8 @@ export async function POST(req) {
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
 
+// INTERFACE FUCNTIONS FOR DATABASE
+
 // takes user's email as argument and returns corresponding user object
 export async function getUser(email, id) {
   await connect();
@@ -71,10 +73,59 @@ export async function updateUser(email, changes) {
 }
 
 // Returns array of everyone's emails
-// Untested
-async function getEmailsOfCompletedSignups() {
+// To print: getEmailsOfCompletedSignups().then(emails => console.log(emails));
+export async function getEmailsOfCompletedSignups() {
   await connect();
   let users = await User.find({ signupCompleted: true }, 'email').exec();
+  let emails = users.map(users => users.email);
+  return emails;
+}
+
+// Not good at naming
+// Returns array of everyone's emails except current user
+// To print: getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail).then(emails => console.log(emails));
+export async function getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail) {
+  await connect();
+  let users = await User.find({ signupCompleted: true, email: { $ne: currentUserEmail } }, 'email').exec();
   let emails = users.map(user => user.email);
   return emails;
 }
+
+// Aquire user's locations given email
+// To print: getUserLocations(currentUserEmail).then(locations => console.log(locations))
+export async function getUserLocations(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'locations').exec();
+  return user.locations;
+}
+
+// Aquire user's classes given email
+// To print: getUserClasses(currentUserEmail).then(classes => console.log(classes))
+export async function getUserClasses(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'classes').exec();
+  return user.classes;
+}
+
+// Aquire user's major given email
+// To print: getUserMajor(currentUserEmail).then(major => console.log(major))
+export async function getUserMajor(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'major').exec();
+  return user.major;
+}
+
+export async function matching(currentUserEmail){
+  await connect();
+  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+
+  for(let email of emails){
+    getUserClasses(email).then(classes => console.log(classes));
+    getUserMajor(email).then(major => console.log(major));
+    getUserLocations(email).then(locations => console.log(locations));
+  }
+  
+  return emails;
+}
+
+
