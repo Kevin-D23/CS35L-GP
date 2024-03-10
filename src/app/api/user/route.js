@@ -132,27 +132,24 @@ export async function matching(currentUserEmail){
   // Pairs of emails to points
   let pairs = emails.map(email => ({ email: email, value: 0 }));
 
-  // Compare majors
-  for(let pair of pairs){
-    const otherMajor = await getUserMajor(pair.email);
+  // Compare majors, locations, and classes in parallel
+  await Promise.all(pairs.map(async pair => {
+    const [otherMajor, otherLocations, otherClasses] = await Promise.all([
+      getUserMajor(pair.email),
+      getUserLocations(pair.email),
+      getUserClasses(pair.email)
+    ]);
+
     if(currentMajor === otherMajor){
       pair.value += POINTS_PER_MAJOR;
     }
-  }
-  
-  // Compare locations
-  for(let pair of pairs){
-    const otherLocations = await getUserLocations(pair.email);
-    const commonLocations = currentLocations.filter(location => otherLocations.includes(location));
-    pair.value += (otherLocations.length * POINTS_PER_LOCATION);
-  }
 
-  // Compare classes
-  for(let pair of pairs){
-    const otherClasses = await getUserClasses(pair.email);
+    const commonLocations = currentLocations.filter(location => otherLocations.includes(location));
+    pair.value += (commonLocations.length * POINTS_PER_LOCATION);
+
     const commonClasses = currentClasses.filter(classes => otherClasses.includes(classes));
     pair.value += (commonClasses.length * POINTS_PER_CLASS);
-  }
+  }));
 
   pairs.sort((a, b) => b.value - a.value);
   return pairs;
