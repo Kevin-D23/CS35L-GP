@@ -48,3 +48,29 @@ export async function pushMessage(data){
         console.log(error);
     }
 }
+
+// Returns object containing sender, reciever, title, message
+// Returns null if error
+export async function fetchMessage(messageID){
+    await connect();
+    try{
+        const doc = await Message.findById(messageID);
+        if(doc){
+            const data = {
+                sender: doc.sender,
+                reciever: doc.reciever,
+                title: doc.title,
+                message: doc.message
+            };
+            return data;
+        } else {
+            console.log("No document found with that ID");
+            return null;
+        }
+    } catch(error) {
+        console.log(error);
+        return null;
+    }
+
+
+}
