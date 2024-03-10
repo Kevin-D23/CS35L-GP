@@ -266,11 +266,6 @@ const SignupCard = ({ sessionName, submit }) => {
               <Select
                 className={styles.courseSelect}
                 options={departments}
-                value={
-                  department
-                    ? { label: department, value: department }
-                    : "Select..."
-                }
                 onChange={(e) => {
                   updateCourses(e.value);
                   setDepartment(e.value);
@@ -437,7 +432,7 @@ const SignupCard = ({ sessionName, submit }) => {
               endTime &&
               startTimeIndex < endTimeIndex
                 ? setPageNumber(pageNumber + 1)
-                : {};
+                : setSubmitAttempted(true);
             }}
           >
             Next
