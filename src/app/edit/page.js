@@ -29,10 +29,11 @@ export default async function edit() {
     backgroundColor:"var(--dark-200)",aspectRatio:"auto"}}>
       <div className={styles.left}>
         <div className={styles.imageContainer}>
-          <img
-            src="/icons/haohan.jpeg"
-            style={{ width: "100%", height: "100%" }}
-          />
+        <img
+                    src={user.image}
+                    alt={"Profile Picture"}
+                    style={{ width: "100%", height: "100%" }}
+                  />
         </div>
         <div className={styles.bioContainer}>
           <h1>{user.name.toUpperCase()}</h1>
