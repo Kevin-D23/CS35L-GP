@@ -34,16 +34,16 @@ function Recipients(props){
   </div>)
 }
 const data = [
-  ["Button 1", "New Text 1"],
-  ["Button 2", "New Text 2"],
-  ["Button 3", "New Text 3"],
-  ["Button 4", "New Text 4"],
-  ["Button 5", "New Text 5"],
-  ["Button 6", "New Text 6"],
-  ["Button 7", "New Text 7"],
-  ["Button 8", "New Text 8"],
-  ["Button 9", "New Text 9"],
-  ["Button 10", "New Text 10"],
+  ["Button 1", "New Text 1","#59BFFF"],
+  ["Button 2", "New Text 2","#A5D296"],
+  ["Button 3", "New Text 3","#D3D3D3"],
+  ["Button 4", "New Text 4","#59BFFF"],
+  ["Button 5", "New Text 5","#A5D296"],
+  ["Button 6", "New Text 6","D3D3D3"],
+  ["Button 7", "New Text 7","59BFFF"],
+  ["Button 8", "New Text 8","A5D296"],
+  ["Button 9", "New Text 9","#D3D3D3"],
+  ["Button 10", "New Text 10","59BFFF"],
   // Add more pairs as needed
 ];
 function ButtonClick({message,toggleBool})
@@ -69,6 +69,7 @@ export default function Message(props){
         {data.map((buttonTexts, index) => (
           <div key={index} className={styles.buttonContainer}>
             <button
+              style={{background: `linear-gradient(120deg, #252525 80%, #2F2F2F 92%,${buttonTexts[2]} 100%)`}}
               className={styles.button}
               onClick={() => toggleButtonText(index)}
             >
