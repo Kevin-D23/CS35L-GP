@@ -80,7 +80,7 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
 
   return (
     <div className={styles.homeContainer} ref={background}>
-      {location == "/" && (
+      {/* {location == "/" && (
         <div className={styles.filterOptionsContainer}>
           <h2>Filter By</h2>
           <div className={styles.filterOptions}>
@@ -110,7 +110,7 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       {user ? (
         <div className={styles.home} ref={background}>
           {location == "/" && (

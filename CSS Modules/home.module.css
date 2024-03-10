@@ -87,6 +87,8 @@
 .bioContainer p {
   color: var(--primary-text);
   font-weight: 400;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .right {

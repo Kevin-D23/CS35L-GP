@@ -18,10 +18,10 @@ const userSchema = new Schema(
     matches: { type: [String], required: false },
     likes: { type: [String], required: false },
     signupCompleted: { type: Boolean, required: true },
-    messagesSent: {type:[String], required: false},
-    messagesRecieved: {type:[String],required: false},
-    messagesRead: {type:[String],required:false},
-
+    messagesSent: { type: [String], required: false },
+    messagesRecieved: { type: [String], required: false },
+    messagesRead: { type: [String], required: false },
+    groups: { type: [String], required: false },
   },
   { timestamps: true }
 );

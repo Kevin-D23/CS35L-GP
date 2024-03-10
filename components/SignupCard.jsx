@@ -25,6 +25,7 @@ const SignupCard = ({ sessionName, submit }) => {
   const [image, setImage] = useState(null);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
+  const [charCount, setCharCount] = useState(0);
   const pictures = [
     "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYm6wqVw9UyQjxFlzZ7e_0d13kNxdD2DQ0ttREVNgoJ1mpIHIyt-8uRXxsn7N4oFZAf-DPn94vHBuADtflvBQhHOg59=w3600-h2008",
     "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYuAuYkj6OfWXPXmDmJ0rRJ001_Bt3Th_YeyISFTOz_1NVW4pwtZWdSGFLwxteQF4v7EdDNlpNcq8XXSgTf_Sj6S7Ln=w3600-h2008",
@@ -160,7 +161,6 @@ const SignupCard = ({ sessionName, submit }) => {
         //peopleSeen: peopleSeen,
         //matches: matches,
         signupCompleted: true,
-
       };
       submit(data);
       router.push("/");
@@ -243,8 +243,13 @@ const SignupCard = ({ sessionName, submit }) => {
             <textarea
               className={styles.bioInput}
               value={bio}
-              onChange={(e) => setBio(e.target.value)}
+              maxLength={150}
+              onChange={(e) => {
+                setBio(e.target.value);
+                setCharCount(e.target.value.length);
+              }}
             />
+            {charCount} / 150 characters
           </div>
           <div className={styles.courseSelectionContainer}>
             <div>
@@ -261,6 +266,11 @@ const SignupCard = ({ sessionName, submit }) => {
               <Select
                 className={styles.courseSelect}
                 options={departments}
+                value={
+                  department
+                    ? { label: department, value: department }
+                    : "Select..."
+                }
                 onChange={(e) => {
                   updateCourses(e.value);
                   setDepartment(e.value);
@@ -272,6 +282,10 @@ const SignupCard = ({ sessionName, submit }) => {
                     className={styles.courseSelect}
                     options={displayCourses}
                     isMulti
+                    value={selectedCourses.map((course) => ({
+                      label: course,
+                      value: course,
+                    }))}
                     onChange={(e) => {
                       let x = [];
                       for (let i = 0; i < e.length; i++) x.push(e[i].value);
@@ -299,6 +313,7 @@ const SignupCard = ({ sessionName, submit }) => {
               What days are you available?
             </div>
             <Select
+              value={selectedDays.map((day) => ({ label: day, value: day }))}
               className={styles.daysSelect}
               options={days}
               isMulti
@@ -329,6 +344,11 @@ const SignupCard = ({ sessionName, submit }) => {
               </div>
 
               <Select
+                value={
+                  startTime
+                    ? { value: startTime, label: startTime }
+                    : "Select..."
+                }
                 className={styles.time}
                 options={startTimes}
                 onChange={(e) => {
@@ -350,6 +370,9 @@ const SignupCard = ({ sessionName, submit }) => {
               </div>
 
               <Select
+                value={
+                  endTime ? { value: endTime, label: endTime } : "Select..."
+                }
                 className={styles.time}
                 options={endTimes}
                 onChange={(e) => {
@@ -370,6 +393,10 @@ const SignupCard = ({ sessionName, submit }) => {
               Where do you like to study?
             </div>
             <Select
+              value={selectedLocations.map((location) => ({
+                label: location,
+                value: location,
+              }))}
               className={styles.locationSelect}
               options={locations}
               isMulti
