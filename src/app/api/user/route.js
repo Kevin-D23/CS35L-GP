@@ -115,5 +115,17 @@ export async function getUserMajor(currentUserEmail){
   return user.major;
 }
 
+export async function matching(currentUserEmail){
+  await connect();
+  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+
+  for(let email of emails){
+    getUserClasses(email).then(classes => console.log(classes));
+    getUserMajor(email).then(major => console.log(major));
+    getUserLocations(email).then(locations => console.log(locations));
+  }
+  
+  return emails;
+}
 
 
