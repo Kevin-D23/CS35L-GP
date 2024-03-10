@@ -44,6 +44,8 @@ export async function POST(req) {
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }
 
+// INTERFACE FUCNTIONS FOR DATABASE
+
 // takes user's email as argument and returns corresponding user object
 export async function getUser(email, id) {
   await connect();
@@ -83,8 +85,35 @@ export async function getEmailsOfCompletedSignups() {
 // Returns array of everyone's emails except current user
 // To print: getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail).then(emails => console.log(emails));
 export async function getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail) {
+  await connect();
   let users = await User.find({ signupCompleted: true, email: { $ne: currentUserEmail } }, 'email').exec();
   let emails = users.map(user => user.email);
   return emails;
 }
+
+// Aquire user's locations given email
+// To print: getUserLocations(currentUserEmail).then(locations => console.log(locations))
+export async function getUserLocations(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'locations').exec();
+  return user.locations;
+}
+
+// Aquire user's classes given email
+// To print: getUserClasses(currentUserEmail).then(classes => console.log(classes))
+export async function getUserClasses(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'classes').exec();
+  return user.classes;
+}
+
+// Aquire user's major given email
+// To print: getUserMajor(currentUserEmail).then(major => console.log(major))
+export async function getUserMajor(currentUserEmail){
+  await connect();
+  let user = await User.findOne({ email: currentUserEmail }, 'major').exec();
+  return user.major;
+}
+
+
 
