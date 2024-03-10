@@ -116,16 +116,43 @@ export async function getUserMajor(currentUserEmail){
 }
 
 export async function matching(currentUserEmail){
+  // Setup connection, get current user info
   await connect();
-  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+  const currentMajor = await getUserMajor(currentUserEmail);
+  const currentClasses = await getUserClasses(currentUserEmail);
+  const currentLocations = await getUserLocations(currentUserEmail);
 
-  for(let email of emails){
-    getUserClasses(email).then(classes => console.log(classes));
-    getUserMajor(email).then(major => console.log(major));
-    getUserLocations(email).then(locations => console.log(locations));
-  }
+  const POINTS_PER_MAJOR = 10;
+  const POINTS_PER_LOCATION = 20;
+  const POINTS_PER_CLASS = 10;
   
-  return emails;
+  // Get emails of everyone else
+  let emails = await getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail);
+  
+  // Pairs of emails to points
+  let pairs = emails.map(email => ({ email: email, value: 0 }));
+
+  // Compare majors, locations, and classes in parallel
+  await Promise.all(pairs.map(async pair => {
+    const [otherMajor, otherLocations, otherClasses] = await Promise.all([
+      getUserMajor(pair.email),
+      getUserLocations(pair.email),
+      getUserClasses(pair.email)
+    ]);
+
+    if(currentMajor === otherMajor){
+      pair.value += POINTS_PER_MAJOR;
+    }
+
+    const commonLocations = currentLocations.filter(location => otherLocations.includes(location));
+    pair.value += (commonLocations.length * POINTS_PER_LOCATION);
+
+    const commonClasses = currentClasses.filter(classes => otherClasses.includes(classes));
+    pair.value += (commonClasses.length * POINTS_PER_CLASS);
+  }));
+
+  pairs.sort((a, b) => b.value - a.value);
+  return pairs;
 }
 
 
