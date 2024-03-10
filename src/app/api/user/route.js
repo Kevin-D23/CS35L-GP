@@ -71,10 +71,20 @@ export async function updateUser(email, changes) {
 }
 
 // Returns array of everyone's emails
-// Untested
-async function getEmailsOfCompletedSignups() {
+// To print: getEmailsOfCompletedSignups().then(emails => console.log(emails));
+export async function getEmailsOfCompletedSignups() {
   await connect();
   let users = await User.find({ signupCompleted: true }, 'email').exec();
+  let emails = users.map(users => users.email);
+  return emails;
+}
+
+// Not good at naming
+// Returns array of everyone's emails except current user
+// To print: getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail).then(emails => console.log(emails));
+export async function getEmailsOfCompletedSignupsExceptCurrentUser(currentUserEmail) {
+  let users = await User.find({ signupCompleted: true, email: { $ne: currentUserEmail } }, 'email').exec();
   let emails = users.map(user => user.email);
   return emails;
 }
+
