@@ -114,6 +114,30 @@
   background-color: var(--dark-400);
 }
 
+.group:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+.makeGroup {
+  display: block;
+  width: 1000px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Abel", sans-serif;
+  color: white;
+  background-color: var(--dark-300);
+  border: 2px solid black;
+}
+
+.makeGroup:hover {
+  color: white;
+  background-color: blueviolet;
+}
+
 .suggestions:hover {
   background-color: blueviolet;
   color: white;
@@ -129,11 +153,6 @@
   border-width: 2px;
   border-color: black;
   width: 100%;
-}
-
-.group:hover {
-  background-color: blueviolet;
-  color: white;
 }
 
 .location {

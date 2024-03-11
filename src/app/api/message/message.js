@@ -53,3 +53,19 @@ export async function fetchMessage(messageID){
 
 
 }
+
+// Sorts messagesRecieved and messagesSent in the database
+export async function sortMessagesRecievedAndSent(currentUserEmail){
+    const User = mongoose.model('User');
+
+    const user = await User.findOne({ email: currentUserEmail })
+        .populate({
+            path: 'messagesRecieved',
+            options: { sort: { 'timestamp': -1 }}
+        })
+        .populate({
+            path: 'messagesSent',
+            options: { sort: { 'timestamp': -1 }}
+        })
+        console.log("Done");
+}
