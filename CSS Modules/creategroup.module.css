@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
 .createGroupPageContainer {
+  position: fixed;
   display: flex;
   align-items: center;
+  height: fit-content;
 }
 
 .createGroupContainer {
@@ -24,7 +26,6 @@
 }
 
 .createGroupCardContainer {
-
   width: 100%;
 }
 
@@ -40,7 +41,6 @@
   width: 100%;
   flex-direction: column;
   color: white;
-
 }
 
 .textInput input {
@@ -110,4 +110,9 @@
   text-align: center;
 }
 
-
+.closeButton {
+  position: absolute;
+  display: inline-block;
+  right: 1rem;
+  top: 1rem;
+}

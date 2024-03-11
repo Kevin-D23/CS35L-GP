@@ -9,6 +9,7 @@ export async function createGroup(
   location,
   studyStart,
   studyEnd,
+  days,
   memberEmails
 ) {
   await connect();
@@ -17,16 +18,30 @@ export async function createGroup(
     let user = await User.findOne({ email: memberEmails[i] });
     members.push({ email: memberEmails[i], name: user.name });
   }
+  let user = await User.findOne({ email: owner });
+  members.push({ email: owner, name: user.name });
+  let ownerObj = await User.findOne({ email: owner });
+  let ownerDBInfo = { email: owner, name: ownerObj.name };
 
-  await Group.create({
+  let group = await Group.create({
     name: name,
-    owner: owner,
+    owner: ownerDBInfo,
     location: location,
     studyStart: studyStart,
     studyEnd: studyEnd,
+    days: days,
     members: members,
   })
-    .then(() => console.log("Group successfully created"))
+    .then(async (group) => {
+      console.log("Group successfully created");
+      for (let i = 0; i < memberEmails.length; i++) {
+        await User.updateOne(
+          { email: memberEmails[i] },
+          { $push: { groups: group._id } }
+        );
+      }
+      await User.updateOne({email: owner}, { $push: { groups: group.id } })
+    })
     .catch(() => console.log("Group creation failed"));
 }
 

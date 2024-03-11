@@ -52,7 +52,13 @@
 }
 
 .meetingInfo {
-  margin-right: 10rem;
+  margin-right: 5rem;
+  width: 40%;
+}
+
+.meetingInfo h2 {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .membersContainer {
@@ -235,17 +241,22 @@
   color: black;
 }
 
-.join {
-  color: black;
-  background-color: var(--dark-600);
-  border-width: 2px;
-  border-color: black;
-  width: 100%;
-  font-family: "Abel", sans-serif;
-  font-size: 20px;
+.daysContainer {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
 }
 
-.join:hover {
-  background-color: lightgreen;
-  color: black;
+.createButton {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--primary-300);
+}
+
+.createPopup {
+  position: absolute;
+  border: 1px solid red;
 }

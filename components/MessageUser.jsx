@@ -9,7 +9,5 @@ export default async function test(){
     let email = session?.user?.email;
     const user = await getUser(email); // returns user object
     let name = user.name;
-    console.log(email);
-    console.log(user);
     return (<></>)
 }

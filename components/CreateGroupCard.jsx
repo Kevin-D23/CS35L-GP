@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import styles from "../CSS Modules/creategroup.module.css";
 import Select from "react-select";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { FaXmark } from "react-icons/fa6";
 
-const CreateGroupCard = ({ sessionName, submit }) => {
-  const [groupName, setGroupName] = useState(null);
+const CreateGroupCard = ({
+  sessionName,
+  matches,
+  handleCreate,
+  setShowCreate,
+}) => {
+  const [groupName, setGroupName] = useState("");
   const [location, setLocation] = useState(null);
   const [selectedDays, setSelectedDays] = useState([]);
   const [startTime, setStartTime] = useState(null);
@@ -16,6 +20,11 @@ const CreateGroupCard = ({ sessionName, submit }) => {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
+  let matchesObjects = [];
+
+  for (let i = 0; i < matches.length; i++) {
+    matchesObjects.push({ value: matches[i].email, label: matches[i].name });
+  }
 
   const members = [
     { value: 1, label: "Member 1" },
@@ -70,23 +79,39 @@ const CreateGroupCard = ({ sessionName, submit }) => {
     { value: "Olympic", label: "Olympic" },
   ];
 
-  function handleSubmit() {
-    if (groupName && location && members) {
+  async function handleSubmit() {
+    if (
+      groupName &&
+      location &&
+      selectedDays.length != 0 &&
+      startTime &&
+      endTime
+    ) {
       const data = {
-        groupName: groupName,
+        name: groupName,
         location: location,
-        members: members,
-        createGroupCompleted: true,
+        members: selectedMembers,
+        studyStart: startTime,
+        studyEnd: endTime,
+        days: selectedDays,
       };
-      submit(data);
-      router.push("/");
+      await handleCreate(data);
+      window.location.reload()
     } else {
       setSubmitAttempted(true);
     }
   }
   return (
     <div className={styles.createGroupPageContainer}>
-      
+      <button className={styles.closeButton} onClick={() => setShowCreate(false)}>
+        <FaXmark
+          color="var(--dark-400)"
+          style={{
+            width: "2.5rem",
+            height: "2.5rem",
+          }}
+        />
+      </button>
       <div className={styles.createGroupContainer}>
         <h1>Create Your Group</h1>
         <div className={styles.createGroupCardContainer}>
@@ -104,23 +129,14 @@ const CreateGroupCard = ({ sessionName, submit }) => {
         </div>
 
         <div className={styles.locationSelectContainer}>
-          <div
-            style={
-              submitAttempted && !selectedLocations.length
-                ? { color: "red" }
-                : {}
-            }
-          >
+          <div style={submitAttempted && !location ? { color: "red" } : {}}>
             Where will the group be meeting?
           </div>
           <Select
             className={styles.locationSelect}
             options={locations}
-            isMulti
             onChange={(e) => {
-              let x = [];
-              for (let i = 0; i < e.length; i++) x.push(e[i].value);
-              setSelectedLocations(x);
+              setLocation(e.value);
             }}
             styles={{
               control: (styles) => ({
@@ -158,63 +174,54 @@ const CreateGroupCard = ({ sessionName, submit }) => {
         </div>
 
         <div className={styles.timeSelectContainer}>
-            <label>
-              <div
-                style={
-                  submitAttempted &&
-                  (!startTime || startTimeIndex >= endTimeIndex)
-                    ? { color: "red" }
-                    : {}
-                }
-              >
-                Meeting Time: Start
-              </div>
+          <label>
+            <div
+              style={
+                submitAttempted &&
+                (!startTime || startTimeIndex >= endTimeIndex)
+                  ? { color: "red" }
+                  : {}
+              }
+            >
+              Meeting Time: Start
+            </div>
 
-              <Select
-                className={styles.time}
-                options={startTimes}
-                onChange={(e) => {
-                  setStartTime(e.label);
-                  setStartTimeIndex(e.value);
-                }}
-              />
-            </label>
-            <label>
-              <div
-                style={
-                  submitAttempted &&
-                  (!endTime || startTimeIndex >= endTimeIndex)
-                    ? { color: "red" }
-                    : {}
-                }
-              >
-                Meeting Time: End
-              </div>
+            <Select
+              className={styles.time}
+              options={startTimes}
+              onChange={(e) => {
+                setStartTime(e.label);
+                setStartTimeIndex(e.value);
+              }}
+            />
+          </label>
+          <label>
+            <div
+              style={
+                submitAttempted && (!endTime || startTimeIndex >= endTimeIndex)
+                  ? { color: "red" }
+                  : {}
+              }
+            >
+              Meeting Time: End
+            </div>
 
-              <Select
-                className={styles.time}
-                options={endTimes}
-                onChange={(e) => {
-                  setEndTime(e.label);
-                  setEndTimeIndex(e.value);
-                }}
-              />
-            </label>
-          </div>
-          
-          <div className={styles.membersSelectContainer}>
-          <div
-            style={
-              submitAttempted && !selectedMembers.length
-                ? { color: "red" }
-                : {}
-            }
-          >
-            Add members to your group!
-          </div>
+            <Select
+              className={styles.time}
+              options={endTimes}
+              onChange={(e) => {
+                setEndTime(e.label);
+                setEndTimeIndex(e.value);
+              }}
+            />
+          </label>
+        </div>
+
+        <div className={styles.membersSelectContainer}>
+          <div>Add members to your group!</div>
           <Select
             className={styles.membersSelect}
-            options={members}
+            options={matchesObjects}
             isMulti
             onChange={(e) => {
               let x = [];
@@ -229,39 +236,27 @@ const CreateGroupCard = ({ sessionName, submit }) => {
             }}
           />
         </div>
-          
+
         <div>
-        <button
+          <button
             className={styles.submit}
             style={
-              name &&
-              selectedMajor &&
-              year &&
-              selectedCourses.length != 0 &&
-              selectedLocations.length != 0 &&
               startTime &&
               endTime &&
-              startTimeIndex < endTimeIndex
-                ? { backgroundColor: "var(--primary-400" }
-                : {}
+              startTimeIndex < endTimeIndex &&
+              groupName &&
+              location &&
+              days
+                ? { backgroundColor: "var(--primary-400)" }
+                : { backgroundColor: "var(--dark-200)" }
             }
             onClick={() => {
-              name &&
-              selectedMajor &&
-              year &&
-              selectedCourses.length != 0 &&
-              selectedLocations.length != 0 &&
-              startTime &&
-              endTime &&
-              startTimeIndex < endTimeIndex
-                ? setPageNumber(pageNumber + 1)
-                : {};
+              handleSubmit();
             }}
           >
             Create Group
           </button>
         </div>
-
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ export default async function Home() {
     let temp = await getUser(pairs[i].email)
     users.push(temp)
   }
+
   // convert returned array into plain text
   for (let i = 0; i < users.length; i++) {
     users[i] = JSON.parse(JSON.stringify(users[i]));
@@ -56,7 +57,6 @@ export default async function Home() {
         let index = userLikes.indexOf(likedUser);
         // remove the user they liked from their liked users array
         userLikes.splice(index, 1);
-        console.log(userLikes);
         // add the liked user to the current user's matches
         userMatches.push(likedUser);
         await updateUser(email, { likes: userLikes, matches: userMatches });

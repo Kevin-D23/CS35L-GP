@@ -1,6 +1,7 @@
 "use client";
 import styles from "../CSS Modules/groups.module.css";
 import { useState } from "react";
+import CreateGroupCard from "./CreateGroupCard";
 
 export default function GroupsCard({
   currentUserEmail,
@@ -8,15 +9,18 @@ export default function GroupsCard({
   suggestedGroups,
   handleLeave,
   handleJoin,
+  matches,
+  handleCreate,
 }) {
   const [groups, setGroups] = useState(myGroups);
   const [suggested, setSuggested] = useState(suggestedGroups);
+  const [showCreate, setShowCreate] = useState(false);
+
   /////////////////////////////////////////////////
   // helper functions
   /////////////////////////////////////////////////
   function showGroup(group, key, user) {
     const [isOpen, setIsOpen] = useState(false);
-    const [joined, setJoined] = useState(true);
 
     const toggleMenu = () => {
       setIsOpen(!isOpen); // toggle menu visibility
@@ -35,6 +39,9 @@ export default function GroupsCard({
           <div className={styles.groupInfoContainer}>
             <div className={styles.meetingInfo}>
               <h2>
+                Owner: <h3>{group.owner.name}</h3>
+              </h2>
+              <h2>
                 Meeting location: <h3>{group.location}</h3>
               </h2>
               <h2>
@@ -42,6 +49,14 @@ export default function GroupsCard({
                 <h3>
                   {group.studyStart} - {group.studyEnd}
                 </h3>
+              </h2>
+              <h2>
+                Days:{" "}
+                <div className={styles.daysContainer}>
+                  {group.days.map((day, index) => {
+                    return <h3 key={index}>{day}</h3>;
+                  })}
+                </div>
               </h2>
             </div>
             <h2>Members:</h2>
@@ -56,7 +71,7 @@ export default function GroupsCard({
             </ul>
           </div>
         )}
-        {group.owner == user && isOpen && (
+        {group.owner.email == user && isOpen && (
           <button className={styles.editButton}>Edit Group</button>
         )}
         {isOpen && (
@@ -95,6 +110,9 @@ export default function GroupsCard({
           <div className={styles.groupInfoContainer}>
             <div className={styles.meetingInfo}>
               <h2>
+                Owner: <h3>{suggestion.owner.name}</h3>
+              </h2>
+              <h2>
                 Meeting location: <h3>{suggestion.location}</h3>
               </h2>
               <h2>
@@ -102,6 +120,14 @@ export default function GroupsCard({
                 <h3>
                   {suggestion.studyStart} - {suggestion.studyEnd}
                 </h3>
+              </h2>
+              <h2>
+                Days:{" "}
+                <div className={styles.daysContainer}>
+                  {suggestion.days.map((day, index) => {
+                    return <h3 key={index}>{day}</h3>;
+                  })}
+                </div>
               </h2>
             </div>
             <h2>Members:</h2>
@@ -134,6 +160,15 @@ export default function GroupsCard({
 
   return (
     <div className={styles.groupsPageContainer}>
+      <button className={styles.createButton} onClick={() => setShowCreate(true)}>Create Group</button>
+      {showCreate && (
+        <CreateGroupCard
+          className={styles.createPopup}
+          matches={matches}
+          handleCreate={handleCreate}
+          setShowCreate={setShowCreate}
+        />
+      )}
       <div className={styles.groupsPageSection}>
         <h1 className={styles.title}>YOUR GROUPS</h1>
         <div className={styles.myGroupsContainer}>

@@ -79,12 +79,12 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
   }
 
   const DefaultCardContent = () => (
-  <div className={styles.defaultCard}>
-    <img
-      src="/icons/studentsinfernodefault.png"
-      style={{ width: "800px" }}
-    />
-  </div>
+    <div
+      className={styles.defaultCard}
+      style={{ backgroundColor: "transparent" }}
+    >
+      <img src="/icons/studentsinfernodefault.png" style={{ width: "800px" }} />
+    </div>
   );
 
   return (
@@ -230,42 +230,8 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
             </div>
           )}
         </div>
-      ) : users.length === 0 ? (
-        <DefaultCardContent />
       ) : (
-        <div className={styles.home} ref={background}>
-          <div className={styles.matchOption}></div>
-          <div className={styles.userContainer}>
-            <div className={styles.left}>
-              <div className={styles.imageContainer}></div>
-              <div className={styles.bioContainer}>
-                <h1>...</h1>
-                <h2>...</h2>
-                <h2>
-                  Major:<p>...</p>
-                </h2>
-                <p>...</p>
-              </div>
-            </div>
-            <div className={styles.right}>
-              <div className={styles.coursesContainer}>
-                <h2>COURSES</h2>
-                ...
-              </div>
-              <div className={styles.timesContainer}>
-                <h2>AVAILABLE DAYS</h2>
-                ...
-                <h2>WHEN</h2>
-                <p>...</p>
-              </div>
-              <div className={styles.locationContainer}>
-                <h2>LOCATIONS</h2>
-                ...
-              </div>
-            </div>
-          </div>
-          <div className={styles.matchOption}></div>
-        </div>
+        <DefaultCardContent />
       )}
     </div>
   );
