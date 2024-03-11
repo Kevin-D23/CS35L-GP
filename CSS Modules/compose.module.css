@@ -1,10 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
 .container{
     background-color: blanchedalmond;
 }
 .box{
     position: relative;
-    color: red;
-    background-color: white;
+    color: black;
+    background-color: rgb(240, 240, 240);
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: var(--dark-600);
     display: grid;
     grid-template-rows: 15% 10% auto;
     row-gap: 0%;
@@ -13,35 +18,60 @@
     padding: 3%;
 }
 .closeButton{
-    background-color: blueviolet;
     top: 0;
     right:0;
     height: 5%;
     width: 5%;
     position: absolute;
     cursor: pointer;
+    font-size: 2rem;
+    color: var(--dark-300);
+    text-align: center;
+    padding-top: -5%;
 }
+
+.closeButton:hover{
+    color: blueviolet;
+}
+
 .submitButton{
     position: absolute;
-    bottom: -10%;
+    bottom: 1%;
+    left: 6%;
+    padding: 1%;
     cursor: pointer;
-    background-color: green;
+    color: black;
+    border-radius: 3px;
+    width: 6rem;
+    background-color: var(--primary-600);
 }
 .title{
-    background-color: aquamarine;
-    height: 100%;
+    background-color: white;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: blueviolet;
+    color: black;
+    height: 2.5rem;
+    padding-left: 4px;
+    padding-right: 4px;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: x-large;
+    font-family: "Abel", sans-serif;
+
 }
+
 .recipient{
     background-color: blue;
     height: 100%;
 }
 .contents{
-    background-color: red;
+    background-color: white;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: blueviolet;
     padding: 1rem;
-    height: 100%;
-    color:white;
+    height: 98%;
+    color:black;
 }
