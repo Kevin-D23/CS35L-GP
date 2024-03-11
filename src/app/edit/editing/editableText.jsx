@@ -21,6 +21,7 @@ const SignupCard = () => {
   const [endTimeIndex, setEndTimeIndex] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [charCount, setCharCount] = useState(0);
   const router = useRouter();
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -33,6 +34,7 @@ const SignupCard = () => {
     setYear(info_array[2].value);
     setSelectedMajor(info_array[3].value);
     setBio(info_array[4]);
+    setCharCount(info_array[4].length)
     setSelectedDays(info_array[5]);
     setSelectedLocations(info_array[6]);
     setStartTime(info_array[7]);
@@ -221,14 +223,22 @@ const SignupCard = () => {
         </label>
       </div>
       <div className={styles.bioContainer}>
-      <div style={submitAttempted && !bio ? { color: "red" } : {}}>
-          Write a short bio about you!
-     </div>
-        <textarea
-          className={styles.bioInput}
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        />
+
+     <div className={styles.bioContainer}>
+            <div style={submitAttempted && !bio ? { color: "red" } : {}}>
+              Write a short bio about you!
+            </div>
+            <textarea
+              className={styles.bioInput}
+              value={bio}
+              maxLength={150}
+              onChange={(e) => {
+                setBio(e.target.value);
+                setCharCount(e.target.value.length);
+              }}
+            />
+            {charCount} / 150 characters
+          </div>
       </div>
       <div className={styles.courseSelectionContainer}>
         <div>
@@ -381,7 +391,7 @@ const SignupCard = () => {
           startTime &&
           endTime &&
           startTimeIndex < endTimeIndex
-            ? { backgroundColor: "var(--primary-400" }
+            ? { backgroundColor: "#7a5af5"}
             : {}
         }
         onClick={() => handleSubmit()}
