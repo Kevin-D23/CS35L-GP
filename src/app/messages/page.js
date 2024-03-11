@@ -14,10 +14,16 @@ export default async function Messages() {
   //console.log("MESSAGE")
   //console.log(fetchMessage(user.messagesSent[0]))
   //we will pass in the database data into the components which will handle it from there
+  const messagesSentPromises = user.messagesSent.map(val => fetchMessage(val));
+  const messagesReceivedPromises = user.messagesRecieved.map(val => fetchMessage(val));
+  const sentMessages = await Promise.all(messagesSentPromises) 
+  const receivedMessages = await Promise.all(messagesReceivedPromises);
+  console.log(sentMessages)
+  console.log(receivedMessages)
   return(
     <>
-    <Link href="/compose" className={styles.makeMessageButton}>Send Message!</Link>
-    <Message messagesSent={user.messagesSent} messagesRead={user.messagesRead} messagesRecieved={user.messagesRecieved}></Message>
+    <Link href="/compose"className={styles.makeMessageButton}>Send Message!</Link>
+    <Message receivedMessages={receivedMessages}></Message>
     </>
     )
 }

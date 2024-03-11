@@ -55,11 +55,11 @@ if(toggleBool)
 
 }
 export default function Message(props){ 
-  const colors = [];
+  console.log(props.receivedMessages)
   const [buttonColors, setButtonColors] = React.useState(() => 
-    data.map(item => [item[2],80,92])
+    props.receivedMessages.map(item => ["#59BFFF",80,92])
   );
-  const [buttonTextIndex, setButtonTextIndex] = React.useState(Array(data.length).fill(0));
+  const [buttonTextIndex, setButtonTextIndex] = React.useState(Array(props.receivedMessages.length).fill(0));
   
   const toggleBackgroundColor = (index,newColor) => {
     setButtonColors(buttonColors.map((color, idx) => { 
@@ -85,7 +85,7 @@ export default function Message(props){
   return (
     <div>
       <div className={styles.scrollContainer}>
-        {data.map((buttonTexts, index) => (
+        {props.receivedMessages.map((buttonTexts, index) => (
           <div key={index} className={styles.buttonContainer}>
             <button
               style={{background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`}}
@@ -93,11 +93,11 @@ export default function Message(props){
               onClick={() => toggleButtonText(index,buttonColors[index][0])}
               id={`message${index}`}
             >
-              {buttonTexts[buttonTextIndex[index]]}
+              {buttonTexts.sender}
             </button>
             {buttonTextIndex[index] === 1 && (
               <div>
-                Additional Content for {buttonTexts[0]}
+                {buttonTexts.message}
               </div>
             )}
           </div>
