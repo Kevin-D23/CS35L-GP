@@ -78,6 +78,15 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
     });
   }
 
+  const DefaultCardContent = () => (
+  <div className={styles.defaultCard}>
+    <img
+      src="/icons/studentsinfernodefault.png"
+      style={{ width: "800px" }}
+    />
+  </div>
+  );
+
   return (
     <div className={styles.homeContainer} ref={background}>
       {/* {location == "/" && (
@@ -221,6 +230,8 @@ export default function ProfileCard({ userArr, likeUser, getFilteredUsers }) {
             </div>
           )}
         </div>
+      ) : users.length === 0 ? (
+        <DefaultCardContent />
       ) : (
         <div className={styles.home} ref={background}>
           <div className={styles.matchOption}></div>
