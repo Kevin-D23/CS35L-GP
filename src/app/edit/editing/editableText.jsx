@@ -4,7 +4,7 @@ import styles from "../../../../CSS Modules/signup.module.css";
 import Select from "react-select";
 import { useRouter } from "next/navigation";
 import {processData,getInfo} from "./actions"
-
+import Haohan from "../../../../public/icons/haohan.jpeg";
 const SignupCard = () => {
   const [selectedMajor, setSelectedMajor] = useState();
   const [selectedCourses, setSelectedCourses] = useState([]);
@@ -22,6 +22,7 @@ const SignupCard = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [charCount, setCharCount] = useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
   const router = useRouter();
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -42,11 +43,34 @@ const SignupCard = () => {
     setSelectedCourses(info_array[9]);
     setStartTimeIndex(0);
     setEndTimeIndex(1);
+
     }
 
     fetchData();
   }, []);
- 
+  const pictures = [
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYm6wqVw9UyQjxFlzZ7e_0d13kNxdD2DQ0ttREVNgoJ1mpIHIyt-8uRXxsn7N4oFZAf-DPn94vHBuADtflvBQhHOg59=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYuAuYkj6OfWXPXmDmJ0rRJ001_Bt3Th_YeyISFTOz_1NVW4pwtZWdSGFLwxteQF4v7EdDNlpNcq8XXSgTf_Sj6S7Ln=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZvyCZGQEVMSzn8XifdLUe4WkJn6Jou3mq2ZXaVAVS7C2nv7mj9VjN2vgMbbBSecfPqQ7vsA4Zc6QDXqgrPKAUNBRP5hw=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihaTyxfxR246RZEF6ghO6EJ36YL46E4qTexnNq7Za51N6ftUABQIxUD5fNLglW8dQrNuc3qDjbGj5oJOwJ2bzdm_xyEE7Q=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihb0HdM6Ua8xt19YO84e9B9bAcZLDtlpjVgap0FB-gTz3jEKVhuQzy1rNwqO6sQ8_6KyZ3pGBIfy2N_4qg26of8-gKgq8A=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZrvUbGDo-TvAK3jGama17A4rC2WCBKuQ1RKPkPhHKIchsVUJEg3WqLkHQ8k1eMaBagiooIV6xLdul_Ir_jgMJJ3XUa=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbYkZ9opUt86FBu5Q4UxvOeb2Z-4NLJUUogithVxqGRW80dD3J129FMtYkIKNIpgNP8u15gh0Hxx1YXngBsb3LJsmkQAQ=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYnBiOLSsspFeQT5dj3BCkLVgIm2_pSLwfQUP-RL8GciBGrzus8_Uxw5Mb4YjuEbPMvn7xfbNjEViaSdMtIHUVcuEEcgw=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpiha3ZgiMnf9BkwQuBnirNKybs-4ss8ESa7HqF9lfq2Fr6jmKCbAkoymSoaGkfji_NyhNJr8nE4htPBkqLisH_r9pVU-rCw=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbqjVsPecpTD_jVwFbdYWfQ5x4Uw7uoLV7OX2zJ4sIxsFedMBM26jH88N8AEE3GzZL6_UGiikl6EPUfL-fAHbx4oMs0eg=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZC4g_fv5e3wk8qJlKfvKitNOJ60WBbYeZqugrB_8xakTVKTbdisZr24IqTYYSOy3ROhbcVALNTCrlP8ATJYDkFSo8DIA=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZRKllEtwffB77bj_8uIF1xkC5b4v3Gq2HQj86m2U6Pd5frZ0PRavuxI90_RaG-cHFt8C97LFhD62EjQc6CGyIzypIj0w=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihbo1Cq1NKrYRo0QQsRbtkGWnSDyBQUtWAeNm5Fcz3gQKo4ypxRfRt2wAquvhJbHEu6CdaJ1PftrBt2HvzGeL08BfMOi=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihb4daWBr7JBsMhzvC2c8epkydRu3nn0-3diuZI02GLzgJYSDCRM5mvBmLRvCJNb7X5gahAk5dEkvYjYDkeADT_ctsP1aA=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihar4Krs6L2qOWuGs-aPj1ZQYECe_bINM67ozLasnDY86yf5nVKLyuhNBF1lga4M2FnaS-XCw3fDbraIhnSxVEilmKbO=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZChf3YEXR2mFy3L-EvsXA9c_CiKVpoKQmkl70yecEogy-Ynv7I3ZHr_tUsfJ9fiyJtVv6EI4tD1XIe4kqGSBpvptKk2A=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYTmYvHGiDg5Gv9fE-QQGDzTyz9AKI8FFnjQH4A6IBwf2M6b-c-NKE8f2iwpPt_In3EZGNuljDVZwM-bvYtxsqZfUJO=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihai4a5PP3FR4hG2H6hGxLabCfW9Py6hbxgIUbBfEv7wDuixGqWtrvH6xrKnpuQfZAUakxmOo31-SqbtaoU55RA4y6TJcw=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihZN02Zc2tH9vhmM-mPfJ3rUM9iuEjSWF-gWqeuQPhi_w_g2Rljf80P9EwsnloOUYgxrmBLklXyuQ3HeMMuaZHhgLs0J-Q=w3600-h2008",
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYCsj3SCf3i50IUg8KL573kLovtLnU_dZXWFvAROmbs798z8-4VizdbZ5ZbBbiEWMd32Wq0Tse1aIxJMyBFvFRFfSJQ=w3600-h2008",
+  ];
+  const [selectedPicture, setSelectedPicture] = useState();
   const departments = [
     { value: "0", label: "COM SCI" },
     { value: "1", label: "ENGR" },
@@ -135,20 +159,40 @@ const SignupCard = () => {
       &&
       selectedDays.length != 0
     ) {
+      if(selectedPicture){
+        const data = {
+          name:name,
+          age: age,
+          year: year,
+          major: selectedMajor,
+          bio: bio,
+          classes: selectedCourses,
+          daysAvailable: selectedDays,
+          studyStart: startTime,
+          studyEnd: endTime,
+          locations: selectedLocations,
+          image: pictures[selectedPicture]
+        };
+        processData(data);
+      }
+      else
+      {
+        const data = {
+          name:name,
+          age: age,
+          year: year,
+          major: selectedMajor,
+          bio: bio,
+          classes: selectedCourses,
+          daysAvailable: selectedDays,
+          studyStart: startTime,
+          studyEnd: endTime,
+          locations: selectedLocations,
+          image: pictures[selectedPicture]
+        };
+        processData(data);
+      }
       
-      const data = {
-        name:name,
-        age: age,
-        year: year,
-        major: selectedMajor,
-        bio: bio,
-        classes: selectedCourses,
-        daysAvailable: selectedDays,
-        studyStart: startTime,
-        studyEnd: endTime,
-        locations: selectedLocations,
-      };
-      processData(data);
       window.location.href = '/edit';
     }
     else
@@ -168,7 +212,39 @@ const SignupCard = () => {
     setDisplayCourses(temp);
   }
   return (
-    <div className={styles.signupContainer}>
+    <div>
+      {pageNumber == 0 ? ( <div className={styles.pictureContainer}>
+          <h1>Edit Your Profile Picture?</h1>
+          <div className={styles.pictures}>
+            {pictures.map((picture, index) => {
+              return (
+                <img
+                  key={index}
+                  className={styles.picture}
+                  src={picture}
+                  alt={Haohan}
+                  style={
+                    selectedPicture == index
+                      ? { border: "2px solid var(--primary-300)" }
+                      : {}
+                  }
+                  onClick={() => {
+                    setSelectedPicture(index);
+                  }}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.pictureButtons}>
+            <button
+              onClick={() =>  setPageNumber(pageNumber + 1)}
+              style={{ backgroundColor: "var(--primary-300)" }}
+            >
+              Next
+            </button>
+          </div>
+        </div>) : (
+        <div  className={styles.signupContainer}>
       <h1>Edit your profile:</h1>
       <div className={styles.textInputs}>
         <label className={styles.textInput}>
@@ -380,6 +456,7 @@ const SignupCard = () => {
           }}
         />
       </div>
+      <button  className={styles.submit}  style={{backgroundColor:"#7a5af5"}}onClick={() => setPageNumber(pageNumber - 1)}>Back</button>
       <button
         className={styles.submit}
         style={
@@ -398,6 +475,8 @@ const SignupCard = () => {
       >
         Save
       </button>
+      </div>
+      )}
     </div>
   );
 };

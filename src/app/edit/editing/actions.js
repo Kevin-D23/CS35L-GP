@@ -46,6 +46,7 @@ export async function getInfo()
   data_array[8]= end;
   let course = user.classes;
   data_array[9]= course;
+  console.log(user.image);
 return(data_array)
 
 }
