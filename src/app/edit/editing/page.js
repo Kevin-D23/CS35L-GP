@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { options } from "../../api/auth/[...nextauth]/options";
 import Image from "next/image";
-import EditableText from "./editableText"
+import EditableText from "../../../../components/editableText"
 import "../../../../CSS Modules/editing.module.css";
 async function Name() {
   const session = await getServerSession(options);

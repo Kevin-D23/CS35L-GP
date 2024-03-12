@@ -1,10 +1,10 @@
 "use client";
 import React, { useState,useEffect } from "react";
-import styles from "../../../../CSS Modules/signup.module.css";
+import styles from "../CSS Modules/signup.module.css";
 import Select from "react-select";
 import { useRouter } from "next/navigation";
-import {processData,getInfo} from "./actions"
-import Haohan from "../../../../public/icons/haohan.jpeg";
+import {processData,getInfo} from "../src/app/edit/editing/actions"
+import Haohan from "../public/icons/haohan.jpeg";
 const SignupCard = () => {
   const [selectedMajor, setSelectedMajor] = useState();
   const [selectedCourses, setSelectedCourses] = useState([]);
