@@ -71,9 +71,7 @@ export default function GroupsCard({
             </ul>
           </div>
         )}
-        {group.owner.email == user && isOpen && (
-          <button className={styles.editButton}>Edit Group</button>
-        )}
+
         {isOpen && (
           <button
             className={styles.leaveButton}
@@ -160,7 +158,12 @@ export default function GroupsCard({
 
   return (
     <div className={styles.groupsPageContainer}>
-      <button className={styles.createButton} onClick={() => setShowCreate(true)}>Create Group</button>
+      <button
+        className={styles.createButton}
+        onClick={() => setShowCreate(true)}
+      >
+        Create Group
+      </button>
       {showCreate && (
         <CreateGroupCard
           className={styles.createPopup}

@@ -6,13 +6,16 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { IoMdExit } from "react-icons/io";
 import NavBtns from "./NavBtns";
+import { getUser } from "@/app/api/user/route";
 
 export default async function NavBar() {
   const session = await getServerSession(options);
 
   let name = session?.user?.name.split(" ");
   let email = session?.user?.email;
-  let image = session?.user?.image;
+
+  let user = await getUser(email)
+  let image = user.image
   return (
     <>
       {session ? (
