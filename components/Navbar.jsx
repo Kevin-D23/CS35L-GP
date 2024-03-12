@@ -15,7 +15,7 @@ export default async function NavBar() {
   let email = session?.user?.email;
 
   let user = await getUser(email)
-  let image = user.image
+  let image = user?.image
   return (
     <>
       {session ? (

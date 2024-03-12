@@ -3,12 +3,9 @@ import { options } from "./api/auth/[...nextauth]/options";
 import ProfileCard from "../../components/ProfileCard";
 import { redirect } from "next/navigation";
 import { getUser, updateUser } from "./api/user/route";
-import { getAllUsers } from "./api/user/route";
 import { matching } from "./api/user/route";
 
 export default async function Home() {
-  
-
   // create session and email/user
   const session = await getServerSession(options);
   const email = session?.user?.email;

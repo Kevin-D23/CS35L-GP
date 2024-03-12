@@ -16,12 +16,18 @@ export async function POST(req) {
   const defaultStudyEnd = "";
   const defaultLocations = [];
   const defaultImage =
-    "https://media.vanityfair.com/photos/64ca8376f9a03860a86c239f/9:16/w_747,h_1328,c_limit/taylor-swift-bonuses.jpg";
+    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYm6wqVw9UyQjxFlzZ7e_0d13kNxdD2DQ0ttREVNgoJ1mpIHIyt-8uRXxsn7N4oFZAf-DPn94vHBuADtflvBQhHOg59=w3600-h2008";
   const defaultMatches = [];
   const defaultPeopleSeen = [];
   const defaultLikes = [];
   const defaultGroups = [];
 
+  // For demo purposes, when a new account signs in, everyone likes this user
+  let allUsers = await User.find({ email: { $ne: email } });
+  for (let i = 0; i < allUsers.length; i++) {
+    defaultLikes.push(allUsers[i].email);
+  }
+  ///////////////////////////////
   await User.create({
     name: name,
     email: email,
@@ -81,13 +87,13 @@ export async function appendUserMessagesRecieved(email, messageID) {
   try {
     await User.updateOne(
       { email: email },
-      { 
-        $push: { 
+      {
+        $push: {
           messagesRecieved: {
             $each: [messageID],
-            $sort: -1
-          } 
-        }
+            $sort: -1,
+          },
+        },
       }
     );
   } catch (error) {
@@ -101,13 +107,13 @@ export async function appendUserMessagesSent(email, messageID) {
   try {
     await User.updateOne(
       { email: email },
-      { 
-        $push: { 
+      {
+        $push: {
           messagesSent: {
             $each: [messageID],
-            $sort: -1
-          } 
-        }
+            $sort: -1,
+          },
+        },
       }
     );
   } catch (error) {
