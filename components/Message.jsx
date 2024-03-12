@@ -97,6 +97,7 @@ export default function Message(props) {
   return (
     <div>
       <div className={styles.scrollContainer}>
+<<<<<<< Updated upstream
         {props.receivedMessages.filter(buttonTexts => buttonTexts !== null).map((buttonTexts, index) => (
           <div key={index} className={styles.buttonContainer}>
             <button
@@ -110,6 +111,54 @@ export default function Message(props) {
               {buttonTexts.sender}
             </button>
             {buttonTextIndex[index] === 1 && <div>{buttonTexts.message}</div>}
+=======
+        <div className={styles.label}>
+          Received
+        </div>
+        {props.receivedMessages.map((buttonTexts, index) => (
+          <div>
+            <div key={index} className={styles.buttonContainer}>
+              <button
+                style={{background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`}}
+                className={styles.button}
+                onClick={() => toggleButtonText(index,buttonColors[index][0])}
+                id={`message${index}`}
+              >
+                {buttonTexts.sender}
+              </button>
+              {buttonTextIndex[index] === 1 && (
+                <div className={styles.message}>
+                  {buttonTexts.message}
+                </div>
+              )}
+            </div>
+        
+          </div>
+        ))}
+      </div>
+      <div className={styles.scrollContainer}>
+        <div className={styles.label}>
+          Sent
+        </div>
+        {props.receivedMessages.map((buttonTexts, index) => (
+          <div>
+            <div key={index} className={styles.buttonContainer}>
+              <button
+                style={{background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`}}
+                className={styles.button}
+                onClick={() => toggleButtonText(index,buttonColors[index][0])}
+                id={`message${index}`}
+              >
+                {buttonTexts.sender}
+              </button>
+              {buttonTextIndex[index] === 1 && (
+                <div>
+                  {buttonTexts.message}
+                </div>
+              )}
+            </div>
+        
+>>>>>>> Stashed changes
           </div>
         ))}
       </div>

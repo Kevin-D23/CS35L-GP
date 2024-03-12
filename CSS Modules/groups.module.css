@@ -263,7 +263,12 @@
   background-color: var(--primary-300);
 }
 
+.createButton:hover {
+  background-color: rgb(145, 116, 238);
+}
+
 .createPopup {
   position: absolute;
   border: 1px solid red;
 }
+

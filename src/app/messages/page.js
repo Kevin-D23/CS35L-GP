@@ -22,7 +22,7 @@ export default async function Messages() {
   console.log(receivedMessages)
   return(
     <>
-    <Link href="/compose"className={styles.makeMessageButton}>Send Message!</Link>
+    <Link href="/compose"className={styles.makeMessageButton}>Send Message</Link>
     <Message receivedMessages={receivedMessages}></Message>
     </>
     )

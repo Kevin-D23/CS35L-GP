@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+
 .box{
     background-color: aqua;
     display: grid;
@@ -71,7 +73,12 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    width: 35rem;
+    margin-left: 10px;
+    margin-right: 10px;
   }
+
   .list {
     list-style-type: none;
     padding: 0;
@@ -104,4 +111,18 @@
     border-radius: 4px;
     transition: background-color 0.7s ease-in, box-shadow 0.2s;
     cursor:pointer;
+  }
+
+  .button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .message {
+    margin-left: 20px;
+  }
+  .label {
+    color: white;
+    font-family: "Abel", sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
   }
