@@ -23,7 +23,7 @@ export default async function Messages() {
   return(
     <>
     <Link href="/compose"className={styles.makeMessageButton}>Send Message</Link>
-    <Message receivedMessages={receivedMessages}></Message>
+    <Message receivedMessages={receivedMessages} sentMessages={sentMessages}></Message>
     </>
     )
 }
