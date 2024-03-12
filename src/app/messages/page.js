@@ -18,8 +18,6 @@ export default async function Messages() {
   const messagesReceivedPromises = user.messagesRecieved.map(val => fetchMessage(val));
   const sentMessages = await Promise.all(messagesSentPromises) 
   const receivedMessages = await Promise.all(messagesReceivedPromises);
-  console.log(sentMessages)
-  console.log(receivedMessages)
   return(
     <>
     <Link href="/compose"className={styles.makeMessageButton}>Send Message</Link>

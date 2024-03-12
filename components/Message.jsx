@@ -65,8 +65,6 @@ function ButtonClick({ message, toggleBool }) {
   }
 }
 export default function Message(props) {
-  console.log(props.receivedMessages);
-  console.log(props.sentMessages)
   const [buttonColors, setButtonColors] = React.useState(() =>
     props.receivedMessages.map((item) => ["#59BFFF", 80, 92])
   );
