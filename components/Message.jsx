@@ -97,7 +97,7 @@ export default function Message(props) {
   return (
     <div>
       <div className={styles.scrollContainer}>
-        {props.receivedMessages.map((buttonTexts, index) => (
+        {props.receivedMessages.filter(buttonTexts => buttonTexts !== null).map((buttonTexts, index) => (
           <div key={index} className={styles.buttonContainer}>
             <button
               style={{
