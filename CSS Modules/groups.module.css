@@ -65,8 +65,15 @@
   margin-left: 1rem;
   display: flex;
   width: 15rem;
+  height: fit-content;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 0;
+}
+
+.membersContainer li {
+  width: fit-content;
+  height: fit-content;
 }
 
 .editButton {
@@ -80,7 +87,7 @@
 }
 
 .leaveButton {
-  background-color: var(--dark-200);
+  background-color: var(--dark-300);
   width: 100%;
   color: var(--primary-text);
 }

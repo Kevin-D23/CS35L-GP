@@ -13,10 +13,11 @@ export const metadata = {
 
 export default async function RootLayout({ children, params }) {
   let session = await getServerSession(options);
+  
   return (
     <html lang="en">
       <body className={inter.className}>
-       <NavBar />
+        <NavBar />
         <div className="main" params={params}>
           {children}
         </div>
