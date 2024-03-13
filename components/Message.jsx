@@ -162,7 +162,7 @@ export default function Message(props) {
                 Sent to: {buttonTexts.reciever}
               </button>
               {SentsbuttonTextIndex[index] === 1 && (
-                <div>
+                <div className={styles.message}>
                   {buttonTexts.message}
                 </div>
               )}
