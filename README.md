@@ -1,6 +1,6 @@
 # Students Inferno
 
-Study companion app designed to help students find others to study with. This platform combines the convenience of a dating app with the purpose of finding like-minded individuals.
+Study companion app designed to help students find others to form study groups with. This platform combines the convenience of a dating app with the purpose of finding like-minded individuals.
 
 ## Getting Started
 
