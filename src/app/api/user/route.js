@@ -1,6 +1,7 @@
 import connect from "../connect";
 import User from "../../(models)/User";
 import { NextResponse } from "next/server";
+import { pushMessage } from "../message/message";
 
 // make POST request whenever adding a new user to database; req is a JSON object
 export async function POST(req) {
@@ -27,6 +28,13 @@ export async function POST(req) {
   for (let i = 0; i < allUsers.length; i++) {
     defaultLikes.push(allUsers[i].email);
   }
+  let data = {
+    sender: "eggert@gmail.com",
+    reciever: email,
+    title: "Welcome!",
+    message: "Thank you for trying our app!",
+  };
+  pushMessage(data);
   ///////////////////////////////
   await User.create({
     name: name,

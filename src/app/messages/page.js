@@ -6,9 +6,13 @@ import React from "react"
 import Link from "next/link"
 import Message from "../../../components/Message"
 import styles from "../../../CSS Modules/MessagesPage.module.css"
+import { redirect } from "next/navigation"
 export default async function Messages() {
+
   const session = await getServerSession(options)
   let user = await getUser(session?.user?.email)
+  if (!user?.signupCompleted) redirect("/signup");
+
   user = JSON.parse(JSON.stringify(user));
   //console.log(user)
   //console.log("MESSAGE")

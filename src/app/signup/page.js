@@ -18,6 +18,7 @@ const Page = async () => {
     "use server";
     // Sends information to database
     await updateUser(email, data);
+    redirect('/')
   };
   return (
     <div>
