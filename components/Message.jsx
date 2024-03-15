@@ -70,7 +70,7 @@ export default function Message(props) {
   );
   const [sentButtonColors, setSentButtonColors] = React.useState(() =>
     props.sentMessages.map((item) => ["#A5D296", 80, 92])
-  )
+  );
   const [buttonTextIndex, setButtonTextIndex] = React.useState(
     Array(props.receivedMessages.length).fill(0)
   );
@@ -122,54 +122,62 @@ export default function Message(props) {
   return (
     <div>
       <div className={styles.scrollContainer}>
-        <div className={styles.label}>
-          Received
-        </div>
-        {props.receivedMessages.filter(buttonTexts => buttonTexts !== null).map((buttonTexts, index) => (
-          <div>
-            <div key={index} className={styles.buttonContainer}>
-              <button
-                style={{background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`}}
-                className={styles.button}
-                onClick={() => toggleButtonText(index,buttonColors[index][0])}
-                id={`message${index}`}
-              >
-                {buttonTexts.sender}
-              </button>
-              {buttonTextIndex[index] === 1 && (
-                <div className={styles.message}>
-                  {buttonTexts.message}
-                </div>
-              )}
+        <div className={styles.label}>Received</div>
+        {props.receivedMessages
+          .filter((buttonTexts) => buttonTexts !== null)
+          .map((buttonTexts, index) => (
+            <div>
+              <div key={index} className={styles.buttonContainer}>
+                <button
+                  style={{
+                    background: `linear-gradient(120deg, #252525 ${buttonColors[index][1]}%, #2f2f2f ${buttonColors[index][2]}%, ${buttonColors[index][0]} 100%`,
+                  }}
+                  className={styles.button}
+                  onClick={() =>
+                    toggleButtonText(index, buttonColors[index][0])
+                  }
+                  id={`message${index}`}
+                >
+                  {buttonTexts.sender}
+                </button>
+                {buttonTextIndex[index] === 1 && (
+                  <div className={styles.message}>
+                    <h1>{buttonTexts.title}</h1>
+                    {buttonTexts.message}
+                  </div>
+                )}
+              </div>
             </div>
-        
-          </div>
-        ))}
+          ))}
       </div>
       <div className={styles.scrollContainer}>
-        <div className={styles.label}>
-          Sent
-        </div>
-        {props.sentMessages.filter(buttonTexts=> buttonTexts !== null).map((buttonTexts, index) => (
-          <div>
-            <div key={index} className={styles.buttonContainer}>
-              <button
-                style={{background: `linear-gradient(120deg, #252525 ${sentButtonColors[index][1]}%, #2f2f2f ${sentButtonColors[index][2]}%, ${sentButtonColors[index][0]} 100%`}}
-                className={styles.button}
-                onClick={() => toggleSentText(index,sentButtonColors[index][0])}
-                id={`message${index}`}
-              >
-                Sent to: {buttonTexts.reciever}
-              </button>
-              {SentsbuttonTextIndex[index] === 1 && (
-                <div className={styles.message}>
-                  {buttonTexts.message}
-                </div>
-              )}
+        <div className={styles.label}>Sent</div>
+        {props.sentMessages
+          .filter((buttonTexts) => buttonTexts !== null)
+          .map((buttonTexts, index) => (
+            <div>
+              <div key={index} className={styles.buttonContainer}>
+                <button
+                  style={{
+                    background: `linear-gradient(120deg, #252525 ${sentButtonColors[index][1]}%, #2f2f2f ${sentButtonColors[index][2]}%, ${sentButtonColors[index][0]} 100%`,
+                  }}
+                  className={styles.button}
+                  onClick={() =>
+                    toggleSentText(index, sentButtonColors[index][0])
+                  }
+                  id={`message${index}`}
+                >
+                  Sent to: {buttonTexts.reciever}
+                </button>
+                {SentsbuttonTextIndex[index] === 1 && (
+                  <div className={styles.message}>
+                    <h1>{buttonTexts.title}</h1>
+                    {buttonTexts.message}
+                  </div>
+                )}
+              </div>
             </div>
-
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
