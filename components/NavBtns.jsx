@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdPeople } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { HiUserGroup } from "react-icons/hi";
-import styles from "../CSS Modules/Navbar.module.css";
+import styles from "../CSS Modules/navbar.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

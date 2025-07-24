@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../CSS Modules/Navbar.module.css";
+import styles from "../CSS Modules/navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
