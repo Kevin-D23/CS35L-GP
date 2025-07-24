@@ -17,32 +17,34 @@ export const options = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.picture = user.picture;
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.picture;
+      }
       return token;
     },
+
     async session({ session, token }) {
-      if (session?.user) session.user.image = token.picture;
+      if (session?.user) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
       return session;
     },
 
     async signIn({ user, account }) {
       if (account.provider === "google") {
         const { name, email } = user;
-
-        // check if user exists in database, if not, add user
         const userExists = await getUser(email);
         if (!userExists) {
           try {
             const res = await fetch("http://localhost:3000/api/user", {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name,
-                email,
-                signupCompleted: false,
-              }),
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, signupCompleted: false }),
             });
             if (res.ok) return user;
           } catch (err) {
@@ -53,7 +55,7 @@ export const options = {
         }
       }
     },
-  },
+},
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin",

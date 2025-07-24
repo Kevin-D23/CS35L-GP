@@ -11,11 +11,23 @@ import { getUser } from "@/app/api/user/route";
 export default async function NavBar() {
   const session = await getServerSession(options);
 
-  let email = session?.user?.email;
+  const name = session?.user?.name;
+  const email = session?.user?.email;
 
-  let user = await getUser(email)
-  let image = user?.image
-  let name = user?.name.split(" ");
+  // Manage names with no last names
+  let displayName = "";
+  if (name) {
+    const nameParts = name.split(" ");
+    if (nameParts.length > 1 && nameParts[1]) {
+      displayName = `${nameParts[0]} ${nameParts[1][0]}.`;
+    } else {
+      displayName = name;
+    }
+  }
+
+  const userFromDb = await getUser(email);
+  const image = userFromDb?.image || session?.user?.image;
+
   return (
     <>
       {session ? (
@@ -37,7 +49,7 @@ export default async function NavBar() {
             />
             <div className={styles.userInfoContainer}>
               <h1 className={styles.name}>
-                {session ? name[0] + " " + name[1][0] + "." : ""}
+                {displayName}
               </h1>
               <h2 className={styles.email}>{email}</h2>
             </div>

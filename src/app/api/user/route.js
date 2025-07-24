@@ -17,7 +17,8 @@ export async function POST(req) {
   const defaultStudyEnd = "";
   const defaultLocations = [];
   const defaultImage =
-    "https://lh3.googleusercontent.com/u/0/drive-viewer/AKGpihYm6wqVw9UyQjxFlzZ7e_0d13kNxdD2DQ0ttREVNgoJ1mpIHIyt-8uRXxsn7N4oFZAf-DPn94vHBuADtflvBQhHOg59=w3600-h2008";
+    // Note this is different than original
+    "https://play-lh.googleusercontent.com/R2K9Ws9xpTzaomIXQBK4WR1sDy6MM-wSV6dYtRXAyotLXUZpqOz2lCsos_uB7uh0bCQ";
   const defaultMatches = [];
   const defaultPeopleSeen = [];
   const defaultLikes = [];
